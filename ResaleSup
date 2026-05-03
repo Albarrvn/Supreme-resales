@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResalesPR — Streetwear</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #161616;
+    --border: #222222;
+    --white: #f5f5f5;
+    --gray: #888888;
+    --accent: #ff2d2d;
+    --gold: #c9a84c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* CURSOR */
+  * { cursor: none; }
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,45,45,0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.12s ease;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 64px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .nav-ig {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    transition: all 0.2s;
+  }
+  .nav-ig:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 32px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 70% 50%, rgba(255,45,45,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.05) 0%, transparent 50%),
+      var(--black);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .hero-title .outline {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+    color: transparent;
+  }
+
+  .hero-title .accent { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--gray);
+    letter-spacing: 1px;
+    max-width: 360px;
+    line-height: 1.6;
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    position: relative;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+  .btn-primary:hover { background: #e00; transform: translateY(-2px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--border);
+    padding: 14px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--white); }
+
+  .hero-stats {
+    position: absolute;
+    right: 32px;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-align: right;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--accent);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 20s linear infinite;
+  }
+  .ticker span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: white;
+    padding: 0 24px;
+  }
+  .ticker-dot { color: rgba(255,255,255,0.4); }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* FILTER BAR */
+  .filter-bar {
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-tabs {
+    display: flex;
+    gap: 4px;
+  }
+  .filter-tab {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    padding: 8px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    cursor: none;
+  }
+  .filter-tab.active, .filter-tab:hover {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--black);
+  }
+  .product-count {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+  .product-count span { color: var(--white); }
+
+  /* PRODUCTS GRID */
+  .products {
+    padding: 40px 32px;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+  }
+
+  .product-card {
+    background: var(--card);
+    position: relative;
+    overflow: hidden;
+    group: true;
+    cursor: none;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover { transform: scale(1.01); z-index: 2; }
+
+  .product-img {
+    aspect-ratio: 3/4;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: 4px;
+  }
+
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .product-card:hover .product-overlay { opacity: 1; }
+
+  .overlay-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: none;
+    transform: translateY(8px);
+    transition: transform 0.3s;
+  }
+  .product-card:hover .overlay-btn { transform: translateY(0); }
+
+  .badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+  .badge-sale { background: var(--accent); color: white; }
+  .badge-sold { background: var(--dark); color: var(--gray); border: 1px solid var(--border); }
+  .badge-new { background: var(--gold); color: var(--black); }
+
+  .product-info {
+    padding: 16px 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .product-brand {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .product-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+  .product-pricing {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .price-original {
+    font-size: 12px;
+    color: var(--gray);
+    text-decoration: line-through;
+  }
+  .price-sale {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+  .price-markup {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-left: auto;
+  }
+
+  /* DM SECTION */
+  .dm-section {
+    margin: 2px;
+    background: linear-gradient(135deg, var(--accent) 0%, #8b0000 100%);
+    padding: 80px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dm-section::before {
+    content: 'PLUG';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    color: rgba(0,0,0,0.15);
+    letter-spacing: -5px;
+  }
+  .dm-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.95;
+    letter-spacing: 1px;
+  }
+  .dm-sub {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+  }
+  .btn-white {
+    background: white;
+    color: var(--accent);
+    border: none;
+    padding: 16px 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .btn-white:hover { transform: scale(1.04); }
+
+  /* HOW IT WORKS */
+  .how {
+    padding: 80px 32px;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 1px;
+    margin-bottom: 48px;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+  }
+  .step {
+    background: var(--card);
+    padding: 32px;
+    border-top: 2px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .step:hover { border-color: var(--accent); }
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+  .step-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag { animation: fadeUp 0.6s ease 0.1s both; }
+  .hero-title { animation: fadeUp 0.6s ease 0.2s both; }
+  .hero-sub { animation: fadeUp 0.6s ease 0.3s both; }
+  .hero-cta { animation: fadeUp 0.6s ease 0.4s both; }
+  .hero-stats { animation: fadeUp 0.6s ease 0.5s both; }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    nav { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 16px 60px; }
+    .hero-stats { display: none; }
+    .filter-bar { padding: 20px 16px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .products { padding: 20px 16px; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .dm-section { flex-direction: column; padding: 48px 16px; text-align: center; }
+    .dm-section::before { display: none; }
+    .how { padding: 48px 16px; }
+    footer { padding: 32px 16px; flex-direction: column; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Resales<span>PR</span></a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#how">Cómo funciona</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://instagram.com/resalespr" class="nav-ig" target="_blank">@resalespr</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">🇵🇷 Puerto Rico's Streetwear Plug</div>
+  <h1 class="hero-title">
+    STREET<br>
+    <span class="outline">WEAR</span><br>
+    <span class="accent">AL PRECIO</span><br>
+    CORRECTO
+  </h1>
+  <p class="hero-sub">Supreme • Nike • Jordan • Off-White<br>Calidad que habla sola. DM para info.</p>
+  <div class="hero-cta">
+    <a href="#shop" class="btn-primary">Ver productos</a>
+    <a href="https://instagram.com/resalespr" class="btn-ghost" target="_blank">DM ahora</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">21K+</div>
+      <div class="stat-label">Views mensuales</div>
+    </div>
+    <div>
+      <div class="stat-num">2X</div>
+      <div class="stat-label">Precio de resale</div>
+    </div>
+    <div>
+      <div class="stat-num">PR</div>
+      <div class="stat-label">Based</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Supreme <span class="ticker-dot">✦</span></span>
+    <span>Nike <span class="ticker-dot">✦</span></span>
+    <span>Jordan <span class="ticker-dot">✦</span></span>
+    <span>Off-White <span class="ticker-dot">✦</span></span>
+    <span>Comenta PLUG <span class="ticker-dot">✦</span></span>
+    <span>Puerto Rico <span class="ticker-dot">✦</span></span>
+    <span>W2C Available <span class="ticker-dot">✦</span></span>
+    <span>DM for info <span class="ticker-dot">✦</span></span>
+    <span>Supreme <span class="ticker-dot">✦</span></span>
+    <span>Nike <span class="ticker-dot">✦</span></span>
+    <span>Jordan <span class="ticker-dot">✦</span></span>
+    <span>Off-White <span class="ticker-dot">✦</span></span>
+    <span>Comenta PLUG <span class="ticker-dot">✦</span></span>
+    <span>Puerto Rico <span class="ticker-dot">✦</span></span>
+    <span>W2C Available <span class="ticker-dot">✦</span></span>
+    <span>DM for info <span class="ticker-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- FILTER + SHOP -->
+<div id="shop">
+  <div class="filter-bar">
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterProducts('all', this)">Todo</button>
+      <button class="filter-tab" onclick="filterProducts('supreme', this)">Supreme</button>
+      <button class="filter-tab" onclick="filterProducts('nike', this)">Nike</button>
+      <button class="filter-tab" onclick="filterProducts('jordan', this)">Jordan</button>
+      <button class="filter-tab" onclick="filterProducts('offwhite', this)">Off-White</button>
+    </div>
+    <div class="product-count">Mostrando <span id="count">8</span> productos</div>
+  </div>
+
+  <div class="products">
+    <div class="products-grid" id="grid">
+
+      <div class="product-card" data-cat="supreme">
+        <div class="product-img">
+          <div class="product-img-placeholder">SUP</div>
+          <span class="badge badge-sale">SALE</span>
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="dmProduct('Supreme Box Logo Hoodie')">Comenta PLUG 👀</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Supreme</div>
+          <div class="product-name">Box Logo Hoodie — Black</div>
+          <div class="product-pricing">
+            <span class="price-original">$300</span>
+            <span class="price-sale">$160</span>
+            <span class="price-markup">🔥 Deal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="supreme">
+        <div class="product-img">
+          <div class="product-img-placeholder">SUP</div>
+          <span class="badge badge-new">NEW</span>
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="dmProduct('Supreme Sweatpants')">Comenta PLUG 👀</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Supreme</div>
+          <div class="product-name">Old English Sweatpants</div>
+          <div class="product-pricing">
+            <span class="price-original">$300</span>
+            <span class="price-sale">$80</span>
+            <span class="price-markup">🔥 Deal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="supreme">
+        <div class="product-img">
+          <div class="product-img-placeholder">SUP</div>
+          <span class="badge badge-sold">SOLD</span>
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="dmProduct('Supreme Jacket')">Ver similar 👀</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Supreme</div>
+          <div class="product-name">Track Jacket — Cream</div>
+          <div class="product-pricing">
+            <span class="price-original">$250</span>
+            <span class="price-sale">$80</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="jordan">
+        <div class="product-img">
+          <div class="product-img-placeholder">AIR</div>
+          <span class="badge badge-sale">SALE</span>
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="dmProduct('Jordan 1 Retro High')">Comenta PLUG 👀</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Jordan</div>
+          <div class="product-name">Air Jordan 1 Retro High OG</div>
+          <div class="product-pricing">
+            <span class="price-original">$180</span>
+            <span class="price-sale">$120</span>
+            <span class="price-markup">🔥 Deal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="nike">
+        <div class="product-img">
+          <div class="product-img-placeholder">NK</div>
+          <span class="badge badge-new">NEW</span>
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="dmProduct('Nike Tech Fleece')">Comenta PLUG 👀</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Nike</div>
+          <div class="product-name">Tech Fleece Full-Zip — Black</div>
+          <div class="product-pricing">
+            <span class="price-original">$200</span>
+            <span class="price-sale">$85</span>
+            <span class="price-markup">🔥 Deal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="offwhite">
+        <div class="product-img">
+          <div class="product-img-placeholder">O/W</div>
+          <span class="badge badge-sale">SALE</span>
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="dmProduct('Off-White Industrial Belt')">Comenta PLUG 👀</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Off-White</div>
+          <div class="product-name">Industrial Belt — Yellow</div>
+          <div class="product-pricing">
+            <span class="price-original">$150</span>
+            <span class="price-sale">$65</span>
+            <span class="price-markup">🔥 Deal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="jordan">
+        <div class="product-img">
+          <div class="product-img-placeholder">AIR</div>
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="dmProduct('Jordan 4 Retro')">Comenta PLUG 👀</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Jordan</div>
+          <div class="product-name">Air Jordan 4 Retro — White Cement</div>
+          <div class="product-pricing">
+            <span class="price-original">$210</span>
+            <span class="price-sale">$140</span>
+            <span class="price-markup">🔥 Deal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="supreme">
+        <div class="product-img">
+          <div class="product-img-placeholder">SUP</div>
+          <span class="badge badge-new">NEW</span>
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="dmProduct('Supreme 5-Panel Cap')">Comenta PLUG 👀</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Supreme</div>
+          <div class="product-name">5-Panel Camp Cap — Red</div>
+          <div class="product-pricing">
+            <span class="price-original">$80</span>
+            <span class="price-sale">$45</span>
+            <span class="price-markup">🔥 Deal</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- DM BANNER -->
+<div class="dm-section" id="contact">
+  <div>
+    <p class="dm-tag" style="font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin-bottom:12px;">¿Ves algo que quieres?</p>
+    <h2 class="dm-title">COMENTA<br>"PLUG"<br>Y TE CUIDO</h2>
+    <p class="dm-sub">Precios reales. Calidad que habla sola. 🇵🇷</p>
+  </div>
+  <a href="https://instagram.com/resalespr" target="_blank" class="btn-white">IR A INSTAGRAM →</a>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-label">El proceso</div>
+  <h2 class="section-title">Así funciona</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Ves algo 👀</div>
+      <div class="step-desc">Explora los productos y encuentra lo que te llama la atención.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Comenta PLUG</div>
+      <div class="step-desc">Comenta "PLUG" en el post de Instagram o manda un DM directo.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Confirmamos</div>
+      <div class="step-desc">Te mando info, talla, color y precio. Coordenamos el pago.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Te llega 📦</div>
+      <div class="step-desc">Tu orden se procesa y llega directo a donde estés. Puerto Rico incluido.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Resales<span>PR</span></div>
+  <ul class="footer-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="https://instagram.com/resalespr" target="_blank">Instagram</a></li>
+    <li><a href="#how">Cómo funciona</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 ResalesPR · Puerto Rico 🇵🇷</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 5 + 'px';
+    cursor.style.top = e.clientY - 5 + 'px';
+    rx += (e.clientX - 18 - rx) * 0.12;
+    ry += (e.clientY - 18 - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+  });
+
+  function animateRing() {
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Filter
+  function filterProducts(cat, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const cards = document.querySelectorAll('.product-card');
+    let visible = 0;
+    cards.forEach(c => {
+      const show = cat === 'all' || c.dataset.cat === cat;
+      c.style.display = show ? 'block' : 'none';
+      if (show) visible++;
+    });
+    document.getElementById('count').textContent = visible;
+  }
+
+  // DM redirect
+  function dmProduct(name) {
+    const msg = encodeURIComponent(`Hola! Vi el producto "${name}" en ResalesPR y quiero info 👀`);
+    window.open(`https://instagram.com/resalespr`, '_blank');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.product-card, .step').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
