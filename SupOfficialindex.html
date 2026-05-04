@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResalesPR — Streetwear Plug</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #161616;
+    --border: #222222;
+    --white: #f5f5f5;
+    --gray: #888888;
+    --accent: #ff2d2d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 60px;
+    background: rgba(10,10,10,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 20px 40px;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(255,45,45,0.1) 0%, transparent 70%);
+  }
+  .hero-tag { font-size: 10px; letter-spacing: 3px; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: 60px; line-height: 0.9; margin-bottom: 20px; }
+  .hero-title span { color: var(--accent); }
+  .ticker { background: var(--accent); padding: 12px 0; overflow: hidden; white-space: nowrap; }
+  .ticker-inner { display: inline-flex; animation: ticker 15s linear infinite; }
+  .ticker span { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; padding: 0 20px; color: white; text-transform: uppercase; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .products { padding: 40px 15px; }
+  .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .product-card { background: var(--card); border: 1px solid var(--border); overflow: hidden; position: relative; }
+  .product-img { aspect-ratio: 1/1; background: var(--dark); display: flex; align-items: center; justify-content: center; position: relative; }
+  .product-img-placeholder { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: rgba(255,255,255,0.05); }
+  .badge { position: absolute; top: 8px; left: 8px; background: var(--accent); color: white; padding: 3px 7px; font-size: 9px; font-weight: 700; text-transform: uppercase; }
+  .product-info { padding: 12px; }
+  .product-name { font-size: 13px; font-weight: 500; height: 35px; overflow: hidden; margin-bottom: 8px; color: var(--white); }
+  .price-sale { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+  .buy-btn {
+    display: block;
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+  .footer { padding: 40px 20px; text-align: center; border-top: 1px solid var(--border); font-size: 11px; color: var(--gray); }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="#" class="nav-logo">RESALES<span>PR</span></a>
+  <a href="https://instagram.com/resalespr" target="_blank" style="color:var(--gray); font-size:11px; text-decoration:none;">@resalespr</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Puerto Rico Streetwear</div>
+  <h1 class="hero-title">EL PLUG<br><span>DIRECTO</span></h1>
+  <p style="font-size:12px; color:var(--gray);">Calidad Premium. Los mejores precios de la isla.</p>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Supreme ✦ Nike ✦ Jordan ✦ Hipobuy Deals ✦ W2C ✦ Puerto Rico ✦</span>
+    <span>Supreme ✦ Nike ✦ Jordan ✦ Hipobuy Deals ✦ W2C ✦ Puerto Rico ✦</span>
+  </div>
+</div>
+
+<div class="products" id="shop">
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder">SUP</div>
+        <span class="badge">HOT</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Supreme Box Logo Hoodie</div>
+        <div
+
+    
