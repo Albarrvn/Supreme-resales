@@ -684,7 +684,85 @@
   </div>
 
   <div class="products">
-    <div class="products-grid" id="grid">
+    <div class="products-grid" id="grid"> <div class="products-grid" id="grid">
+
+  <div class="product-card" data-cat="supreme">
+    <div class="product-img">
+      <div class="product-img-placeholder">SUP</div>
+      <span class="badge badge-sale">HOT</span>
+      <div class="product-overlay">
+        <a href="https://hipobuy.cn/MePVsXCX?s=appshare" target="_blank" class="overlay-btn" style="text-decoration:none;">Comprar Ahora</a>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Supreme</div>
+      <div class="product-name">Supreme Box Logo Hoodie</div>
+      <div class="product-pricing">
+        <span class="price-original">$180</span>
+        <span class="price-sale">$85</span>
+        <span class="price-markup">W2C link</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-cat="supreme">
+    <div class="product-img">
+      <div class="product-img-placeholder">SUP</div>
+      <span class="badge badge-new">NEW</span>
+      <div class="product-overlay">
+        <a href="https://hipobuy.cn/0kdPhTjr?s=appshare" target="_blank" class="overlay-btn" style="text-decoration:none;">Ver en Hipobuy</a>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Supreme</div>
+      <div class="product-name">Camisa Supreme Negra 🌑</div>
+      <div class="product-pricing">
+        <span class="price-original">$60</span>
+        <span class="price-sale">$28</span>
+        <span class="price-markup">Best Price</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-cat="supreme">
+    <div class="product-img">
+      <div class="product-img-placeholder">SUP</div>
+      <div class="product-overlay">
+        <a href="https://hipobuy.cn/tSRj2npN?s=appshare" target="_blank" class="overlay-btn" style="text-decoration:none;">Get the Plug</a>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Supreme</div>
+      <div class="product-name">Supreme Box Logo Rojo</div>
+      <div class="product-pricing">
+        <span class="price-original">$75</span>
+        <span class="price-sale">$32</span>
+        <span class="price-markup">Original Cut</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-cat="supreme">
+    <div class="product-img">
+      <div class="product-img-placeholder">SUP</div>
+      <span class="badge badge-sale">SALE</span>
+      <div class="product-overlay">
+        <a href="https://hipobuy.cn/0XAZQaHF?s=appshare" target="_blank" class="overlay-btn" style="text-decoration:none;">Cop Now</a>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Supreme</div>
+      <div class="product-name">Supreme Classic T-Shirts</div>
+      <div class="product-pricing">
+        <span class="price-original">$50</span>
+        <span class="price-sale">$24</span>
+        <span class="price-markup">Fuego</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 
       <div class="product-card" data-cat="supreme">
         <div class="product-img">
