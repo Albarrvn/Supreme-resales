@@ -1,4 +1,270 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResalesPR — Streetwear</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #161616;
+    --border: #222222;
+    --white: #f5f5f5;
+    --gray: #888888;
+    --accent: #ff2d2d;
+    --gold: #c9a84c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
+  * { cursor: none; }
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,45,45,0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.12s ease;
+  }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 64px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 32px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(255,45,45,0.08) 0%, transparent 60%), var(--black);
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.9;
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .hero-title .accent { color: var(--accent); }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 14px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .ticker { background: var(--accent); padding: 10px 0; overflow: hidden; white-space: nowrap; }
+  .ticker-inner { display: inline-flex; animation: ticker 20s linear infinite; }
+  .ticker span { font-family: 'Barlow Condensed', sans-serif; padding: 0 24px; color: white; text-transform: uppercase; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .products { padding: 40px 32px; }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+  .product-card { background: var(--card); border: 1px solid var(--border); transition: 0.3s; }
+  .product-img { aspect-ratio: 3/4; background: var(--dark); display: flex; align-items: center; justify-content: center; position: relative; }
+  .product-img-placeholder { font-family: 'Bebas Neue', sans-serif; font-size: 60px; color: rgba(255,255,255,0.05); }
+  .product-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+  .product-card:hover .product-overlay { opacity: 1; }
+  .overlay-btn { background: var(--accent); color: white; padding: 12px 24px; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; }
+  .product-info { padding: 20px; }
+  .product-brand { font-size: 10px; color: var(--accent); text-transform: uppercase; margin-bottom: 5px; }
+  .product-name { font-size: 15px; margin-bottom: 10px; font-weight: 600; }
+  .price-sale { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; }
+  .badge { position: absolute; top: 10px; left: 10px; background: var(--accent); padding: 4px 8px; font-size: 10px; font-weight: 700; }
+  .dm-section { background: var(--accent); padding: 60px 32px; text-align: center; }
+  .dm-title { font-family: 'Bebas Neue', sans-serif; font-size: 60px; }
+  footer { padding: 40px; text-align: center; border-top: 1px solid var(--border); }
+  @media (max-width: 640px) { .products-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="#" class="nav-logo">Resales<span>PR</span></a>
+  <div class="nav-right">
+    <a href="https://instagram.com/resalespr" class="nav-ig" target="_blank">@resalespr</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">🇵🇷 Puerto Rico's Streetwear Plug</div>
+  <h1 class="hero-title">STREET<br><span class="accent">WEAR</span><br>PLUG</h1>
+  <div class="hero-cta">
+    <a href="#shop" class="btn-primary">Ver productos</a>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Supreme ✦ Nike ✦ Jordan ✦ Hipobuy Deals ✦ Puerto Rico ✦ W2C ✦</span>
+    <span>Supreme ✦ Nike ✦ Jordan ✦ Hipobuy Deals ✦ Puerto Rico ✦ W2C ✦</span>
+  </div>
+</div>
+
+<div id="shop" class="products">
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder">SUP</div>
+        <span class="badge">HOT</span>
+        <div class="product-overlay">
+          <a href="https://hipobuy.cn/MePVsXCX?s=appshare" target="_blank" class="overlay-btn">Comprar Ahora</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Supreme</div>
+        <div class="product-name">Supreme Box Logo Hoodie</div>
+        <div class="price-sale">$85.00</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder">SUP</div>
+        <span class="badge">NEW</span>
+        <div class="product-overlay">
+          <a href="https://hipobuy.cn/0kdPhTjr?s=appshare" target="_blank" class="overlay-btn">Comprar Ahora</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Supreme</div>
+        <div class="product-name">Camisa Supreme Negra 🌑</div>
+        <div class="price-sale">$28.00</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder">SUP</div>
+        <div class="product-overlay">
+          <a href="https://hipobuy.cn/tSRj2npN?s=appshare" target="_blank" class="overlay-btn">Comprar Ahora</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Supreme</div>
+        <div class="product-name">Supreme Box Rojo</div>
+        <div class="price-sale">$32.00</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder">SUP</div>
+        <div class="product-overlay">
+          <a href="https://hipobuy.cn/0XAZQaHF?s=appshare" target="_blank" class="overlay-btn">Comprar Ahora</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Supreme</div>
+        <div class="product-name">Supreme T-Shirts Pack</div>
+        <div class="price-sale">$24.00</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-placeholder">SUP</div>
+        <div class="product-overlay">
+          <a href="https://hipobuy.cn/jsB7oNE4?s=appshare" target="_blank" class="overlay-btn">Comprar Ahora</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Supreme</div>
+        <div class="product-name">Supreme Accessories</div>
+        <div class="price-sale">$45.00</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="dm-section">
+  <h2 class="dm-title">SÍGUENOS EN IG</h2>
+  <a href="https://instagram.com/resalespr" target="_blank" style="color:white; font-weight:bold;">@resalespr</a>
+</div>
+
+<footer>
+  <p>© 2026 ResalesPR · Puerto Rico 🇵🇷</p>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 5 + 'px';
+    cursor.style.top = e.clientY - 5 + 'px';
+    rx += (e.clientX - 18 - rx) * 0.12;
+    ry += (e.clientY - 18 - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+  });
+  function animateRing() {
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+</script>
+</body>
+</html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
