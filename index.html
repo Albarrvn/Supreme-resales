@@ -1,4 +1,4 @@
-   .;}<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -638,6 +638,34 @@
     text-align: center;
   }
 
+  /* BUY NOW BUTTON */
+  .buy-now-btn {
+    display: block;
+    width: 100%;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 0;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 3;
+  }
+  .buy-now-btn:hover { background: var(--red-dark); }
+
+  /* WIDE CARD (full width) */
+  .product-card-wide {
+    grid-column: 1 / -1;
+  }
+  .product-card-wide .product-img {
+    aspect-ratio: 16/9;
+  }
+
   /* TESTIMONIOS */
   .reviews-section { background: var(--black2); }
   .reviews-grid {
@@ -1086,103 +1114,97 @@
   <div class="filter-bar">
     <button class="filter-btn active" onclick="filterProducts('todo', this)">Todo</button>
     <button class="filter-btn" onclick="filterProducts('supreme', this)">Supreme</button>
-    <button class="filter-btn" onclick="filterProducts('nike', this)">Nike</button>
-    <button class="filter-btn" onclick="filterProducts('jordan', this)">Jordan</button>
+    <button class="filter-btn" onclick="filterProducts('collab', this)">Supreme x Nike</button>
   </div>
 
   <div class="products-grid" id="productsGrid">
 
+    <!-- PRODUCTO 1: Supreme Devil Tee -->
     <div class="product-card" data-cat="supreme">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20Devil%20Tee%20Black" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
       <div class="product-img">
         <span class="product-badge badge-hot">HOT</span>
-        <div class="product-placeholder">SUPREME<br>JERSEY</div>
-        <div class="product-overlay"><span>W2C →</span></div>
+        <img src="images/supreme-devil-tee.jpg" alt="Supreme Devil Tee Black" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="product-overlay"><span>COMPRAR →</span></div>
       </div>
       <div class="product-info">
         <p class="product-brand">Supreme</p>
-        <p class="product-name">Jersey Basketball 2024</p>
+        <p class="product-name">Devil Tee Black</p>
         <div class="product-price-row">
-          <span class="product-price">$185</span>
+          <span class="product-price">DM Price</span>
           <span class="product-w2c">W2C</span>
         </div>
       </div>
     </div>
 
+    <!-- PRODUCTO 2: Supreme Body Snatchers -->
     <div class="product-card" data-cat="supreme">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20Body%20Snatchers%20Tee%20Navy" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
       <div class="product-img">
         <span class="product-badge badge-new">NEW</span>
-        <div class="product-placeholder">SUPREME<br>JERSEY GREY</div>
-        <div class="product-overlay"><span>W2C →</span></div>
+        <img src="images/supreme-body-snatchers.jpg" alt="Supreme Body Snatchers Tee" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="product-overlay"><span>COMPRAR →</span></div>
       </div>
       <div class="product-info">
         <p class="product-brand">Supreme</p>
-        <p class="product-name">Jersey Grey Tono</p>
+        <p class="product-name">Body Snatchers Tee Navy</p>
         <div class="product-price-row">
-          <span class="product-price">$175</span>
+          <span class="product-price">DM Price</span>
           <span class="product-w2c">W2C</span>
         </div>
       </div>
     </div>
 
-    <div class="product-card" data-cat="nike">
-      <div class="product-img">
-        <span class="product-badge badge-new">NEW</span>
-        <div class="product-placeholder">NIKE<br>DUNK LOW</div>
-        <div class="product-overlay"><span>W2C →</span></div>
-      </div>
-      <div class="product-info">
-        <p class="product-brand">Nike</p>
-        <p class="product-name">Dunk Low Retro</p>
-        <div class="product-price-row">
-          <span class="product-price">$220</span>
-          <span class="product-w2c">W2C</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card" data-cat="jordan">
+    <!-- PRODUCTO 3: Supreme Apes Orange -->
+    <div class="product-card" data-cat="supreme">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20Apes%20Tee%20Orange" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
       <div class="product-img">
         <span class="product-badge badge-hot">HOT</span>
-        <div class="product-placeholder">AIR<br>JORDAN 1</div>
-        <div class="product-overlay"><span>W2C →</span></div>
-      </div>
-      <div class="product-info">
-        <p class="product-brand">Jordan</p>
-        <p class="product-name">Air Jordan 1 High OG</p>
-        <div class="product-price-row">
-          <span class="product-price">$295</span>
-          <span class="product-w2c">W2C</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card" data-cat="supreme">
-      <div class="product-img">
-        <div class="product-placeholder">SUPREME<br>BOX LOGO</div>
-        <div class="product-overlay"><span>W2C →</span></div>
+        <img src="images/supreme-apes-orange.jpg" alt="Supreme Apes Tee Orange" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="product-overlay"><span>COMPRAR →</span></div>
       </div>
       <div class="product-info">
         <p class="product-brand">Supreme</p>
-        <p class="product-name">Box Logo Hoodie FW24</p>
+        <p class="product-name">Apes Tee Orange</p>
         <div class="product-price-row">
-          <span class="product-price on-request">DM for Price</span>
+          <span class="product-price">DM Price</span>
           <span class="product-w2c">W2C</span>
         </div>
       </div>
     </div>
 
-    <div class="product-card" data-cat="nike">
+    <!-- PRODUCTO 4: Supreme Evolution Tee -->
+    <div class="product-card" data-cat="supreme">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20Evolution%20Tee%20Black" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
       <div class="product-img">
-        <span class="product-badge badge-sold">SOLD</span>
-        <div class="product-placeholder" style="opacity:0.4">NIKE<br>SB DUNK</div>
-        <div class="product-overlay"><span>Sold Out</span></div>
+        <span class="product-badge badge-new">NEW</span>
+        <img src="images/supreme-evolution-tee.jpg" alt="Supreme Evolution Tee Black" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="product-overlay"><span>COMPRAR →</span></div>
       </div>
       <div class="product-info">
-        <p class="product-brand">Nike SB</p>
-        <p class="product-name">Dunk Low Pro</p>
+        <p class="product-brand">Supreme</p>
+        <p class="product-name">Evolution Tee Black</p>
         <div class="product-price-row">
-          <span class="product-price" style="color:var(--grey)">SOLD</span>
-          <span class="product-w2c" style="border-color:rgba(255,255,255,0.1);color:var(--grey)">GONE</span>
+          <span class="product-price">DM Price</span>
+          <span class="product-w2c">W2C</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 5: Supreme x Nike Cap Purple - FULL WIDTH -->
+    <div class="product-card product-card-wide" data-cat="collab">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20x%20Nike%20Corduroy%20Cap%20Purple" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
+      <div class="product-img">
+        <span class="product-badge badge-hot">🔥 COLLAB</span>
+        <img src="images/supreme-nike-cap-purple.jpg" alt="Supreme x Nike Corduroy Cap Purple" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="product-overlay"><span>COMPRAR →</span></div>
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Supreme x Nike</p>
+        <p class="product-name">Corduroy Camp Cap Purple</p>
+        <div class="product-price-row">
+          <span class="product-price">DM Price</span>
+          <span class="product-w2c">W2C</span>
         </div>
       </div>
     </div>
@@ -1396,4 +1418,3 @@
 </script>
 </body>
 </html>
-
