@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SupResales PR — El Plug Directo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #E51C1C;
+    --red-dark: #B01515;
+    --black: #0A0A0A;
+    --black2: #111111;
+    --black3: #1A1A1A;
+    --white: #FFFFFF;
+    --grey: #888888;
+    --grey-light: #CCCCCC;
+    --gold: #C9A84C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: normal;
+  }
+  .cursor-follower {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(229,28,28,0.5);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.08s ease-out;
+  }
+  a:hover ~ .cursor, button:hover ~ .cursor { width: 20px; height: 20px; }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--red);
+    overflow: hidden;
+    padding: 8px 0;
+    position: relative;
+    z-index: 100;
+  }
+  .ticker {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 20s linear infinite;
+    gap: 0;
+  }
+  .ticker-item {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ticker-item::after {
+    content: '◆';
+    font-size: 8px;
+    opacity: 0.7;
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-ig {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 6px 14px;
+    transition: all 0.2s;
+  }
+  .nav-ig:hover {
+    background: var(--red);
+    border-color: var(--red);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100svh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 24px 60px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(229,28,28,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(229,28,28,0.08) 0%, transparent 70%),
+      var(--black);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(229,28,28,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(229,28,28,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  }
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+  /* Floating product mockup */
+  .hero-visual {
+    position: absolute;
+    top: 10%;
+    right: -20px;
+    width: 55%;
+    max-width: 300px;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .hero-visual-inner {
+    width: 100%;
+    aspect-ratio: 1;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(229,28,28,0.4), transparent 70%);
+    border-radius: 50%;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(-3deg); }
+    50% { transform: translateY(-20px) rotate(3deg); }
+  }
+
+  .hero-eyebrow {
+    position: relative;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    animation: fadeUp 0.8s ease both 0.2s;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--red);
+    display: inline-block;
+  }
+
+  .hero-title {
+    position: relative;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 22vw, 140px);
+    line-height: 0.88;
+    letter-spacing: 0.01em;
+    margin-bottom: 28px;
+  }
+  .hero-title .line1 {
+    display: block;
+    color: var(--white);
+    animation: fadeUp 0.8s ease both 0.35s;
+  }
+  .hero-title .line2 {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+    animation: fadeUp 0.8s ease both 0.45s;
+  }
+  .hero-title .line3 {
+    display: block;
+    color: var(--red);
+    animation: fadeUp 0.8s ease both 0.55s;
+  }
+
+  .hero-brands {
+    position: relative;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 6px;
+    animation: fadeUp 0.8s ease both 0.65s;
+  }
+  .hero-sub {
+    position: relative;
+    font-size: 15px;
+    color: var(--grey-light);
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s ease both 0.7s;
+  }
+
+  .hero-ctas {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    animation: fadeUp 0.8s ease both 0.8s;
+  }
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 16px 28px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: none;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.15);
+    transition: left 0.3s ease;
+  }
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 16px 28px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: none;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--red);
+    color: var(--red);
+    transform: translateY(-1px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 1s ease both 1.2s;
+  }
+  .hero-scroll span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--black2);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 28px 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: rgba(255,255,255,0.06);
+  }
+  .stat-item {
+    background: var(--black2);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--red);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* SECTION COMMON */
+  section { padding: 80px 24px; }
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--red);
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 10vw, 64px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    margin-bottom: 40px;
+  }
+
+  /* HOW IT WORKS */
+  .how-section { background: var(--black2); }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    bottom: 40px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+  }
+  .step {
+    display: flex;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+  .step.visible { opacity: 1; transform: translateX(0); }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    background: rgba(229,28,28,0.1);
+    border: 1px solid rgba(229,28,28,0.3);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .step-content h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .step-content p {
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+  .step-icon {
+    font-size: 28px;
+    margin-left: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  /* PRODUCTS */
+  .products-section { background: var(--black); }
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: var(--grey);
+    cursor: none;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .filter-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+  .filter-btn:hover:not(.active) {
+    border-color: rgba(255,255,255,0.4);
+    color: var(--white);
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .product-card {
+    background: var(--black3);
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover { transform: translateY(-4px); }
+  .product-card:hover .product-overlay { opacity: 1; }
+  .product-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Placeholder product visuals */
+  .product-placeholder {
+    width: 75%;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(255,255,255,0.08);
+  }
+  .product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    z-index: 2;
+  }
+  .badge-hot { background: var(--red); color: var(--white); }
+  .badge-new { background: var(--gold); color: var(--black); }
+  .badge-sold { background: rgba(0,0,0,0.7); color: var(--grey); border: 1px solid rgba(255,255,255,0.1); }
+
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(229,28,28,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .product-overlay span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 10px 20px;
+  }
+
+  .product-info {
+    padding: 12px 14px 16px;
+  }
+  .product-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+  .product-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .product-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .product-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+  .product-price.on-request {
+    font-size: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .product-w2c {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid rgba(229,28,28,0.4);
+    padding: 4px 10px;
+  }
+
+  .products-cta {
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  /* BUY NOW BUTTON */
+  .buy-now-btn {
+    display: block;
+    width: 100%;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 0;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 3;
+  }
+  .buy-now-btn:hover { background: var(--red-dark); }
+
+  /* WIDE CARD (full width) */
+  .product-card-wide {
+    grid-column: 1 / -1;
+  }
+  .product-card-wide .product-img {
+    aspect-ratio: 16/9;
+  }
+
+  /* TESTIMONIOS */
+  .reviews-section { background: var(--black2); }
+  .reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .review-card {
+    background: var(--black3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: 3px solid var(--red);
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
+  .review-card.visible { opacity: 1; transform: translateY(0); }
+  .review-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 10px;
+  }
+  .star { color: var(--gold); font-size: 14px; }
+  .review-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--grey-light);
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .review-text::before { content: '"'; color: var(--red); font-size: 20px; line-height: 0; vertical-align: -4px; }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .review-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(229,28,28,0.15);
+    border: 1px solid rgba(229,28,28,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    color: var(--red);
+  }
+  .review-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .review-handle {
+    font-size: 12px;
+    color: var(--grey);
+  }
+
+  /* FAQ */
+  .faq-section { background: var(--black); }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: none;
+    transition: color 0.2s;
+    gap: 16px;
+  }
+  .faq-q:hover { color: var(--red); }
+  .faq-icon {
+    font-size: 20px;
+    color: var(--red);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    font-style: normal;
+    line-height: 1;
+    font-family: monospace;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a {
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+  .faq-item.open .faq-a {
+    max-height: 200px;
+    padding-bottom: 20px;
+  }
+
+  /* CONTACT / CTA */
+  .cta-section {
+    background: var(--black2);
+    text-align: center;
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(229,28,28,0.12), transparent 70%);
+  }
+  .cta-section .section-eyebrow {
+    justify-content: center;
+  }
+  .cta-section .section-eyebrow::before { display: none; }
+  .cta-section .section-title { margin-bottom: 12px; }
+  .cta-sub {
+    font-size: 15px;
+    color: var(--grey);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+  }
+  .btn-wa {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: #25D366;
+    color: var(--white);
+    border: none;
+    padding: 18px 28px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: none;
+    transition: all 0.2s;
+  }
+  .btn-wa:hover { background: #1aad52; transform: translateY(-1px); }
+  .payments-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .payment-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+    width: 100%;
+    text-align: center;
+    margin-bottom: -8px;
+  }
+  .payment-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--grey-light);
+  }
+  .payment-badge.ath { border-color: rgba(229,28,28,0.4); color: var(--red); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 20px;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .footer-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--red); }
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* FLOATING WA BUTTON */
+  .wa-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 400;
+    width: 54px;
+    height: 54px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: waPulse 3s ease-in-out infinite;
+  }
+  .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35); }
+    50% { box-shadow: 0 4px 30px rgba(37,211,102,0.6); }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(229,28,28,0.4), transparent);
+    margin: 0 24px;
+  }
+
+  /* BRAND LOGOS */
+  .brands-section {
+    padding: 40px 24px;
+    background: var(--black2);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .brands-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .brands-list {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .brand-pill {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.15);
+    transition: color 0.2s;
+  }
+  .brand-pill:hover { color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- FLOATING WHATSAPP -->
+<a class="wa-float" href="https://wa.me/1787XXXXXXX?text=Hola,%20vi%20sus%20productos%20en%20SupResales%20y%20quiero%20info" target="_blank" title="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">W2C</span>
+    <span class="ticker-item">DM For Info</span>
+    <span class="ticker-item">Supreme</span>
+    <span class="ticker-item">Nike</span>
+    <span class="ticker-item">Jordan</span>
+    <span class="ticker-item">Off-White</span>
+    <span class="ticker-item">Puerto Rico</span>
+    <span class="ticker-item">ATH Móvil</span>
+    <span class="ticker-item">El Plug Directo</span>
+    <span class="ticker-item">W2C</span>
+    <span class="ticker-item">DM For Info</span>
+    <span class="ticker-item">Supreme</span>
+    <span class="ticker-item">Nike</span>
+    <span class="ticker-item">Jordan</span>
+    <span class="ticker-item">Off-White</span>
+    <span class="ticker-item">Puerto Rico</span>
+    <span class="ticker-item">ATH Móvil</span>
+    <span class="ticker-item">El Plug Directo</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">RESALES<span>PR</span></a>
+  <a href="https://instagram.com/resalespr" target="_blank" class="nav-ig">@RESALESPR</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-visual"><div class="hero-visual-inner"></div></div>
+
+  <div class="hero-eyebrow">🇵🇷 Puerto Rico Streetwear Plug</div>
+  <h1 class="hero-title">
+    <span class="line1">EL</span>
+    <span class="line2">PLUG</span>
+    <span class="line3">DIRECTO</span>
+  </h1>
+  <p class="hero-brands">Supreme · Nike · Jordan · Off-White</p>
+  <p class="hero-sub">Calidad premium. Los mejores precios de la isla.</p>
+  <div class="hero-ctas">
+    <a href="#productos" class="btn-primary">Ver Productos →</a>
+    <a href="https://instagram.com/resalespr" target="_blank" class="btn-secondary">DM Ahora</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">500+</span>
+    <span class="stat-label">Clientes</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">Auténtico</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">PR</span>
+    <span class="stat-label">Toda la isla</span>
+  </div>
+</div>
+
+<!-- BRANDS -->
+<div class="brands-section">
+  <p class="brands-label">Marcas disponibles</p>
+  <div class="brands-list">
+    <span class="brand-pill">SUPREME</span>
+    <span class="brand-pill">NIKE</span>
+    <span class="brand-pill">JORDAN</span>
+    <span class="brand-pill">OFF-WHITE</span>
+    <span class="brand-pill">BAPE</span>
+    <span class="brand-pill">PALACE</span>
+    <span class="brand-pill">STÜSSY</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="como-comprar">
+  <div class="section-eyebrow">¿Cómo funciona?</div>
+  <h2 class="section-title">COMPRAR<br>ES FÁCIL</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Ve el Producto</h3>
+        <p>Busca en nuestro catálogo o pregunta por algo específico. Si no lo ves aquí, pregunta igual — conseguimos casi todo.</p>
+      </div>
+      <div class="step-icon">👀</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Haz tu DM o WhatsApp</h3>
+        <p>Contáctanos por Instagram o WhatsApp con el item que quieres. Te respondemos en menos de 24 horas con precio y disponibilidad.</p>
+      </div>
+      <div class="step-icon">💬</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Paga y Recibe</h3>
+        <p>Aceptamos ATH Móvil, Zelle y efectivo. Hacemos envíos a toda Puerto Rico o pickup disponible en el área sur.</p>
+      </div>
+      <div class="step-icon">📦</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="productos">
+  <div class="section-eyebrow">Catálogo</div>
+  <h2 class="section-title">DROPS<br>DISPONIBLES</h2>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProducts('todo', this)">Todo</button>
+    <button class="filter-btn" onclick="filterProducts('supreme', this)">Supreme</button>
+    <button class="filter-btn" onclick="filterProducts('collab', this)">Supreme x Nike</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid">
+
+    <!-- PRODUCTO 1: Supreme Devil Tee -->
+    <div class="product-card" data-cat="supreme">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20Devil%20Tee%20Black" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
+      <div class="product-img">
+        <span class="product-badge badge-hot">HOT</span>
+        <img src="images/supreme-devil-tee.jpg" alt="Supreme Devil Tee Black" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <a href="<script 
+  src="https://www.paypal.com/sdk/js?client-id=BAAHj9-huPxRb1UfAMSjeM32zJucHbjbPlZp3kG2TxAeUz_iSpV0N49Z9wKa5-TamOojzjs3cT0CTKUWYc&components=hosted-buttons&enable-funding=venmo&currency=USD">
+</script><div id="paypal-container-67MTM85UM4V3J"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "67MTM85UM4V3J",
+  }).render("#paypal-container-67MTM85UM4V3J")
+</script>" target="_blank" class="product-overlay">
+  <span>PAGAR AHORA →</span>
+</a>
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Supreme</p>
+        <p class="product-name">Devil Tee Black</p>
+        <div class="product-price-row">
+          <span class="product-price">DM Price</span>
+          <span class="product-w2c">W2C</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 2: Supreme Body Snatchers -->
+    <div class="product-card" data-cat="supreme">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20Body%20Snatchers%20Tee%20Navy" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
+      <div class="product-img">
+        <span class="product-badge badge-new">NEW</span>
+        <img src="images/supreme-body-snatchers.jpg" alt="Supreme Body Snatchers Tee" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <script href="<script 
+  src="https://www.paypal.com/sdk/js?client-id=BAAHj9-huPxRb1UfAMSjeM32zJucHbjbPlZp3kG2TxAeUz_iSpV0N49Z9wKa5-TamOojzjs3cT0CTKUWYc&components=hosted-buttons&enable-funding=venmo&currency=USD"><div id="paypal-container-S5EQLQVNC6332"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "S5EQLQVNC6332",
+  }).render("#paypal-container-S5EQLQVNC6332")
+</script>
+</script>" target="_blank" class="product-overlay">
+  <span>PAGAR AHORA →</span>
+</a>
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Supreme</p>
+        <p class="product-name">Body Snatchers Tee Navy</p>
+        <div class="product-price-row">
+          <span class="product-price">DM Price</span>
+          <span class="product-w2c">W2C</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 3: Supreme Apes Orange -->
+    <div class="product-card" data-cat="supreme">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20Apes%20Tee%20Orange" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
+      <div class="product-img">
+        <span class="product-badge badge-hot">HOT</span>
+        <img src="images/supreme-apes-orange.jpg" alt="Supreme Apes Tee Orange" style="width:100%;height:100%;object-fit:cover;display:block;">
+         <a href="<script 
+https://www.paypal.com/sdk/js?client-id=BAAHj9-huPxRb1UfAMSjeM32zJucHbjbPlZp3kG2TxAeUz_iSpV0N49Z9wKa5-TamOojzjs3cT0CTKUWYc&components=hosted-buttons&enable-funding=venmo&currency=USD"><div id="paypal-container-S5EQLQVNC6332"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "S5EQLQVNC6332",
+  }).render("#paypal-container-S5EQLQVNC6332")
+</script>
+</script>" target="_blank" class="product-overlay">
+  <span>PAGAR AHORA →</span>
+</a>
+</script><div id="paypal-container-S5EQLQVNC6332"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "S5EQLQVNC6332",
+  }).render("#paypal-container-S5EQLQVNC6332")
+</script>" target="_blank" class="product-overlay">
+  <span>PAGAR AHORA →</span>
+</a>
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Supreme</p>
+        <p class="product-name">Apes Tee Orange</p>
+        <div class="product-price-row">
+          <span class="product-price">DM Price</span>
+          <span class="product-w2c">W2C</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 4: Supreme Evolution Tee -->
+    <div class="product-card" data-cat="supreme">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20Evolution%20Tee%20Black" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
+      <div class="product-img">
+        <span class="product-badge badge-new">NEW</span>
+        <img src="images/supreme-evolution-tee.jpg" alt="Supreme Evolution Tee Black" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <a href="TU_LINK_DE_PAYPAL" target="_blank" class="product-overlay">
+  <span>PAGAR AHORA →</span>
+</a><script 
+  src="https://www.paypal.com/sdk/js?client-id=BAAHj9-huPxRb1UfAMSjeM32zJucHbjbPlZp3kG2TxAeUz_iSpV0N49Z9wKa5-TamOojzjs3cT0CTKUWYc&components=hosted-buttons&enable-funding=venmo&currency=USD">
+</script><div id="paypal-container-RY67SRUX7NSLQ"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "RY67SRUX7NSLQ",
+  }).render("#paypal-container-RY67SRUX7NSLQ")
+</script>
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Supreme</p>
+        <p class="product-name">Evolution Tee Black</p>
+        <div class="product-price-row">
+          <span class="product-price">DM Price</span>
+          <span class="product-w2c">W2C</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 5: Supreme x Nike Cap Purple - FULL WIDTH -->
+    <div class="product-card product-card-wide" data-cat="collab">
+      <a href="https://wa.me/17870000000?text=Hola%2C%20quiero%20info%20del%20Supreme%20x%20Nike%20Corduroy%20Cap%20Purple" target="_blank" class="buy-now-btn">COMPRAR AHORA 🛒</a>
+      <div class="product-img">
+        <span class="product-badge badge-hot">🔥 COLLAB</span>
+        <img src="images/supreme-nike-cap-purple.jpg" alt="Supreme x Nike Corduroy Cap Purple" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <a href="TU_LINK_DE_PAYPAL" target="_blank" class="product-overlay">
+  <span>PAGAR AHORA →</span>
+</a><script 
+  src="https://www.paypal.com/sdk/js?client-id=BAAHj9-huPxRb1UfAMSjeM32zJucHbjbPlZp3kG2TxAeUz_iSpV0N49Z9wKa5-TamOojzjs3cT0CTKUWYc&components=hosted-buttons&enable-funding=venmo&currency=USD">
+</script><div id="paypal-container-WZVNQW5GNKD9Q"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "WZVNQW5GNKD9Q",
+  }).render("#paypal-container-WZVNQW5GNKD9Q")
+</script>
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Supreme x Nike</p>
+        <p class="product-name">Corduroy Camp Cap Purple</p>
+        <div class="product-price-row">
+          <span class="product-price">DM Price</span>
+          <span class="product-w2c">W2C</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="products-cta">
+    <a href="https://instagram.com/resalespr" target="_blank" class="btn-primary">Ver Más en IG →</a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="section-eyebrow">Clientes</div>
+  <h2 class="section-title">LO QUE<br>DICEN</h2>
+  <div class="reviews-grid">
+
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="review-text">Compré unos Jordan 1 y llegaron perfectos. El proceso fue rapidísimo, me respondieron al momento. Sin duda el mejor plug de PR.</p>
+      <div class="review-author">
+        <div class="review-avatar">JR</div>
+        <div>
+          <p class="review-name">José R.</p>
+          <p class="review-handle">Ponce, PR</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="review-text">Llevaba tiempo buscando un Supreme Box Logo. Lo conseguí en 3 días. El precio estuvo brutal comparado con StockX. 100% recomendado.</p>
+      <div class="review-author">
+        <div class="review-avatar">KM</div>
+        <div>
+          <p class="review-name">Kevin M.</p>
+          <p class="review-handle">San Juan, PR</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="review-text">Siempre compro aquí. El envío llegó al otro día y el packaging viene bien protegido. Transacción por ATH Móvil sin problema.</p>
+      <div class="review-author">
+        <div class="review-avatar">AN</div>
+        <div>
+          <p class="review-name">Andrea N.</p>
+          <p class="review-handle">Mayagüez, PR</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-eyebrow">Preguntas</div>
+  <h2 class="section-title">FAQ</h2>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Los productos son auténticos?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-a">Sí. Todos nuestros productos son 100% auténticos, obtenidos de fuentes verificadas. Nunca vendemos réplicas. Si tienes dudas, puedes pedir fotos detalladas antes de comprar.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Hacen envíos a toda Puerto Rico?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-a">Sí. Enviamos a toda la isla vía USPS o mensajería privada. El costo de envío varía según la ubicación. También hay opción de pickup en el área sur si prefieres recogerlo en persona.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Qué métodos de pago aceptan?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-a">Aceptamos ATH Móvil, Zelle y efectivo. No reembolsamos una vez confirmada la transacción, así que asegúrate bien antes de pagar.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Qué es W2C?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-a">"Where To Cop" — es el término que usamos para indicar que el producto está disponible. Si ves W2C en un item, simplemente hazle DM y te damos todos los detalles de compra.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Puedo pedir algo que no veo en el catálogo?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-a">¡Claro! Si tienes algo específico en mente, escríbenos y hacemos lo posible por conseguirlo. Tenemos acceso a una red amplia de drops y resellers.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Cuánto tiempo tardan en responder?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-a">Generalmente respondemos en menos de 24 horas. Para respuesta más rápida, usa el WhatsApp que aparece en el site.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="contacto">
+  <div class="cta-bg"></div>
+  <div class="section-eyebrow">Contacto</div>
+  <h2 class="section-title">¿LISTO PARA<br>COGER TUYO?</h2>
+  <p class="cta-sub">No dejes que otra persona lo coja primero.<br>Escríbenos ahora y lo coordinamos.</p>
+  <div class="cta-buttons">
+    <a href="https://wa.me/1787XXXXXXX?text=Hola,%20quiero%20info%20sobre%20productos" target="_blank" class="btn-wa">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp Directo
+    </a>
+    <a href="https://instagram.com/resalespr" target="_blank" class="btn-secondary" style="justify-content:center">Instagram DM →</a>
+  </div>
+  <div class="payments-row">
+    <span class="payment-label">Métodos de pago aceptados</span>
+    <span class="payment-badge ath">ATH Móvil</span>
+    <span class="payment-badge">Zelle</span>
+    <span class="payment-badge">Efectivo</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">RESALES<span>PR</span></span>
+  <p class="footer-tagline">🇵🇷 Puerto Rico Streetwear Plug · El Plug Directo</p>
+  <div class="footer-links">
+    <a href="#como-comprar">Cómo Comprar</a>
+    <a href="#productos">Productos</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contacto">Contacto</a>
+    <a href="https://instagram.com/resalespr" target="_blank">Instagram</a>
+  </div>
+  <p class="footer-copy">© 2025 SupResales PR. Hecho con 🔥 en Puerto Rico.</p>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  let mx = 0, my = 0, fx = 0, fy = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animateCursor() {
+    fx += (mx - fx) * 0.12;
+    fy += (my - fy) * 0.12;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+    follower.style.left = fx + 'px';
+    follower.style.top = fy + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.step, .review-card').forEach(el => observer.observe(el));
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // FILTER PRODUCTS
+  function filterProducts(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.product-card').forEach(card => {
+      if (cat === 'todo' || card.dataset.cat === cat) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // SMOOTH SCROLL for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
