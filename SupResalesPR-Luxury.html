@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SupResales PR — El Plug Directo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #050505;
+    --void: #0a0a0a;
+    --charcoal: #111111;
+    --red: #e8002d;
+    --red-dim: #a0001f;
+    --cream: #f0ede6;
+    --gold: #c9a84c;
+    --silver: #888;
+    --white: #fafafa;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Playfair Display', serif;
+    --display: 'Bebas Neue', sans-serif;
+    --sans: 'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    mix-blend-mode: exclusion;
+  }
+  .cursor-ring {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(232,0,45,0.5);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  body:hover .cursor { opacity: 1; }
+  a:hover ~ .cursor, button:hover ~ .cursor { width: 20px; height: 20px; }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9990;
+    opacity: 0.4;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--red);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 900;
+  }
+  .ticker-track {
+    display: inline-block;
+    animation: ticker 25s linear infinite;
+  }
+  .ticker-track span {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    padding: 0 60px;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 36px; left: 0; right: 0;
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: linear-gradient(to bottom, rgba(5,5,5,0.97) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 100%;
+    height: 1px;
+    background: var(--red);
+    transition: right 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { right: 0; }
+  .nav-cta {
+    background: var(--red);
+    color: var(--white) !important;
+    padding: 10px 22px !important;
+    font-family: var(--mono) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.2em !important;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s !important;
+    display: inline-block;
+  }
+  .nav-cta:hover { background: var(--red-dim) !important; transform: translateY(-1px) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+    align-items: stretch;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 40px 60px 64px;
+    position: relative;
+    z-index: 2;
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--red);
+  }
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(56px, 6vw, 100px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .hero-title .accent {
+    color: var(--red);
+    display: block;
+  }
+  .hero-subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(14px, 1.5vw, 18px);
+    color: var(--silver);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+  .hero-brands {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .brand-chip {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 6px 12px;
+    color: var(--silver);
+    transition: all 0.3s;
+  }
+  .brand-chip:hover {
+    border-color: var(--red);
+    color: var(--white);
+    background: rgba(232,0,45,0.08);
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: var(--white);
+    padding: 16px 36px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .btn-primary:hover::before { transform: scaleX(1); }
+  .btn-primary:hover { color: var(--black); }
+  .btn-primary span { position: relative; z-index: 1; }
+  .btn-ghost {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost .arrow { transition: transform 0.3s; }
+  .btn-ghost:hover .arrow { transform: translateX(6px); }
+
+  /* HERO RIGHT — PRODUCTOS INLINE */
+  .hero-right {
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 24px 24px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--void);
+    scrollbar-width: none;
+  }
+  .hero-right::-webkit-scrollbar { display: none; }
+
+  .hero-products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 4px;
+  }
+  .hero-products-header span {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  .hero-products-header a {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .hero-products-header a:hover { color: var(--white); }
+
+  /* HERO PRODUCT ROW — horizontal card */
+  .hero-product-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    background: var(--charcoal);
+    padding: 14px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-product-row:hover {
+    border-left-color: var(--red);
+    background: #161616;
+  }
+  .hero-product-row::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 100%;
+    height: 1px;
+    background: var(--red);
+    transition: right 0.4s ease;
+  }
+  .hero-product-row:hover::after { right: 0; }
+
+  .hpr-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    filter: grayscale(10%);
+    transition: filter 0.4s;
+  }
+  .hero-product-row:hover .hpr-img { filter: grayscale(0%); }
+
+  .hpr-info { display: flex; flex-direction: column; gap: 6px; }
+  .hpr-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    background: var(--red);
+    color: var(--white);
+    width: fit-content;
+  }
+  .hpr-badge.new-badge {
+    background: transparent;
+    border: 1px solid var(--red);
+    color: var(--red);
+  }
+  .hpr-badge.collab-badge {
+    background: var(--gold);
+    color: #000;
+  }
+  .hpr-brand {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+  .hpr-name {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .hpr-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .hpr-price {
+    font-family: var(--display);
+    font-size: 36px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hpr-price .cur {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--silver);
+    vertical-align: super;
+  }
+  .hpr-buy {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--red);
+    color: var(--white);
+    padding: 8px 16px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .hpr-buy:hover { background: var(--red-dim); }
+
+  /* Badge spin removed - no longer needed */
+  @keyframes badgeSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+  @keyframes badgeSpinReverse { from { transform: rotate(0); } to { transform: rotate(-360deg); } }
+
+  /* VERTICAL TEXT */
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.12);
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    z-index: 3;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--charcoal);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-item {
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(232,0,45,0.04); }
+  .stat-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--red);
+    transition: width 0.4s ease;
+  }
+  .stat-item:hover::before { width: 100%; }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 52px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--red); }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* SECTIONS */
+  section { padding: 120px 64px; }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--red-dim);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(48px, 6vw, 90px);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 60px;
+  }
+  .section-title em {
+    font-style: italic;
+    font-family: var(--serif);
+    color: var(--silver);
+    font-size: 0.65em;
+  }
+
+  /* HOW IT WORKS */
+  .how-section { background: var(--void); }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .step {
+    background: var(--charcoal);
+    padding: 56px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+  .step:hover { background: #161616; }
+  .step-num {
+    font-family: var(--display);
+    font-size: 120px;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    line-height: 1;
+    transition: color 0.4s;
+  }
+  .step:hover .step-num { color: rgba(232,0,45,0.08); }
+  .step-icon {
+    font-size: 32px;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .step h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .step p {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+  .step-line {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--red);
+    transition: width 0.5s ease;
+  }
+  .step:hover .step-line { width: 100%; }
+
+  /* PRODUCTS */
+  .products-section { background: var(--black); }
+  .filter-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--silver);
+    cursor: none;
+    transition: all 0.3s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .product-card {
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+    group: true;
+  }
+  .product-img {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    position: relative;
+  }
+  .product-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(15%);
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), filter 0.5s;
+  }
+  .product-card:hover .product-img img {
+    transform: scale(1.08);
+    filter: grayscale(0%);
+  }
+  .product-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    background: var(--red);
+    color: var(--white);
+    z-index: 2;
+  }
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 30px;
+  }
+  .product-card:hover .product-overlay { opacity: 1; }
+  .buy-now-btn {
+    width: 100%;
+    background: var(--red);
+    color: var(--white);
+    padding: 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    transform: translateY(10px);
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover .buy-now-btn { transform: translateY(0); }
+  .product-info {
+    padding: 24px;
+    background: var(--charcoal);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .product-brand {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .product-name {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .product-price {
+    font-family: var(--display);
+    font-size: 32px;
+    color: var(--white);
+    text-align: right;
+  }
+  .product-price .currency {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--silver);
+    vertical-align: super;
+    margin-right: 2px;
+  }
+
+  /* FEATURE STRIP */
+  .feature-strip {
+    background: var(--red);
+    padding: 80px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .feature-strip-left h2 {
+    font-family: var(--display);
+    font-size: clamp(48px, 6vw, 80px);
+    color: var(--white);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+  }
+  .feature-strip-left p {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.75);
+    margin-top: 24px;
+    max-width: 400px;
+  }
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .feature-list li {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .feature-list li:last-child { border-bottom: none; }
+  .feature-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    width: 44px;
+    text-align: center;
+  }
+  .feature-text h4 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .feature-text p {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* REVIEWS */
+  .reviews-section {
+    background: var(--void);
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .review-card {
+    background: var(--charcoal);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .review-card:hover { background: #141414; }
+  .review-card::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 160px;
+    color: rgba(232,0,45,0.08);
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .stars {
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+  }
+  .review-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--cream);
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .reviewer-avatar {
+    width: 44px; height: 44px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .reviewer-name {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+  .reviewer-loc {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* FAQ */
+  .faq-section { background: var(--black); }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .faq-item {
+    background: var(--charcoal);
+    border-left: 3px solid transparent;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+  .faq-item:hover {
+    border-left-color: var(--red);
+    background: #131313;
+  }
+  .faq-question {
+    padding: 32px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: none;
+    user-select: none;
+  }
+  .faq-question h4 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+  }
+  .faq-toggle {
+    width: 28px; height: 28px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    font-size: 16px;
+    color: var(--silver);
+  }
+  .faq-item.open .faq-toggle {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+    transform: rotate(45deg);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .faq-item.open .faq-answer { max-height: 200px; }
+  .faq-answer p {
+    padding: 0 36px 32px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--silver);
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--charcoal);
+    padding: 140px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: 'RESALESPR';
+    font-family: var(--display);
+    font-size: 240px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255,255,255,0.02);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+  }
+  .cta-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+  }
+  .cta-title {
+    font-family: var(--display);
+    font-size: clamp(56px, 8vw, 110px);
+    line-height: 0.92;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .cta-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--silver);
+    margin-bottom: 56px;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+  .pay-methods {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .pay-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--silver);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--void);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 60px 64px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .footer-brand .logo {
+    font-family: var(--display);
+    font-size: 36px;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .footer-brand .logo span { color: var(--red); }
+  .footer-brand p {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+  .footer-links h5 {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+  }
+  .footer-links ul { list-style: none; }
+  .footer-links li { margin-bottom: 14px; }
+  .footer-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--silver);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    grid-column: 1/-1;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.2);
+  }
+  .footer-bottom span { color: var(--red); }
+
+  /* SCROLL INDICATOR */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 3;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--red));
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  .scroll-text {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  }
+
+  /* ============ ANIMATION SYSTEM ============ */
+
+  /* HERO TITLE — char por char */
+  .hero-title .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(110%) skewY(10deg);
+    animation: charDrop 0.65s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  @keyframes charDrop { to { opacity:1; transform:translateY(0) skewY(0); } }
+
+  /* GLITCH en nav logo */
+  .nav-logo { position:relative; }
+  .nav-logo::before, .nav-logo::after {
+    content: attr(data-text);
+    position: absolute; top:0; left:0;
+    font-family: var(--display);
+    font-size: inherit;
+    letter-spacing: inherit;
+    opacity: 0;
+  }
+  .nav-logo::before { color:#00ffff; animation: glitch1 7s infinite; }
+  .nav-logo::after  { color:var(--red); animation: glitch2 7s infinite; }
+  @keyframes glitch1 {
+    0%,92%,100%{opacity:0;transform:none}
+    93%{opacity:0.8;transform:translate(-3px,0);clip-path:inset(30% 0 50% 0)}
+    94%{opacity:0;transform:none}
+  }
+  @keyframes glitch2 {
+    0%,92%,100%{opacity:0;transform:none}
+    95%{opacity:0.8;transform:translate(3px,0);clip-path:inset(60% 0 10% 0)}
+    96%{opacity:0;transform:none}
+  }
+
+  /* FADE UP — scroll reveal */
+  .fade-up {
+    opacity:0; transform:translateY(55px);
+    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  /* SLIDE LEFT */
+  .slide-left {
+    opacity:0; transform:translateX(-60px);
+    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  }
+  .slide-left.visible { opacity:1; transform:translateX(0); }
+
+  /* SCALE IN */
+  .scale-in {
+    opacity:0; transform:scale(0.82);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .scale-in.visible { opacity:1; transform:scale(1); }
+
+  /* SECTION TITLE — red block wipe reveal */
+  .section-title {
+    position:relative;
+  }
+  .section-title .wipe-wrap {
+    display:inline-block;
+    position:relative;
+    overflow:hidden;
+  }
+  .section-title .wipe-wrap::after {
+    content:'';
+    position:absolute;
+    inset:0;
+    background:var(--red);
+    transform:scaleX(1);
+    transform-origin:left;
+    transition: transform 0.9s cubic-bezier(0.77,0,0.18,1);
+  }
+  .section-title .wipe-wrap.wiped::after {
+    transform:scaleX(0);
+    transform-origin:right;
+  }
+
+  /* EYEBROW slide */
+  .section-eyebrow {
+    opacity:0; transform:translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .section-eyebrow.visible { opacity:1; transform:translateX(0); }
+
+  /* HERO PRODUCT ROWS — stagger slide-in */
+  .hero-product-row {
+    opacity:0; transform:translateX(50px);
+    transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1),
+                border-left-color 0.3s, background 0.3s;
+  }
+  .hero-product-row.row-visible { opacity:1; transform:translateX(0); }
+  .hero-product-row:hover { transform:translateX(8px) !important; }
+
+  /* PRICE — late */
+  .hpr-price { animation: pricePulse 3.5s ease-in-out infinite; }
+  @keyframes pricePulse {
+    0%,100%{transform:scale(1); color:var(--white);}
+    50%{transform:scale(1.07); color:#ff1a47;}
+  }
+
+  /* BUY BUTTON — shake de urgencia */
+  .hpr-buy { animation: buyShake 6s ease-in-out infinite; }
+  @keyframes buyShake {
+    0%,88%,100%{transform:translateX(0)}
+    90%{transform:translateX(-3px)}
+    92%{transform:translateX(3px)}
+    94%{transform:translateX(-2px)}
+    96%{transform:translateX(0)}
+  }
+
+  /* HOT / NEW BADGE — flash */
+  .hpr-badge, .product-badge { animation: badgeFlash 3s ease-in-out infinite; }
+  @keyframes badgeFlash {
+    0%,78%,100%{opacity:1} 80%{opacity:0.3} 84%{opacity:1}
+  }
+
+  /* HERO TAG — blink */
+  .hero-tag { animation: tagBlink 5s ease-in-out infinite; }
+  @keyframes tagBlink {
+    0%,82%,100%{opacity:1} 85%{opacity:0.3} 88%{opacity:1}
+  }
+
+  /* BRAND CHIPS — pop-in stagger (applied via JS) */
+  .brand-chip {
+    opacity:0;
+    transform:scale(0.7);
+    animation: chipPop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  @keyframes chipPop { to{opacity:1;transform:scale(1);} }
+
+  /* PRODUCT CARD — 3D tilt hover */
+  .product-card {
+    transform-style:preserve-3d;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .product-card:hover {
+    transform: perspective(800px) rotateY(-5deg) rotateX(2deg) translateY(-8px);
+    box-shadow: 24px 24px 60px rgba(0,0,0,0.9), -4px 0 40px rgba(232,0,45,0.18);
+  }
+
+  /* STAT NUMS — hover glow */
+  .stat-item { transition: background 0.4s; }
+  .stat-num { transition: color 0.3s; }
+  .stat-item:hover .stat-num { color:var(--red); }
+
+  /* BTN PRIMARY — glitch hover */
+  .btn-primary:hover span { animation: btnGlitch 0.35s steps(2) forwards; }
+  @keyframes btnGlitch {
+    0%{text-shadow:none} 33%{text-shadow:-2px 0 #00ffff} 66%{text-shadow:2px 0 #ff1a47} 100%{text-shadow:none}
+  }
+
+  /* CTA spotlight pulse */
+  .cta-section::after {
+    content:'';
+    position:absolute;
+    top:0;left:50%;bottom:0;
+    width:700px; margin-left:-350px;
+    background:radial-gradient(ellipse at center, rgba(232,0,45,0.09) 0%, transparent 70%);
+    pointer-events:none;
+    animation: spotPulse 3s ease-in-out infinite;
+  }
+  @keyframes spotPulse {
+    0%,100%{opacity:0.5;transform:scaleX(1)} 50%{opacity:1;transform:scaleX(1.4)}
+  }
+
+  /* URGENCY POPUP */
+  #urgencyPop {
+    position:fixed; bottom:28px; left:28px;
+    background:var(--charcoal);
+    border-left:4px solid var(--red);
+    padding:16px 20px; z-index:8000;
+    max-width:290px;
+    transform:translateX(-130%);
+    transition:transform 0.55s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow:0 8px 40px rgba(0,0,0,0.7);
+  }
+  #urgencyPop.show { transform:translateX(0); }
+  #urgencyPop .up-icon { font-size:20px; margin-bottom:6px; display:block; }
+  #urgencyPop .up-title { font-family:var(--sans); font-weight:700; font-size:13px; color:var(--white); margin-bottom:4px; }
+  #urgencyPop .up-sub { font-family:var(--mono); font-size:10px; letter-spacing:0.1em; color:var(--silver); line-height:1.6; }
+  #urgencyPop .up-sub b { color:var(--red); font-weight:normal; }
+
+  /* REVEAL LINE */
+  .reveal-line {
+    width:0; height:2px;
+    background:var(--red);
+    margin-bottom:60px;
+    transition:width 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal-line.visible { width:80px; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 120px 24px 40px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .hero-right { padding: 20px 16px; max-height: none; overflow-y: visible; }
+    .hpr-img { width: 70px; height: 70px; }
+    .vertical-text { display: none; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat-item { padding: 32px 24px; }
+    section { padding: 80px 24px; }
+    .steps-grid, .products-grid, .reviews-grid, .faq-grid { grid-template-columns: 1fr; }
+    .feature-strip { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+    footer { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px 32px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .cta-section { padding: 100px 24px; }
+    .cta-section::before { font-size: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker">
+    <span>W2C — DM FOR INFO</span>
+    <span>SUPREME · NIKE · JORDAN · OFF-WHITE · BAPE · PALACE</span>
+    <span>100% AUTÉNTICO · EL PLUG DIRECTO 🇵🇷</span>
+    <span>ATH MÓVIL · ZELLE · EFECTIVO</span>
+    <span>ENVÍOS A TODA PUERTO RICO</span>
+    <span>W2C — DM FOR INFO</span>
+    <span>SUPREME · NIKE · JORDAN · OFF-WHITE · BAPE · PALACE</span>
+    <span>100% AUTÉNTICO · EL PLUG DIRECTO 🇵🇷</span>
+    <span>ATH MÓVIL · ZELLE · EFECTIVO</span>
+    <span>ENVÍOS A TODA PUERTO RICO</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SUP<span>R</span>ESALES</a>
+  <ul class="nav-links">
+    <li><a href="#como-comprar">Cómo Comprar</a></li>
+    <li><a href="#productos">Catálogo</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://instagram.com/resalespr" class="nav-cta">DM Ahora →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">🇵🇷 Puerto Rico Streetwear Plug</div>
+    <h1 class="hero-title">
+      EL PLUG
+      <span class="accent">DIRECTO</span>
+    </h1>
+    <p class="hero-subtitle">Supreme · Nike · Jordan · Off-White<br>Calidad premium. Los mejores precios de la isla.</p>
+    <div class="hero-brands">
+      <span class="brand-chip">Supreme</span>
+      <span class="brand-chip">Nike</span>
+      <span class="brand-chip">Jordan</span>
+      <span class="brand-chip">Off-White</span>
+      <span class="brand-chip">BAPE</span>
+      <span class="brand-chip">Palace</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#productos" class="btn-primary"><span>Ver Drops →</span></a>
+      <a href="https://instagram.com/resalespr" class="btn-ghost">
+        @resalespr <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-products-header">
+      <span>🔥 Drops Disponibles</span>
+      <a href="#productos">Ver todos →</a>
+    </div>
+
+    <a class="hero-product-row" href="https://www.paypal.com/ncp/payment/67MTM85UM4V3J">
+      <img class="hpr-img" src="https://albarrvn.github.io/Supreme-resales/images/supreme-devil-tee.jpg" alt="Devil Tee">
+      <div class="hpr-info">
+        <span class="hpr-badge">HOT</span>
+        <div class="hpr-brand">Supreme</div>
+        <div class="hpr-name">Devil Tee Black</div>
+      </div>
+      <div class="hpr-cta">
+        <div class="hpr-price"><span class="cur">$</span>65</div>
+        <span class="hpr-buy">Comprar →</span>
+      </div>
+    </a>
+
+    <a class="hero-product-row" href="https://www.paypal.com/ncp/payment/A3BY43UWTBBPY">
+      <img class="hpr-img" src="https://albarrvn.github.io/Supreme-resales/images/supreme-body-snatchers.jpg" alt="Body Snatchers">
+      <div class="hpr-info">
+        <span class="hpr-badge new-badge">NEW</span>
+        <div class="hpr-brand">Supreme</div>
+        <div class="hpr-name">Body Snatchers Tee Navy</div>
+      </div>
+      <div class="hpr-cta">
+        <div class="hpr-price"><span class="cur">$</span>50</div>
+        <span class="hpr-buy">Comprar →</span>
+      </div>
+    </a>
+
+    <a class="hero-product-row" href="https://www.paypal.com/ncp/payment/S5EQLQVNC6332">
+      <img class="hpr-img" src="https://albarrvn.github.io/Supreme-resales/images/supreme-apes-orange.jpg" alt="Apes Tee">
+      <div class="hpr-info">
+        <span class="hpr-badge">HOT</span>
+        <div class="hpr-brand">Supreme</div>
+        <div class="hpr-name">Apes Tee Orange</div>
+      </div>
+      <div class="hpr-cta">
+        <div class="hpr-price"><span class="cur">$</span>85</div>
+        <span class="hpr-buy">Comprar →</span>
+      </div>
+    </a>
+
+    <a class="hero-product-row" href="https://www.paypal.com/ncp/payment/RY67SRUX7NSLQ">
+      <img class="hpr-img" src="https://albarrvn.github.io/Supreme-resales/images/supreme-evolution-tee.jpg" alt="Evolution Tee">
+      <div class="hpr-info">
+        <span class="hpr-badge new-badge">NEW</span>
+        <div class="hpr-brand">Supreme</div>
+        <div class="hpr-name">Evolution Tee Black</div>
+      </div>
+      <div class="hpr-cta">
+        <div class="hpr-price"><span class="cur">$</span>65</div>
+        <span class="hpr-buy">Comprar →</span>
+      </div>
+    </a>
+
+    <a class="hero-product-row" href="https://www.paypal.com/ncp/payment/WZVNQW5GNKD9Q">
+      <img class="hpr-img" src="https://albarrvn.github.io/Supreme-resales/images/supreme-nike-cap-purple.jpg" alt="Corduroy Cap">
+      <div class="hpr-info">
+        <span class="hpr-badge collab-badge">🔥 Collab</span>
+        <div class="hpr-brand">Supreme × Nike</div>
+        <div class="hpr-name">Corduroy Camp Cap Purple</div>
+      </div>
+      <div class="hpr-cta">
+        <div class="hpr-price"><span class="cur">$</span>55</div>
+        <span class="hpr-buy">Comprar →</span>
+      </div>
+    </a>
+
+    <a class="hero-product-row" href="https://instagram.com/resalespr" style="border-left-color:rgba(255,255,255,0.06);">
+      <div style="width:100px;height:100px;background:#111;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:48px;color:rgba(255,255,255,0.08);">?</div>
+      <div class="hpr-info">
+        <div class="hpr-brand">Request</div>
+        <div class="hpr-name">¿No ves lo que buscas?</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--silver);margin-top:4px;">Pídelo por DM — conseguimos casi todo.</div>
+      </div>
+      <div class="hpr-cta">
+        <span class="hpr-buy" style="background:transparent;border:1px solid var(--red);color:var(--red);">DM →</span>
+      </div>
+    </a>
+  </div>
+  <div class="vertical-text">SUPRESALES · PR · 2025</div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <div class="scroll-text">Scroll</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item fade-up">
+    <div class="stat-num">500<span>+</span></div>
+    <div class="stat-label">Clientes satisfechos</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.1s">
+    <div class="stat-num">100<span>%</span></div>
+    <div class="stat-label">Auténtico garantizado</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.2s">
+    <div class="stat-num">&lt;24<span>H</span></div>
+    <div class="stat-label">Tiempo de respuesta</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.3s">
+    <div class="stat-num">78<span>+</span></div>
+    <div class="stat-label">Municipios cubiertos</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="como-comprar">
+  <div class="section-eyebrow">Proceso</div>
+  <h2 class="section-title">COMPRAR <em>es fácil</em></h2>
+  <div class="steps-grid">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <span class="step-icon">👀</span>
+      <h3>Escoge tu pieza</h3>
+      <p>Navega el catálogo o pregunta por algo específico. Si no lo ves aquí, pregunta igual — conseguimos casi todo.</p>
+      <div class="step-line"></div>
+    </div>
+    <div class="step fade-up" style="transition-delay:0.15s">
+      <div class="step-num">02</div>
+      <span class="step-icon">💬</span>
+      <h3>Hazle DM o WhatsApp</h3>
+      <p>Contáctanos por Instagram o WhatsApp con el item. Te respondemos en menos de 24 horas con precio y disponibilidad.</p>
+      <div class="step-line"></div>
+    </div>
+    <div class="step fade-up" style="transition-delay:0.3s">
+      <div class="step-num">03</div>
+      <span class="step-icon">📦</span>
+      <h3>Paga & Recibe</h3>
+      <p>ATH Móvil, Zelle o efectivo. Envíos a toda Puerto Rico o pickup en el área sur disponible.</p>
+      <div class="step-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="productos">
+  <div class="section-eyebrow">Catálogo</div>
+  <h2 class="section-title">DROPS <em>disponibles</em></h2>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProducts('all', this)">Todo</button>
+    <button class="filter-btn" onclick="filterProducts('supreme', this)">Supreme</button>
+    <button class="filter-btn" onclick="filterProducts('collab', this)">Collab</button>
+  </div>
+  <div class="products-grid" id="productsGrid">
+
+    <div class="product-card fade-up" data-cat="supreme">
+      <div class="product-img">
+        <img src="https://albarrvn.github.io/Supreme-resales/images/supreme-devil-tee.jpg" alt="Supreme Devil Tee">
+        <span class="product-badge">HOT</span>
+        <div class="product-overlay">
+          <a href="https://www.paypal.com/ncp/payment/67MTM85UM4V3J" class="buy-now-btn">Comprar Ahora →</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div>
+          <div class="product-brand">Supreme</div>
+          <div class="product-name">Devil Tee Black</div>
+        </div>
+        <div class="product-price"><span class="currency">$</span>65</div>
+      </div>
+    </div>
+
+    <div class="product-card fade-up" data-cat="supreme" style="transition-delay:0.1s">
+      <div class="product-img">
+        <img src="https://albarrvn.github.io/Supreme-resales/images/supreme-body-snatchers.jpg" alt="Supreme Body Snatchers">
+        <span class="product-badge" style="background:#111;border:1px solid var(--red);color:var(--red)">NEW</span>
+        <div class="product-overlay">
+          <a href="https://www.paypal.com/ncp/payment/A3BY43UWTBBPY" class="buy-now-btn">Comprar Ahora →</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div>
+          <div class="product-brand">Supreme</div>
+          <div class="product-name">Body Snatchers Tee Navy</div>
+        </div>
+        <div class="product-price"><span class="currency">$</span>50</div>
+      </div>
+    </div>
+
+    <div class="product-card fade-up" data-cat="supreme" style="transition-delay:0.2s">
+      <div class="product-img">
+        <img src="https://albarrvn.github.io/Supreme-resales/images/supreme-apes-orange.jpg" alt="Supreme Apes Tee">
+        <span class="product-badge">HOT</span>
+        <div class="product-overlay">
+          <a href="https://www.paypal.com/ncp/payment/S5EQLQVNC6332" class="buy-now-btn">Comprar Ahora →</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div>
+          <div class="product-brand">Supreme</div>
+          <div class="product-name">Apes Tee Orange</div>
+        </div>
+        <div class="product-price"><span class="currency">$</span>85</div>
+      </div>
+    </div>
+
+    <div class="product-card fade-up" data-cat="supreme" style="transition-delay:0.3s">
+      <div class="product-img">
+        <img src="https://albarrvn.github.io/Supreme-resales/images/supreme-evolution-tee.jpg" alt="Supreme Evolution Tee">
+        <span class="product-badge" style="background:#111;border:1px solid var(--red);color:var(--red)">NEW</span>
+        <div class="product-overlay">
+          <a href="https://www.paypal.com/ncp/payment/RY67SRUX7NSLQ" class="buy-now-btn">Comprar Ahora →</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div>
+          <div class="product-brand">Supreme</div>
+          <div class="product-name">Evolution Tee Black</div>
+        </div>
+        <div class="product-price"><span class="currency">$</span>65</div>
+      </div>
+    </div>
+
+    <div class="product-card fade-up" data-cat="collab" style="transition-delay:0.4s">
+      <div class="product-img">
+        <img src="https://albarrvn.github.io/Supreme-resales/images/supreme-nike-cap-purple.jpg" alt="Supreme x Nike Cap">
+        <span class="product-badge" style="background:var(--gold);color:#000">🔥 COLLAB</span>
+        <div class="product-overlay">
+          <a href="https://www.paypal.com/ncp/payment/WZVNQW5GNKD9Q" class="buy-now-btn">Comprar Ahora →</a>
+        </div>
+      </div>
+      <div class="product-info">
+        <div>
+          <div class="product-brand">Supreme × Nike</div>
+          <div class="product-name">Corduroy Camp Cap Purple</div>
+        </div>
+        <div class="product-price"><span class="currency">$</span>55</div>
+      </div>
+    </div>
+
+    <div class="product-card fade-up" data-cat="all" style="transition-delay:0.5s; cursor:none;">
+      <div class="product-img" style="background:#111; display:flex; align-items:center; justify-content:center; aspect-ratio:4/5;">
+        <div style="text-align:center; padding:40px;">
+          <div style="font-family:var(--display);font-size:80px;color:rgba(255,255,255,0.06);">?</div>
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);margin-top:16px;">¿No ves lo que buscas?</div>
+        </div>
+      </div>
+      <div class="product-info" style="background:#111;">
+        <div>
+          <div class="product-brand">Request</div>
+          <div class="product-name">Pídelo por DM</div>
+        </div>
+        <a href="https://instagram.com/resalespr" style="font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);text-decoration:none;">DM →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:48px;">
+    <a href="https://instagram.com/resalespr" class="btn-ghost" style="display:inline-flex;gap:10px;align-items:center;">
+      Ver Más en IG <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FEATURE STRIP -->
+<div class="feature-strip">
+  <div class="feature-strip-left fade-up">
+    <h2>POR QUÉ SUPRESALES PR</h2>
+    <p>Somos el plug más confiable del sur. Calidad verificada, precios reales, respuesta rápida. Sin middlemen, sin cuentos.</p>
+  </div>
+  <ul class="feature-list">
+    <li class="fade-up">
+      <span class="feature-icon">✓</span>
+      <div class="feature-text">
+        <h4>100% Auténtico</h4>
+        <p>Nunca vendemos réplicas. Todos los productos vienen verificados de fuentes legítimas.</p>
+      </div>
+    </li>
+    <li class="fade-up" style="transition-delay:0.1s">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-text">
+        <h4>Respuesta en &lt;24h</h4>
+        <p>Te respondemos rápido. Sin demoras, sin pretextos. Tu pedido primero.</p>
+      </div>
+    </li>
+    <li class="fade-up" style="transition-delay:0.2s">
+      <span class="feature-icon">🇵🇷</span>
+      <div class="feature-text">
+        <h4>Toda la Isla</h4>
+        <p>Enviamos a los 78 municipios. Pickup disponible en el área sur.</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="section-eyebrow">Testimonios</div>
+  <h2 class="section-title">LO QUE <em>dicen</em></h2>
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Compré unos Jordan 1 y llegaron perfectos. El proceso fue rapidísimo, me respondieron al momento. Sin duda el mejor plug de PR.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">JR</div>
+        <div>
+          <div class="reviewer-name">José R.</div>
+          <div class="reviewer-loc">Ponce, PR</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up" style="transition-delay:0.15s">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Llevaba tiempo buscando un Supreme Box Logo. Lo conseguí en 3 días. El precio estuvo brutal comparado con StockX. 100% recomendado.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">KM</div>
+        <div>
+          <div class="reviewer-name">Kevin M.</div>
+          <div class="reviewer-loc">San Juan, PR</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up" style="transition-delay:0.3s">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Siempre compro aquí. El envío llegó al otro día y el packaging viene bien protegido. Transacción por ATH Móvil sin problema.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">AN</div>
+        <div>
+          <div class="reviewer-name">Andrea N.</div>
+          <div class="reviewer-loc">Mayagüez, PR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-eyebrow">Preguntas</div>
+  <h2 class="section-title">FAQ</h2>
+  <div class="faq-grid">
+    <div class="faq-item fade-up" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>¿Los productos son auténticos?</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Sí. Todos nuestros productos son 100% auténticos, obtenidos de fuentes verificadas. Nunca vendemos réplicas. Si tienes dudas, puedes pedir fotos detalladas antes de comprar.</p>
+      </div>
+    </div>
+    <div class="faq-item fade-up" style="transition-delay:0.1s" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>¿Hacen envíos a toda Puerto Rico?</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Sí. Enviamos a toda la isla vía USPS o mensajería privada. También hay opción de pickup en el área sur si prefieres recogerlo en persona.</p>
+      </div>
+    </div>
+    <div class="faq-item fade-up" style="transition-delay:0.2s" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>¿Qué métodos de pago aceptan?</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Aceptamos ATH Móvil, Zelle y efectivo. No reembolsamos una vez confirmada la transacción, así que asegúrate bien antes de pagar.</p>
+      </div>
+    </div>
+    <div class="faq-item fade-up" style="transition-delay:0.3s" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>¿Qué es W2C?</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>"Where To Cop" — indica que el producto está disponible. Si ves W2C en un item, simplemente hazle DM y te damos todos los detalles.</p>
+      </div>
+    </div>
+    <div class="faq-item fade-up" style="transition-delay:0.4s" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>¿Puedo pedir algo que no está en el catálogo?</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>¡Claro! Si tienes algo específico en mente, escríbenos y hacemos lo posible por conseguirlo. Tenemos acceso a una red amplia de drops y resellers.</p>
+      </div>
+    </div>
+    <div class="faq-item fade-up" style="transition-delay:0.5s" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>¿Cuánto tiempo tardan en responder?</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Generalmente respondemos en menos de 24 horas. Para respuesta más rápida, usa el WhatsApp que aparece en el site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-eyebrow">🇵🇷 El Plug Directo</div>
+  <h2 class="cta-title">¿LISTO PARA<br>COGER TUYO?</h2>
+  <p class="cta-sub">No dejes que otra persona lo coja primero.</p>
+  <div class="cta-actions">
+    <a href="https://wa.me/1787XXXXXXX?text=Hola,%20quiero%20info%20sobre%20productos" class="btn-primary"><span>WhatsApp Directo →</span></a>
+    <a href="https://instagram.com/resalespr" class="btn-ghost">Instagram DM <span class="arrow">→</span></a>
+  </div>
+  <div class="pay-methods">
+    <span class="pay-tag">ATH Móvil</span>
+    <span class="pay-tag">Zelle</span>
+    <span class="pay-tag">Efectivo</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo">SUP<span>R</span>ESALES</span>
+    <p>Puerto Rico Streetwear Plug.<br>El Plug Directo. 🇵🇷<br>Área Sur · Envíos a toda la isla.</p>
+  </div>
+  <div class="footer-links">
+    <h5>Navegación</h5>
+    <ul>
+      <li><a href="#como-comprar">Cómo Comprar</a></li>
+      <li><a href="#productos">Catálogo</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="https://instagram.com/resalespr">Instagram →</a></li>
+    </ul>
+  </div>
+  <div class="footer-links">
+    <h5>Marcas</h5>
+    <ul>
+      <li><a href="#">Supreme</a></li>
+      <li><a href="#">Nike / Jordan</a></li>
+      <li><a href="#">Off-White</a></li>
+      <li><a href="#">BAPE · Palace · Stüssy</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 SupResales PR. Hecho con <span>🔥</span> en Puerto Rico.</p>
+    <p>@RESALESPR · El Plug Directo</p>
+  </div>
+</footer>
+
+<script>
+/* ================================================
+   SUPRESALES PR — ANIMATION ENGINE
+   ================================================ */
+
+/* ── 1. CUSTOM CURSOR ── */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+});
+(function animRing(){
+  rx += (mx-rx)*0.1; ry += (my-ry)*0.1;
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.faq-item,.product-card,.stat-item,.step,.brand-chip,.hero-product-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cursor.style.width='22px';cursor.style.height='22px';ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(232,0,45,0.9)'; });
+  el.addEventListener('mouseleave',()=>{ cursor.style.width='12px';cursor.style.height='12px';ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(232,0,45,0.5)'; });
+});
+
+/* ── 2. TICKER ── */
+const track = document.getElementById('ticker');
+track.innerHTML += track.innerHTML;
+
+/* ── 3. NAV LOGO GLITCH DATA ATTR ── */
+document.querySelector('.nav-logo').setAttribute('data-text','SUPRESALES');
+
+/* ── 4. HERO TITLE — char-by-char explosion ── */
+function splitChars(el) {
+  const lines = el.innerHTML.split(/<br>|<span class="accent">|<\/span>/i);
+  // simpler: just animate words
+  const text = el.innerText;
+  el.innerHTML = '';
+  let delay = 0.05;
+  text.split('').forEach((ch, i) => {
+    if (ch === '\n') { el.appendChild(document.createElement('br')); return; }
+    const s = document.createElement('span');
+    s.className = 'char';
+    s.textContent = ch === ' ' ? '\u00A0' : ch;
+    s.style.animationDelay = delay + 's';
+    // red for second word
+    if (i > 8) s.style.color = 'var(--red)';
+    el.appendChild(s);
+    delay += ch === ' ' ? 0.04 : 0.038;
+  });
+}
+const heroTitle = document.querySelector('.hero-title');
+if(heroTitle) splitChars(heroTitle);
+
+/* ── 5. HERO SUBTITLE — fade in after title ── */
+const heroSub = document.querySelector('.hero-subtitle');
+if(heroSub){ heroSub.style.opacity='0'; heroSub.style.transform='translateY(20px)'; heroSub.style.transition='opacity 0.8s ease 1.2s, transform 0.8s ease 1.2s'; setTimeout(()=>{ heroSub.style.opacity='1'; heroSub.style.transform='translateY(0)'; },100); }
+
+/* ── 6. BRAND CHIPS — stagger pop ── */
+document.querySelectorAll('.brand-chip').forEach((chip,i)=>{
+  chip.style.animationDelay = (1.4 + i*0.08) + 's';
+});
+
+/* ── 7. HERO ACTIONS — slide up ── */
+const heroActions = document.querySelector('.hero-actions');
+if(heroActions){ heroActions.style.opacity='0'; heroActions.style.transform='translateY(24px)'; heroActions.style.transition='opacity 0.7s ease 1.9s, transform 0.7s ease 1.9s'; setTimeout(()=>{ heroActions.style.opacity='1'; heroActions.style.transform='translateY(0)'; },100); }
+
+/* ── 8. HERO PRODUCT ROWS — stagger from right ── */
+document.querySelectorAll('.hero-product-row').forEach((row,i)=>{
+  setTimeout(()=>{ row.classList.add('row-visible'); }, 400 + i*120);
+});
+
+/* ── 9. INTERSECTION OBSERVER — multi-class ── */
+const obsOpts = { threshold: 0.12 };
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el = e.target;
+    el.classList.add('visible');
+    obs.unobserve(el);
+    // section title wipe
+    el.querySelectorAll && el.querySelectorAll('.wipe-wrap').forEach(w=>{
+      setTimeout(()=>w.classList.add('wiped'),150);
+    });
+  });
+}, obsOpts);
+
+document.querySelectorAll('.fade-up,.slide-left,.scale-in,.section-eyebrow,.reveal-line').forEach(el=>obs.observe(el));
+
+/* wipe titles directly */
+const titleObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    e.target.querySelectorAll('.wipe-wrap').forEach((w,i)=>{
+      setTimeout(()=>w.classList.add('wiped'), 100+i*200);
+    });
+    titleObs.unobserve(e.target);
+  });
+},{threshold:0.2});
+document.querySelectorAll('.section-title').forEach(el=>{
+  // wrap content in wipe-wrap spans
+  el.childNodes.forEach(node=>{
+    if(node.nodeType===3 && node.textContent.trim()){
+      const wrap = document.createElement('span');
+      wrap.className='wipe-wrap';
+      wrap.textContent=node.textContent;
+      node.replaceWith(wrap);
+    } else if(node.nodeType===1 && node.tagName!=='EM'){
+      const wrap=document.createElement('span');
+      wrap.className='wipe-wrap';
+      wrap.appendChild(node.cloneNode(true));
+      node.replaceWith(wrap);
+    }
+  });
+  titleObs.observe(el);
+});
+
+/* ── 10. COUNTER ANIMATION on stats ── */
+function animCount(el, target, suffix=''){
+  let start=0, dur=1800, step=16;
+  const inc = target/(dur/step);
+  const timer = setInterval(()=>{
+    start = Math.min(start+inc, target);
+    el.innerHTML = Math.floor(start) + '<span>' + suffix + '</span>';
+    if(start>=target) clearInterval(timer);
+  },step);
+}
+const countObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el = e.target.querySelector('.stat-num');
+    if(!el || el.dataset.counted) return;
+    el.dataset.counted='1';
+    const txt = el.textContent.replace(/[^0-9]/g,'');
+    const suf = el.textContent.replace(/[0-9]/g,'').replace('<','').trim();
+    animCount(el, parseInt(txt)||0, suf);
+    countObs.unobserve(e.target);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.stat-item').forEach(el=>countObs.observe(el));
+
+/* ── 11. PARALLAX on hero title ── */
+window.addEventListener('scroll',()=>{
+  const sy = window.scrollY;
+  const hl = document.querySelector('.hero-left');
+  if(hl) hl.style.transform = `translateY(${sy*0.18}px)`;
+  // ticker speed up
+  const t = document.querySelector('.ticker-track');
+  if(t) t.style.animationDuration = Math.max(8, 25 - sy/60) + 's';
+});
+
+/* ── 12. URGENCY POPUP ── */
+const urgencyMsgs = [
+  { icon:'👀', title:'Alguien está mirando esto ahora', sub:'<b>3 personas</b> vieron este drop en los últimos 5 min.' },
+  { icon:'🔥', title:'Devil Tee — últimas unidades', sub:'Solo quedan <b>2</b> disponibles en este precio.' },
+  { icon:'⚡', title:'Precio activo ahora', sub:'Este precio no se garantiza después de hoy. <b>Cógelo ya.</b>' },
+  { icon:'🛒', title:'Alguien acaba de comprar', sub:'Apes Tee Orange — vendido hace <b>4 minutos</b>.' },
+  { icon:'📦', title:'Envío disponible hoy', sub:'Ordena antes de las 5pm y sale <b>mañana</b>.' },
+];
+const pop = document.getElementById('urgencyPop');
+let popIndex = 0;
+function showPop(){
+  const msg = urgencyMsgs[popIndex % urgencyMsgs.length];
+  pop.querySelector('.up-icon').textContent  = msg.icon;
+  pop.querySelector('.up-title').textContent = msg.title;
+  pop.querySelector('.up-sub').innerHTML     = msg.sub;
+  pop.classList.add('show');
+  setTimeout(()=>{ pop.classList.remove('show'); },4200);
+  popIndex++;
+}
+setTimeout(()=>{ showPop(); setInterval(showPop, 9000); }, 3500);
+
+/* ── 13. FAQ ── */
+function toggleFaq(el){
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
+}
+
+/* ── 14. PRODUCT FILTER ── */
+function filterProducts(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card=>{
+    const show = cat==='all'||card.dataset.cat===cat;
+    card.style.transition='opacity 0.4s ease, transform 0.4s ease';
+    if(show){ card.style.display=''; requestAnimationFrame(()=>{ card.style.opacity='1'; card.style.transform=''; }); }
+    else { card.style.opacity='0'; card.style.transform='scale(0.9)'; setTimeout(()=>card.style.display='none',400); }
+  });
+}
+
+/* ── 15. 3D TILT on product cards ── */
+document.querySelectorAll('.product-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width-0.5)*12;
+    const y=((e.clientY-r.top)/r.height-0.5)*-8;
+    card.style.transform=`perspective(800px) rotateY(${x}deg) rotateX(${y}deg) translateY(-8px)`;
+  });
+  card.addEventListener('mouseleave',()=>{ card.style.transform=''; });
+});
+
+/* ── 16. MAGNETIC BUTTONS ── */
+document.querySelectorAll('.btn-primary,.hpr-buy,.nav-cta').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.25;
+    const y=(e.clientY-r.top-r.height/2)*0.25;
+    btn.style.transform=`translate(${x}px,${y}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{ btn.style.transform=''; });
+});
+
+/* ── 17. PAGE LOAD flash ── */
+document.body.style.opacity='0';
+document.body.style.transition='opacity 0.4s ease';
+window.addEventListener('load',()=>{ document.body.style.opacity='1'; });
+</script>
+
+<!-- URGENCY POPUP -->
+<div id="urgencyPop">
+  <span class="up-icon">🔥</span>
+  <div class="up-title">Loading...</div>
+  <div class="up-sub">...</div>
+</div>
+</body>
+</html>
