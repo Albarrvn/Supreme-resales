@@ -36,5 +36,16 @@ Vamos a hacer reels verticales animados en 2D con personajitos, en formato **NOV
 4. **Instrucciones de montaje** (cortes, transiciones, música, sonidos).
 5. **Caption** para Instagram/TikTok con 5-8 hashtags.
 
+## Biblia de estilo (sacada de mis vídeos, @luisgabb17)
+- Nicho: soldadura con electrodo. Producto: guía "El cordón perfecto no es suerte" (antes $29.99, hoy $14.99).
+- Ilustración 2D vectorial plana, contorno oscuro grueso y sombras planas, sin degradados.
+- Soldador PRO: casco amarillo con banda/visor negra, mono azul, mangas naranjas, mandil de cuero marrón, guantes y botas marrones.
+- Fondo: pared de taller con panel de herramientas (pegboard) en azul petróleo, verde agua, azul marino o rojo teja según la escena; suelo gris con franja amarilla y negra de seguridad.
+- Objetos personificados con ojitos y cara (la junta soldada, las gotas, la gravedad como bola con "9.8"): los defectos y peligros son "villanos" simpáticos.
+- Iconos de apoyo: número de ronda en círculo amarillo, sellos rojos tipo "POROSIDAD", checks y cruces, reloj de arena.
+- Subtítulos tipo karaoke en MAYÚSCULAS, blancos con borde, palabra clave en rojo o cian, abajo centrados.
+- Locución en primera persona, cercana, frases cortas.
+- Cierre fijo: portada de la guía, precio tachado $29.99 → $14.99 en verde, botón naranja "COMENTA GUÍA", @luisgabb17, "LINK EN MI BIO".
+
 ## Tema de este vídeo
 [TEMA]: por ejemplo "revender ropa Supreme", "hacer fotos de producto", "responder a un cliente", "fijar el precio de una prenda".
