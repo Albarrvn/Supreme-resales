@@ -62,7 +62,7 @@ def group_words(words, max_words=3, max_gap=0.6):
     return groups
 
 
-def build_ass(path, words, clip_len, hook, font, hi_color, captions=True):
+def build_ass(path, words, clip_len, hook, font, hi_color, captions=True, hook_y=230, cap_y=560):
     lines = [
         "[Script Info]", "ScriptType: v4.00+", f"PlayResX: {W}", f"PlayResY: {H}",
         "WrapStyle: 0", "ScaledBorderAndShadow: yes", "",
@@ -70,8 +70,8 @@ def build_ass(path, words, clip_len, hook, font, hi_color, captions=True):
         "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, "
         "BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, "
         "BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-        f"Style: Cap,{font},92,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,1,0,1,7,3,2,60,60,560,1",
-        f"Style: Hook,{font},78,&H00000000,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,-1,0,0,0,100,100,0,0,3,18,0,8,70,70,230,1",
+        f"Style: Cap,{font},92,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,1,0,1,7,3,2,60,60,{cap_y},1",
+        f"Style: Hook,{font},78,&H00000000,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,-1,0,0,0,100,100,0,0,3,18,0,8,70,70,{hook_y},1",
         "", "[Events]",
         "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
     ]
@@ -130,7 +130,8 @@ def render(workdir, clip, words, args, src_w, src_h):
     name = f"short_{int(clip['id']):02d}"
     ass_name = f"{name}.ass"
     build_ass(os.path.join(out_dir, ass_name), cw, length, clip.get("hook", ""),
-              args.font, COLORS.get(args.caption_color, args.caption_color), not args.no_captions)
+              args.font, COLORS.get(args.caption_color, args.caption_color), not args.no_captions,
+              args.hook_y, args.caption_y)
 
     vf = video_filter(args.layout, args.facecam, src_w, src_h) + f";[v0]ass={ass_name},format=yuv420p[v]"
     cmd = ["ffmpeg", "-v", "error", "-y", "-ss", f"{s:.3f}", "-i", os.path.abspath(args.source),
@@ -175,6 +176,8 @@ def main():
     ap.add_argument("--no-captions", action="store_true")
     ap.add_argument("--caption-color", default="yellow")
     ap.add_argument("--font", default="Arial Black")
+    ap.add_argument("--hook-y", type=int, default=230, help="hook text top margin in px (1920 tall)")
+    ap.add_argument("--caption-y", type=int, default=560, help="caption bottom margin in px")
     ap.add_argument("--snapshot", action="store_true")
     ap.add_argument("--preview", action="store_true")
     args = ap.parse_args()
