@@ -76,9 +76,9 @@ def build_ass(path, words, clip_len, hook, font, hi_color, captions=True, hook_y
         "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
     ]
     if hook:
-        end = min(3.2, clip_len)
+        end = min(3.6 if "\\N" in hook else 3.2, clip_len)
         lines.append(f"Dialogue: 1,{ass_time(0)},{ass_time(end)},Hook,,0,0,0,,"
-                     f"{{\\fad(120,200)}}{clean(hook)}")
+                     f"{{\\fad(120,200)}}" + "\\N".join(clean(x) for x in hook.split("\\N")))
     if captions:
         for g in group_words(words):
             g_end = g[-1]["e"]
