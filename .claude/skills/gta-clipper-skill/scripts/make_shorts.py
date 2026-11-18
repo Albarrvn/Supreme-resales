@@ -136,7 +136,7 @@ def render(workdir, clip, words, args, src_w, src_h):
     vf = video_filter(args.layout, args.facecam, src_w, src_h) + f";[v0]ass={ass_name},format=yuv420p[v]"
     cmd = ["ffmpeg", "-v", "error", "-y", "-ss", f"{s:.3f}", "-i", os.path.abspath(args.source),
            "-t", f"{length:.3f}", "-filter_complex", vf, "-map", "[v]", "-map", "0:a?",
-           "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-r", "30",
+           "-c:v", "libx264", "-preset", args.preset, "-crf", str(args.crf), "-r", str(args.fps),
            "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "160k", "-ar", "48000",
            "-movflags", "+faststart", f"{name}.mp4"]
     subprocess.run(cmd, check=True, cwd=out_dir)
@@ -178,6 +178,9 @@ def main():
     ap.add_argument("--font", default="Arial Black")
     ap.add_argument("--hook-y", type=int, default=230, help="hook text top margin in px (1920 tall)")
     ap.add_argument("--caption-y", type=int, default=560, help="caption bottom margin in px")
+    ap.add_argument("--crf", type=int, default=20, help="x264 quality (lower = better, 18 = high)")
+    ap.add_argument("--preset", default="veryfast", help="x264 preset (veryfast/fast/medium)")
+    ap.add_argument("--fps", type=int, default=30)
     ap.add_argument("--snapshot", action="store_true")
     ap.add_argument("--preview", action="store_true")
     args = ap.parse_args()
