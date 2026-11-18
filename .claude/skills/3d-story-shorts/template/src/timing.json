@@ -1,0 +1,90 @@
+{
+ "fps": 30,
+ "duration": 63.23,
+ "shots": [
+  {
+   "key": "hook",
+   "start": 0.15,
+   "end": 5.582,
+   "words": 15,
+   "text": "In nineteen seventy-eight, welders secretly patched a brand new New York skyscraper, every single night."
+  },
+  {
+   "key": "cta",
+   "start": 5.974,
+   "end": 11.538,
+   "words": 23,
+   "text": "Before we go deep into today's story, take a second to like this video and subscribe if you haven't. Let's get into it."
+  },
+  {
+   "key": "tower",
+   "start": 11.93,
+   "end": 16.684,
+   "words": 13,
+   "text": "It stood fifty-nine stories high on giant stilts, and it had just opened."
+  },
+  {
+   "key": "rules",
+   "start": 17.077,
+   "end": 20.643,
+   "words": 11,
+   "text": "The building rules only asked about wind hitting the flat sides."
+  },
+  {
+   "key": "but",
+   "start": 21.036,
+   "end": 26.334,
+   "words": 16,
+   "text": "But a student asked about corner winds, and the numbers showed about forty percent more force."
+  },
+  {
+   "key": "then",
+   "start": 26.726,
+   "end": 31.59,
+   "words": 16,
+   "text": "Then the engineer learned the builders had swapped his welded joints for bolts to save money."
+  },
+  {
+   "key": "storm",
+   "start": 31.983,
+   "end": 35.961,
+   "words": 14,
+   "text": "A big enough storm could snap those bolts, right in the middle of Manhattan."
+  },
+  {
+   "key": "yousee",
+   "start": 36.353,
+   "end": 42.624,
+   "words": 19,
+   "text": "You see, a weld turns a joint into one solid piece. Bolts are only as strong as the bolts."
+  },
+  {
+   "key": "night",
+   "start": 43.017,
+   "end": 48.297,
+   "words": 14,
+   "text": "Every night after the offices emptied, welders covered the bolted joints with steel plates."
+  },
+  {
+   "key": "ella",
+   "start": 48.69,
+   "end": 53.756,
+   "words": 15,
+   "text": "During the repair, Hurricane Ella headed for New York, and evacuation plans were drawn up."
+  },
+  {
+   "key": "so",
+   "start": 54.148,
+   "end": 58.165,
+   "words": 10,
+   "text": "So everyone watched the forecasts, until the storm turned away."
+  },
+  {
+   "key": "close",
+   "start": 58.558,
+   "end": 62.476,
+   "words": 13,
+   "text": "The repair worked, and the public didn't hear about it until nineteen ninety-five."
+  }
+ ]
+}
