@@ -250,19 +250,27 @@ function roundTitle(n,label,p,y=300){
 
 /* ---------- captions ---------- */
 const VO=[
- [0.15,2.9,"Mismo taller, mismo electrodo… pero uno acaba en urgencias."],
- [3.1,4.6,"Cinco: botas de cuero."],
- [4.8,7.8,"La escoria cae… y siempre busca tu zapato."],
- [8.1,9.6,"Cuatro: mascarilla."],
- [9.8,13.8,"El humo no parece peligroso… pero te envenena poco a poco."],
- [14.1,15.6,"Tres: ropa de algodón."],
- [15.8,19.8,"El sintético se derrite y se pega a tu piel."],
- [20.1,21.6,"Dos: guantes largos."],
- [21.8,25.8,"Una pieza recién soldada quema aunque no lo parezca."],
- [26.1,27.8,"Y la número uno: la careta."],
- [28.0,31.8,"El arco quema tus ojos… aunque no lo mires fijo."],
- [32.1,34.8,"Primero, protégete. Después, el cordón perfecto."],
+ [0.05,1.4,"Mismo taller, mismo electrodo…"],
+ [1.45,2.7,"pero uno acaba en urgencias."],
+ [2.8,4.0,"Cinco: botas de cuero."],
+ [4.05,4.7,"La escoria cae…"],
+ [4.75,5.95,"y siempre busca tu zapato."],
+ [6.05,7.1,"Cuatro: mascarilla."],
+ [7.15,8.4,"El humo no parece peligroso…"],
+ [8.45,9.7,"pero te envenena poco a poco."],
+ [9.75,10.8,"Tres: ropa de algodón."],
+ [10.85,13.0,"El sintético se derrite y se pega a tu piel."],
+ [13.05,14.2,"Dos: guantes largos."],
+ [14.25,16.6,"Una pieza recién soldada quema aunque no lo parezca."],
+ [16.65,17.8,"Y la número uno: la careta."],
+ [17.85,18.9,"El arco quema tus ojos…"],
+ [18.95,20.2,"aunque no lo mires fijo."],
+ [20.3,20.9,"Primero, protégete."],
+ [20.95,22.55,"Después, el cordón perfecto."],
 ];
+const MAP=[[0,0],[2.75,3.0],[5.95,8.0],[9.72,14.0],[13.02,20.0],[16.62,26.0],[20.25,32.0],[22.6,34.9],[24.2,37.3],[27.5,38.0]];
+function tau(t){for(let i=1;i<MAP.length;i++){if(t<=MAP[i][0]){const [a0,b0]=MAP[i-1],[a1,b1]=MAP[i];return b0+(b1-b0)*(t-a0)/(a1-a0)}}return 38;}
+window.tau=tau;
 const WORDS=[];
 VO.forEach(([a,b,s])=>{const ws=s.split(' ');const tot=ws.reduce((q,w)=>q+w.length+2,0);let c=a;
   const chunks=[];for(let i=0;i<ws.length;i+=3)chunks.push(ws.slice(i,i+3));
@@ -282,7 +290,8 @@ function caption(t){
 const TOPY=860, BOTY=1590, CX=420, S=1.12;
 function idle(t,ph=0){return Math.sin(t*4+ph)*3}
 
-function render(t){
+function render(tr){
+  const t=tau(tr);
   let top='', bot='', over='';
   let shT=0, shB=0;
   const nov={type:'nov',x:CX,y:TOPY,s:S,expr:'smug',armR:-20,armL:20,hop:idle(t)};
@@ -439,7 +448,7 @@ function render(t){
   // labels
   svg+=chip(36,720,'NOVATO','#E63946','#fff',34)+chip(36,1100,'PRO','#2ECC71','#fff',34);
   svg+=`<text x="1040" y="64" font-size="28" fill="#fff" text-anchor="end" opacity=".85" stroke="${O}" stroke-width="5" paint-order="stroke">@luisgabb17</text>`;
-  svg+=title+over+caption(t);
+  svg+=title+over+caption(tr);
   // CTA
   if(t>=34.9){
     const k=eOut(lin(t,34.9,35.3));
