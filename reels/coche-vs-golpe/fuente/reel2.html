@@ -388,6 +388,11 @@ function cardQ(t,t0,t1){
 }
 
 const TOPY=860, BOTY=1590, S=1.0;
+window.CLIPS=window.CLIPS||{};
+let CLIPCFG={hookTop:null,hookBot:null,testTop:null,testBot1:null,testBot2:null};
+window.setClips=c=>{CLIPCFG=c};
+function clipFrame(key,sec){const c=window.CLIPS[key];if(!c)return null;let f=Math.round(sec*c.fps);f=clamp(f,0,c.n-1);return `clips/${key}/f_${String(f+1).padStart(4,'0')}.jpg`}
+function clipLayer(key,sec,top){const h=clipFrame(key,sec);if(!h)return null;return `<image href="${h}" x="0" y="${top?-150:1020}" width="1080" height="1080" preserveAspectRatio="none"/>`}
 function idle(t,ph=0){return Math.sin(t*4+ph)*3}
 function weldX(prog){return beadX(prog)-281}   // char x so that holder tip (armR -60) is at bead
 function weldPose(o,prog,u,seamY,type,panelTag){ // returns svg for arc at tip
@@ -501,9 +506,14 @@ function render(tr){
   } else bot+=piece(SB,pB,t);
   top=piece(ST,pT,t)+top;
 
+  let cT=null,cB=null;const C=CLIPCFG;
+  if(t<3.2){ if(C.hookBot)cB=clipLayer(C.hookBot.key,C.hookBot.off+t,false); if(C.hookTop)cT=clipLayer(C.hookTop.key,C.hookTop.off+t*C.hookTop.rate,true); }
+  else if(t>=22&&t<CTA0){const u=t-22; if(C.testTop)cT=clipLayer(C.testTop.key,C.testTop.off+u*C.testTop.rate,true);
+    if(u<1.8){if(C.testBot1)cB=clipLayer(C.testBot1.key,C.testBot1.off+u,false);} else if(C.testBot2)cB=clipLayer(C.testBot2.key,C.testBot2.off+(u-1.8),false);}
   let svg=DEFS;
-  svg+=`<g clip-path="url(#cTop)"><g transform="translate(${shT} 0)">${panel(0,900,'#B9533F',800,'#7C7470')}${top}${character(nov,t)}</g></g>`;
-  svg+=`<g clip-path="url(#cBot)"><g transform="translate(${shB} 0)">${panel(1020,900,'#2F8593',1600,'#6F7A7C')}${bot}${character(pro,t)}</g></g>`;
+  if(cT){shT=0;}
+  svg+=`<g clip-path="url(#cTop)"><g transform="translate(${shT} 0)">${panel(0,900,'#B9533F',800,'#7C7470')}${cT?cT:top+character(nov,t)}</g></g>`;
+  svg+=`<g clip-path="url(#cBot)"><g transform="translate(${shB} 0)">${panel(1020,900,'#2F8593',1600,'#6F7A7C')}${cB?cB:bot+character(pro,t)}</g></g>`;
   svg+=`<rect x="0" y="900" width="1080" height="120" fill="#14162D"/><rect x="0" y="896" width="1080" height="6" fill="#F5C518"/><rect x="0" y="1018" width="1080" height="6" fill="#F5C518"/>`;
   svg+=chip(36,400,'NOVATO','#E63946','#fff',34)+chip(36,1100,'PRO','#2ECC71','#fff',34);
   svg+=`<text x="1040" y="64" font-size="28" fill="#fff" text-anchor="end" opacity=".85" stroke="${O}" stroke-width="5" paint-order="stroke">@luisgabb17</text>`;

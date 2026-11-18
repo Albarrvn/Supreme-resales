@@ -67,7 +67,7 @@ for k in [.12,.27,.41,.55,.7,.86]: add(sfx,17.0+k*1.9,popf(),.45)
 add(sfx,19.0,ding(),.8); add(sfx,19.9,popf(),.7); add(sfx,20.6,thud(),.9); add(sfx,20.6,boing(),.6)
 # test
 add(sfx,22.9,thud(),1); add(sfx,22.9,zap(.25),.8); add(sfx,23.0,thud(),.6)
-add(sfx,22.9,boing(),.9); add(sfx,23.8,whoosh(.3),.6); add(sfx,23.9,popf(),.7)
+add(sfx,23.6,boing(),.9); add(sfx,23.6,thud(),.6); add(sfx,23.8,whoosh(.3),.6); add(sfx,23.9,popf(),.7)
 for i,f in enumerate([523,659,784,1046]): add(sfx,24.0+i*.12,ding(f),.5)
 # cta
 d=26.5-34.9
