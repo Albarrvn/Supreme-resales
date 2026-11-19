@@ -5,3 +5,6 @@ shorts/**/raw.wav
 shorts/**/final.mp4
 shorts/chain.log
 shorts/**/node_modules
+shorts/**/out/
+shorts/entrega/*.mp4
+shorts/entrega/frame_*.png
