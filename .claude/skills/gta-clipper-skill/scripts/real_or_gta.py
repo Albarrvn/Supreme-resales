@@ -62,8 +62,9 @@ if __name__ == "__main__":
         build(name, top, bot, gta, p)
         parts.append(p)
         print("✓", p, flush=True)
-    lst = f"{out}/list.txt"
-    open(lst, "w").write("".join(f"file '{p}'\n" for p in parts))
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy",
-                    "-movflags", "+faststart", f"{out}/real_o_gta_3_rondas.mp4"], check=True)
+    ins = sum((["-i", p] for p in parts), [])  # re-encode: stream-copy concat broke timestamps here
+    cat = "".join(f"[{i}:v][{i}:a]" for i in range(len(parts))) + f"concat=n={len(parts)}:v=1:a=1[v][a]"
+    subprocess.run(["ffmpeg", "-v", "error", "-y", *ins, "-filter_complex", cat, "-map", "[v]", "-map", "[a]",
+                    "-c:v", "libx264", "-crf", "19", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart",
+                    f"{out}/real_o_gta_3_rondas.mp4"], check=True)
     print("✓", f"{out}/real_o_gta_3_rondas.mp4")
