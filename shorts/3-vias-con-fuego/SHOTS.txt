@@ -1,0 +1,12 @@
+hook | Sueldan las vías del tren con fuego, y sin una gota de electricidad.
+antes | Antes, los rieles se unían con placas y tornillos, y cada unión hacía traca, traca.
+problema | Esas uniones se aflojaban con cada tren, y había que repararlas sin parar.
+quimico | En mil ochocientos noventa y cinco, un químico alemán, Hans Goldschmidt, patentó una reacción muy curiosa.
+mezcla | Mezcló polvo de aluminio con óxido de hierro. Es decir, con herrumbre.
+mira | Mira: el aluminio le roba el oxígeno al óxido, como un ladrón, y en el robo suelta un calor brutal.
+calor | Más de dos mil grados. Tanto, que el hierro sale derretido.
+molde | Así que ponen un molde alrededor de la unión y encienden la mezcla en un crisol.
+lava | El acero líquido cae como lava y rellena el hueco entre los dos rieles.
+pieza | Al enfriarse, los dos rieles ya son una sola pieza.
+vias | Así se sueldan kilómetros de vía seguidos, casi sin juntas.
+cierre | Por eso muchos trenes ya casi no hacen traca, traca, gracias a un poco de óxido.

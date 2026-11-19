@@ -1,0 +1,12 @@
+hook | Un barco nuevo se partió en dos, estando quieto en el puerto.
+cuando | Fue en enero de mil novecientos cuarenta y tres, en Portland, en plena guerra.
+prisa | Mira: Estados Unidos necesitaba barcos rápido, y por eso empezó a soldarlos en vez de remacharlos.
+rapido | Soldar era mucho más rápido. Los astilleros sacaban barcos en semanas.
+noche | Pero una noche helada, el tanquero Schenectady, recién terminado, sonó como un cañonazo.
+grieta | Una grieta cruzó la cubierta de lado a lado, y el barco quedó doblado en el muelle.
+duda | No había tormenta, ni olas, ni carga. Muchos culparon a la soldadura.
+tipper | Entonces una científica de Cambridge, Constance Tipper, investigó por qué se partían estos barcos.
+frio | Mira: con mucho frío, ese acero se volvía frágil, como una galleta recién sacada de la nevera.
+inicio | Y un defecto en una soldadura era el punto perfecto para que empezara la grieta.
+asi | Así que mejoraron el acero, el diseño y la forma de soldar.
+cierre | Desde entonces, el acero de los barcos se prueba en frío, antes de soldar un solo cordón.
