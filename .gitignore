@@ -1,3 +1,7 @@
 shorts/**/node_modules/
 shorts/**/out/
 shorts/**/stills/
+shorts/**/raw.wav
+shorts/**/final.mp4
+shorts/chain.log
+shorts/**/node_modules
