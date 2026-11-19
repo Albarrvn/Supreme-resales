@@ -14,6 +14,20 @@ Y comenta GUÍA para los 5 secretos del cordón perfecto.
 
 #soldadura #soldador #welding #electrodo #cordondesoldadura #tipsdesoldadura #taller #shorts
 
+## Versión estilo línea (con voz)
+**Título:** ¿Tu cordón se ve así? 3 movimientos que debes conocer 🔥
+
+**Caption:**
+Si tu cordón sale feo… el problema es tu mano, no la máquina 👀
+
+1️⃣ Recto: cordón fino, para el pase de raíz.
+2️⃣ Zigzag: lado a lado, con pausa en los bordes para que no se muerda.
+3️⃣ Oscilatorio: pequeños círculos, el rey en vertical hacia arriba.
+
+¿Cuál usas tú? Comenta 1, 2 o 3 👇 (o GUÍA y te paso el resto)
+
+#soldadura #soldador #welding #electrodo #cordondesoldadura #tipsdesoldadura #taller #shorts
+
 ## Texto para grabar la voz
 ```
 Tres movimientos de mano… y tres cordones totalmente distintos.
