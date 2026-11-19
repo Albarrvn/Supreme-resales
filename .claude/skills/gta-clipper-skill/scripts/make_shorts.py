@@ -98,7 +98,16 @@ def build_ass(path, words, clip_len, hook, font, hi_color, captions=True, hook_y
         f.write("\n".join(lines) + "\n")
 
 
-def video_filter(layout, facecam, src_w, src_h):
+def video_filter(layout, facecam, src_w, src_h, region=None):
+    if layout == "region":
+        # crop a horizontal band of the frame (x0..x1 as fractions), scale it to full width,
+        # and centre it over a blurred fill — keeps the action big and drops side overlays
+        x0, x1 = region
+        return (f"[0:v]split[a][b];"
+                f"[a]crop=iw*{x1 - x0}:ih:iw*{x0}:0,scale={W}:{H}:force_original_aspect_ratio=increase,"
+                f"crop={W}:{H},boxblur=24:3,eq=brightness=-0.12[bg];"
+                f"[b]crop=iw*{x1 - x0}:ih:iw*{x0}:0,scale={W}:-2[fg];"
+                f"[bg][fg]overlay=0:(H-h)/2-40[v0]")
     if layout == "crop":
         return f"[0:v]scale=-2:{H},crop={W}:{H}[v0]"
     if layout == "facecam":
@@ -133,7 +142,7 @@ def render(workdir, clip, words, args, src_w, src_h):
               args.font, COLORS.get(args.caption_color, args.caption_color), not args.no_captions,
               args.hook_y, args.caption_y)
 
-    vf = video_filter(args.layout, args.facecam, src_w, src_h) + f";[v0]ass={ass_name},format=yuv420p[v]"
+    vf = video_filter(args.layout, args.facecam, src_w, src_h, args.region) + f";[v0]ass={ass_name},format=yuv420p[v]"
     cmd = ["ffmpeg", "-v", "error", "-y", "-ss", f"{s:.3f}", "-i", os.path.abspath(args.source),
            "-t", f"{length:.3f}", "-filter_complex", vf, "-map", "[v]", "-map", "0:a?",
            "-c:v", "libx264", "-preset", args.preset, "-crf", str(args.crf), "-r", str(args.fps),
@@ -170,8 +179,9 @@ def preview(workdir):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("workdir")
-    ap.add_argument("--layout", default="blur", choices=["blur", "crop", "facecam"])
+    ap.add_argument("--layout", default="blur", choices=["blur", "crop", "facecam", "region"])
     ap.add_argument("--facecam", help="x,y,w,h as fractions of the frame, e.g. 0.72,0.68,0.27,0.30")
+    ap.add_argument("--region", help="x0,x1 fractions of the frame to keep for --layout region, e.g. 0.08,0.78")
     ap.add_argument("--only", help="comma-separated clip ids")
     ap.add_argument("--no-captions", action="store_true")
     ap.add_argument("--caption-color", default="yellow")
@@ -196,6 +206,8 @@ def main():
                         "-frames:v", "1", "-vf", "scale=1280:-2", out], check=True)
         print(f"✓ {out}"); return
 
+    if args.layout == "region":
+        args.region = [float(v) for v in (args.region or "0.08,0.78").split(",")]
     if args.layout == "facecam":
         if not args.facecam:
             sys.exit("--layout facecam needs --facecam x,y,w,h (run --snapshot to find it)")
