@@ -8,3 +8,6 @@ shorts/**/node_modules
 shorts/**/out/
 shorts/entrega/*.mp4
 shorts/entrega/frame_*.png
+reels/patrones/*.wav
+reels/patrones/video.mp4
+reels/patrones/st_*.jpg

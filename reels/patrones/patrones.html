@@ -1,0 +1,156 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;src:url(poppins900.ttf);font-weight:900}
+html,body{margin:0;background:#000;width:1080px;height:1920px;overflow:hidden}
+text{font-family:P;font-weight:900}
+</style></head>
+<body>
+<svg id="s" xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+<script>
+const O='#1E1B3A';
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)), lin=(t,a,b)=>clamp((t-a)/(b-a),0,1), mix=(a,b,k)=>a+(b-a)*k;
+const eOut=x=>1-Math.pow(1-x,3), eIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const bOut=x=>{const c1=2.2,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const pop=(t,t0,d=.35)=>t<t0?0:bOut(lin(t,t0,t0+d));
+const rnd=i=>{const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const tw=(s,z)=>s.length*z*.66;
+function chip(x,y,s,bg,fg='#fff',z=36){const w=tw(s,z)+50,h=z*1.65;return `<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="${h/2}" fill="${bg}" stroke="${O}" stroke-width="6"/><text x="${x}" y="${y+z*.36}" font-size="${z}" fill="${fg}" text-anchor="middle" stroke="${O}" stroke-width="${fg==='#fff'?7:0}" paint-order="stroke">${esc(s)}</text>`}
+function big(x,y,s,z,fill='#fff'){return `<text x="${x}" y="${y}" font-size="${z}" fill="${fill}" text-anchor="middle" stroke="${O}" stroke-width="${z*.16}" stroke-linejoin="round" paint-order="stroke">${esc(s)}</text>`}
+function popG(x,y,p,inner){return p<=0?'':`<g transform="translate(${x} ${y}) scale(${p})">${inner}</g>`}
+
+/* ---------- the 3 patterns: p (0..1 of travel) -> point ---------- */
+const X0=180, LEN=720;
+const PAT={
+  recto:{w:44, f:(p,c,s=1)=>[X0+LEN*p, c]},
+  zigzag:{w:150, f:(p,c,s=1)=>{const u=p*8;const tri=4*Math.abs(((u+.25)%1)-.5)-1;return [X0+LEN*p, c+60*s*tri]}},
+  osc:{w:140, f:(p,c,s=1)=>{const th=2*Math.PI*7*p;return [X0+LEN*p-45*s*Math.sin(th), c-45*s*Math.cos(th)+45*s*0]}},
+};
+// zigzag dwells at the edges: time->travel warp
+function warpZig(q){const u=q*8;return (u-0.7*Math.sin(4*Math.PI*(u-.25))/(4*Math.PI))/8}
+
+function plate(c,h=170){
+  let s=`<rect x="110" y="${c-h}" width="860" height="${h*2}" rx="18" fill="#9AA3AB" stroke="${O}" stroke-width="7"/>`;
+  s+=`<rect x="130" y="${c-h+18}" width="820" height="${h-24}" rx="10" fill="#A9B2BA"/><rect x="130" y="${c+6}" width="820" height="${h-24}" rx="10" fill="#A3ACB4"/>`;
+  s+=`<line x1="120" y1="${c}" x2="960" y2="${c}" stroke="#5C6670" stroke-width="6"/>`;
+  for(let i=0;i<6;i++)s+=`<line x1="${170+i*150}" y1="${c-h+30}" x2="${230+i*150}" y2="${c-h+70}" stroke="#fff" stroke-width="5" opacity=".25"/>`;
+  return s;
+}
+function bead(kind,c,q,s=1){ // finished band + ripples behind the tip
+  if(q<=0)return'';const P=PAT[kind];const [tx]=P.f(q,c,s);const x1=Math.max(X0,kind==='osc'?tx:X0+LEN*q);const w=P.w*s;
+  let g=`<rect x="${X0-w/2}" y="${c-w/2}" width="${Math.max(0,x1-X0)+w/2}" height="${w}" rx="${w/2}" fill="#C9CFD5" stroke="${O}" stroke-width="5"/>`;
+  for(let x=X0;x<x1-6;x+=14*s)g+=`<path d="M${x} ${c-w/2+6} Q${x+12*s} ${c} ${x} ${c+w/2-6}" fill="none" stroke="#8E99A4" stroke-width="${3*s}"/>`;
+  g+=`<rect x="${Math.max(X0-w/2,x1-110*s)}" y="${c-w/2}" width="${Math.min(110*s,x1-X0+w/2)}" height="${w}" rx="${w/2}" fill="#FF8C1A" opacity=".55"/>`;
+  return g;
+}
+function trail(kind,c,q,s=1,full=false){ // the hand movement as a glowing path
+  const P=PAT[kind];let d='',dd='';const n=Math.max(2,Math.round(420*q));
+  for(let i=0;i<=n;i++){const [x,y]=P.f(q*i/n,c,s);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
+  let g=`<path d="${d}" fill="none" stroke="#FFD34E" stroke-width="${9*s}" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/>`;
+  return g;
+}
+function ghost(kind,c,a,s=1){if(a<=0)return'';const P=PAT[kind];let d='';for(let i=0;i<=420;i++){const [x,y]=P.f(i/420,c,s);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
+  return `<path d="${d}" fill="none" stroke="#fff" stroke-width="${6*s}" stroke-dasharray="${14*s} ${12*s}" opacity="${a*.8}"/>`}
+function torch(x,y,t,s=1,on=true){
+  let g='';
+  if(on){g+=`<circle cx="${x}" cy="${y}" r="${70*s}" fill="url(#gl)"/>`;
+    for(let i=0;i<14;i++){const k=((t*2.4)+rnd(i))%1,a=rnd(i+9)*6.28;g+=`<circle cx="${x+Math.cos(a)*k*110*s}" cy="${y+Math.sin(a)*k*90*s+k*k*60*s}" r="${(5-3*k)*s}" fill="#FFE066" opacity="${1-k}"/>`}}
+  g+=`<line x1="${x}" y1="${y}" x2="${x+150*s}" y2="${y-300*s}" stroke="${O}" stroke-width="${22*s}" stroke-linecap="round"/><line x1="${x}" y1="${y}" x2="${x+150*s}" y2="${y-300*s}" stroke="#7E8389" stroke-width="${12*s}" stroke-linecap="round"/>`;
+  g+=`<g transform="translate(${x+150*s} ${y-300*s}) rotate(-63) scale(${s})"><rect x="-10" y="-30" width="110" height="60" rx="18" fill="#F5C518" stroke="${O}" stroke-width="7"/><rect x="100" y="-14" width="70" height="28" rx="8" fill="#2A2D36" stroke="${O}" stroke-width="6"/></g>`;
+  if(on)g+=`<circle cx="${x}" cy="${y}" r="${16*s}" fill="#fff"/>`;
+  return g;
+}
+
+/* ---------- captions ---------- */
+const VO=[
+ [0.2,3.4,"Tres movimientos de mano… y tres cordones totalmente distintos."],
+ [3.8,6.6,"Uno: el cordón recto, o stringer."],
+ [6.8,9.6,"Avanzas en línea, sin mover la mano a los lados."],
+ [9.8,13.4,"Sale estrecho y es perfecto para el pase de raíz y la chapa fina."],
+ [13.8,15.6,"Dos: el zigzag."],
+ [15.8,18.6,"Mueves la punta de lado a lado mientras avanzas."],
+ [18.8,22.6,"Haces una pausa corta en cada borde, para que no se muerda la orilla."],
+ [22.8,25.8,"Ideal para rellenar y cubrir uniones anchas."],
+ [26.2,28.6,"Tres: el movimiento oscilatorio."],
+ [28.8,31.4,"Dibujas medias lunas o pequeños círculos."],
+ [31.6,35.8,"Funde bien los bordes y se usa mucho en vertical hacia arriba."],
+ [36.2,39.2,"¿Cuál dominas tú?"],
+];
+window.setVO=v=>{VO.length=0;v.forEach(x=>VO.push(x));buildWords()};
+let WORDS=[];
+function buildWords(){WORDS=[];VO.forEach(([a,b,s])=>{const ws=s.split(' ');const tot=ws.reduce((q,w)=>q+w.length+2,0);let c=a;
+  for(let i=0;i<ws.length;i+=3){WORDS.push(ws.slice(i,i+3).map(w=>{const d=(b-a)*(w.length+2)/tot;const it={w,a:c,b:c+d};c+=d;return it}))}})}
+buildWords();
+function caption(t){const ch=WORDS.find(c=>t>=c[0].a-.05&&t<c[c.length-1].b+.12);if(!ch)return'';const p=bOut(lin(t,ch[0].a-.05,ch[0].a+.12));
+  let s=`<g transform="translate(540 1515) scale(${.85+.15*p}) translate(-540 -1515)"><text x="540" y="1530" font-size="58" text-anchor="middle" stroke="${O}" stroke-width="13" stroke-linejoin="round" paint-order="stroke" fill="#fff">`;
+  ch.forEach((it,i)=>{const act=t>=it.a&&t<it.b+.05;s+=`<tspan fill="${act?'#FF2E63':'#fff'}">${esc(it.w.toUpperCase())}${i<ch.length-1?' ':''}</tspan>`});return s+`</text></g>`}
+
+/* ---------- timeline (window.T can be remapped to the voice) ---------- */
+let T={h:0, s1:3.6, s2:13.6, s3:26.0, cmp:36.0, cta:39.6, end:43.5};
+window.setT=x=>{T=x};
+const BG=`<defs><pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="13" cy="13" r="2.6" fill="rgba(0,0,0,.16)"/></pattern>
+<radialGradient id="gl"><stop offset="0" stop-color="#FFF6C8" stop-opacity="1"/><stop offset=".4" stop-color="#FFC34A" stop-opacity=".7"/><stop offset="1" stop-color="#FF8C1A" stop-opacity="0"/></radialGradient>
+<radialGradient id="cta" cx=".5" cy=".42" r=".75"><stop offset="0" stop-color="#14505C"/><stop offset=".6" stop-color="#0B2A33"/><stop offset="1" stop-color="#05141A"/></radialGradient>
+<pattern id="haz" width="44" height="20" patternUnits="userSpaceOnUse"><rect width="44" height="20" fill="#F5C518"/><path d="M0 20 L14 0 L28 0 L14 20Z M30 20 L44 0 L44 20Z" fill="#1E1B3A"/></pattern></defs>`;
+function wall(col){let s=`<rect width="1080" height="1920" fill="${col}"/><rect width="1080" height="1920" fill="url(#dots)"/>`;
+  for(let i=0;i<8;i++){const x=40+i*140+(i%2)*30,y=60+(i%3)*22;s+=`<g fill="rgba(0,0,0,.16)"><circle cx="${x+7}" cy="${y}" r="11"/><rect x="${x}" y="${y}" width="14" height="${70+(i%3)*18}" rx="6"/></g>`}
+  s+=`<rect x="0" y="1700" width="1080" height="220" fill="#6F7A7C"/><rect x="0" y="1690" width="1080" height="20" fill="url(#haz)"/>`;return s}
+const NAMES={recto:['1','CORDÓN RECTO','(STRINGER)'],zigzag:['2','ZIGZAG','(LADO A LADO)'],osc:['3','OSCILATORIO','(MEDIAS LUNAS / CÍRCULOS)']};
+function title(kind,p){if(p<=0)return'';const [n,a,b]=NAMES[kind];return `<g transform="translate(540 330) scale(${p}) translate(-540 -330)"><circle cx="540" cy="250" r="62" fill="#F5C518" stroke="${O}" stroke-width="8"/><text x="540" y="278" font-size="80" fill="${O}" text-anchor="middle">${n}</text>${big(540,410,a,96)}<text x="540" y="470" font-size="40" fill="#BFF3FF" text-anchor="middle" stroke="${O}" stroke-width="8" paint-order="stroke">${esc(b)}</text></g>`}
+
+function section(kind,t,t0,t1,col,chips,extra){
+  const u=t-t0, D=t1-t0, c=980;
+  const tr0=1.0, tr1=D-1.6; let q=lin(u,tr0,tr1); if(kind==='zigzag')q=clamp(warpZig(q),0,1);
+  let s=wall(col)+title(kind,pop(t,t0+.1))+plate(c);
+  s+=ghost(kind,c,lin(u,.3,.7)*(1-lin(u,tr0,tr0+.6)));
+  s+=bead(kind,c,q)+trail(kind,c,q);
+  const [x,y]=PAT[kind].f(q,c);
+  s+=torch(x,y,t,1,u>tr0&&u<tr1+.05);
+  if(extra)s+=extra(u,c,q);
+  chips.forEach(([at,txt,bg],i)=>{s+=popG(540,1240+i*100,pop(t,t0+at),chip(0,0,txt,bg,'#fff',38))});
+  return s;
+}
+function render(t){
+  let s=BG;
+  if(t<T.s1){ // hook: the three patterns at once, small
+    s+=wall('#2F8593');
+    s+=big(540,250,'3 PATRONES',118,'#FFE066')+big(540,370,'DE SOLDADURA',84);
+    const ks=['recto','zigzag','osc'],cs=[700,1000,1300];
+    ks.forEach((k,i)=>{const c=cs[i];const q=eIO(lin(t,.3,T.s1-.2));
+      s+=`<g transform="translate(540 ${c}) scale(.62) translate(-540 ${-c})">${plate(c,150)}${bead(k,c,q)}${trail(k,c,q)}${torch(...PAT[k].f(q,c),t,1,q<1)}</g>`;
+      s+=popG(110,c-118,pop(t,.2+i*.15),`<circle r="40" fill="#F5C518" stroke="${O}" stroke-width="6"/><text y="20" font-size="56" fill="${O}" text-anchor="middle">${i+1}</text>`)});
+  } else if(t<T.s2){
+    s+=section('recto',t,T.s1,T.s2,'#2F8593',[[ (T.s2-T.s1)*.55,'ANCHO: ESTRECHO','#38A3C4'],[(T.s2-T.s1)*.72,'PASE DE RAÍZ · CHAPA FINA','#2ECC71']]);
+  } else if(t<T.s3){
+    const D=T.s3-T.s2;
+    s+=section('zigzag',t,T.s2,T.s3,'#B9533F',[[D*.6,'¡PAUSA EN LOS BORDES!','#E63946'],[D*.75,'RELLENO · UNIONES ANCHAS','#2ECC71']],(u,c,q)=>{
+      const a=pop(t,T.s2+D*.42);if(a<=0)return'';let g='';for(let i=0;i<8;i++){const px=X0+LEN*(i+.5)/8; for(const sy of [-1,1]){const yy=c+sy*60, bl=.6+.4*Math.sin(t*8+i);g+=`<circle cx="${px+(sy>0?0:-LEN/16)}" cy="${yy}" r="${14*a}" fill="#FF2E63" stroke="${O}" stroke-width="4" opacity="${bl}"/>`}}return g});
+  } else if(t<T.cmp){
+    const D=T.cmp-T.s3;
+    s+=section('osc',t,T.s3,T.cmp,'#3B4E8C',[[D*.5,'FUNDE BIEN LOS BORDES','#38A3C4'],[D*.68,'VERTICAL HACIA ARRIBA','#2ECC71']]);
+  } else if(t<T.cta){ // comparison
+    s+=wall('#2F8593')+big(540,300,'¿CUÁL DOMINAS TÚ?',86,'#FFE066');
+    const ks=['recto','zigzag','osc'],cs=[620,920,1220];
+    ks.forEach((k,i)=>{const c=cs[i],p=pop(t,T.cmp+.1+i*.2);if(p<=0)return;
+      s+=`<g transform="translate(540 ${c}) scale(${.62*p}) translate(-540 ${-c})">${plate(c,150)}${bead(k,c,1)}${trail(k,c,1)}</g>`;
+      s+=popG(110,c-118,p,`<circle r="40" fill="#F5C518" stroke="${O}" stroke-width="6"/><text y="20" font-size="56" fill="${O}" text-anchor="middle">${i+1}</text>`)});
+    s+=popG(540,1420,pop(t,T.cmp+1),chip(0,0,'1 · 2 · 3 → COMENTA 👇','#E63946','#fff',40));
+  } else { // CTA
+    const k=eOut(lin(t,T.cta,T.cta+.4)), d=x=>T.cta+x;
+    s+=`<g transform="translate(0 ${(1-k)*1920})"><rect width="1080" height="1920" fill="url(#cta)"/>`;
+    for(let i=0;i<24;i++){const q=((t*.25)+rnd(i))%1;s+=`<circle cx="${rnd(i+50)*1080}" cy="${1700-q*1500}" r="${2+rnd(i+7)*3}" fill="#FFB43A" opacity="${(1-q)*.8}"/>`}
+    s+=popG(540,330,pop(t,d(.3)),chip(0,0,'MI GUÍA','#F5A524',O,40));
+    s+=`<g transform="translate(540 700) scale(${(.94+.03*Math.sin(t*3))*pop(t,d(.2),.45)})"><rect x="-264" y="-338" width="528" height="676" rx="22" fill="none" stroke="#38E1FF" stroke-width="10"/><image href="cover.png" x="-256" y="-330" width="512" height="660" preserveAspectRatio="xMidYMid slice"/></g>`;
+    s+=`<text x="540" y="1150" font-size="44" fill="#9FB3BA" text-anchor="middle">ANTES $29.99</text>`;const ps=lin(t,d(1.0),d(1.3));if(ps>0)s+=`<rect x="340" y="1132" width="${400*ps}" height="7" fill="#E63946"/>`;
+    s+=popG(540,1245,pop(t,d(1.35),.4),`<text x="-250" y="-10" font-size="34" fill="#2ECC71" text-anchor="middle">HOY</text><text x="40" y="34" font-size="120" fill="#2EE57A" text-anchor="middle" stroke="${O}" stroke-width="14" paint-order="stroke">$14.99</text>`);
+    s+=popG(540,1395,pop(t,d(1.8),.4)*(1+.04*Math.sin(t*9)),`<rect x="-300" y="-66" width="600" height="132" rx="34" fill="#F5891F" stroke="#FFB45A" stroke-width="5"/><text y="24" font-size="66" fill="${O}" text-anchor="middle">COMENTA GUÍA</text>`);
+    if(t>d(2.1))s+=`<g opacity="${lin(t,d(2.1),d(2.3))}">${big(540,1515,'@luisgabb17',42)}${chip(540,1570,'LINK EN MI BIO','#38E1FF',O,28)}</g>`;
+    s+=`</g>`;
+  }
+  s+=`<text x="1040" y="64" font-size="28" fill="#fff" text-anchor="end" opacity=".85" stroke="${O}" stroke-width="5" paint-order="stroke">@luisgabb17</text>`;
+  if(t<T.cta)s+=caption(t);
+  document.getElementById('s').innerHTML=s;
+}
+window.render=render;render(0);
+</script></body></html>
