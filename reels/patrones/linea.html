@@ -3,14 +3,14 @@
 <style>
 @font-face{font-family:P;src:url(poppins900.ttf);font-weight:900}
 @font-face{font-family:P;src:url(poppins800.ttf);font-weight:800}
-html,body{margin:0;background:#F4F1EA;width:1080px;height:1920px;overflow:hidden}
+html,body{margin:0;background:#0B1C22;width:1080px;height:1920px;overflow:hidden}
 text{font-family:P;font-weight:900}
 </style></head>
 <body>
 <svg id="s" xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
 <script src="timing.js"></script>
 <script>
-const K='#141414', BG='#F4F1EA', A='#FF5A1F', G='#9A9A9A';
+const K='#E6F1F3', BG='#0B1C22', A='#FF8C2A', G='#5F8590', C='#38E1FF';
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)), lin=(t,a,b)=>clamp((t-a)/(b-a),0,1), mix=(a,b,k)=>a+(b-a)*k;
 const eOut=x=>1-Math.pow(1-x,3), eIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 const bOut=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
@@ -25,6 +25,10 @@ const cut=k=>{const i=TM.shots.findIndex(s=>s.key===k);return i===0?0:(TM.shots[
 const wordT=(k,i)=>S[k].start+(S[k].end-S[k].start)*i/S[k].words;
 const T={promesa:cut('promesa'),recto:cut('recto'),zigzag:cut('zigzag'),osc:cut('osc'),cierre:cut('cierre'),end:TM.duration};
 
+const BGDEF=`<defs><radialGradient id="bgg" cx=".5" cy=".45" r=".8"><stop offset="0" stop-color="#14505C"/><stop offset=".55" stop-color="#0B2A33"/><stop offset="1" stop-color="#06141A"/></radialGradient>
+<filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="14" cy="14" r="2" fill="rgba(56,225,255,.08)"/></pattern></defs>
+<rect width="1080" height="1920" fill="url(#bgg)"/><rect width="1080" height="1920" fill="url(#dots)"/>`;
 /* ---- line helpers ---- */
 const line=(x1,y1,x2,y2,w=5,c=K)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
 const txt=(x,y,s,z,c=K,anchor='middle',w=900)=>`<text x="${x}" y="${y}" font-size="${z}" fill="${c}" text-anchor="${anchor}" font-weight="${w}">${esc(s)}</text>`;
@@ -65,7 +69,7 @@ function section(k,t,t0,t1,cues){
   const tr0=.55,tr1=D*.62;let q=lin(u,tr0,tr1);if(k==='zigzag')q=clamp(warpZig(q),0,1);
   const [x,y]=PAT[k].f(q,c);
   let w=plate(c)+`<path d="${pathD(k,c,1)}" fill="none" stroke="${G}" stroke-width="3" stroke-dasharray="10 12" opacity="${.9*(1-lin(u,tr0,tr0+.5))*lin(u,.1,.3)}"/>`;
-  w+=bead(k,c,q)+`<path d="${pathD(k,c,q)}" fill="none" stroke="${A}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`+torch(x,y,t,u>tr0&&u<tr1+.05);
+  w+=bead(k,c,q)+`<path d="${pathD(k,c,q)}" fill="none" stroke="${C}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>`+torch(x,y,t,u>tr0&&u<tr1+.05);
   if(cues.extra)w+=cues.extra(u,c,q);
   // zoom: punch in at start, follow the tip while welding, pull back to reveal
   const follow=lin(u,tr0-.2,tr0+.3)*(1-lin(u,tr1,tr1+.45));
@@ -78,7 +82,8 @@ function section(k,t,t0,t1,cues){
   return s;
 }
 function render(t){
-  performance_t=t;let s=`<rect width="1080" height="1920" fill="${BG}"/>`;
+  performance_t=t;let s=BGDEF;
+  for(let i=0;i<26;i++){const q=((t*.12)+rnd(i))%1;s+=`<circle cx="${rnd(i+50)*1080+Math.sin(t+i)*20}" cy="${1900-q*1900}" r="${2+rnd(i+7)*3}" fill="${A}" opacity="${(1-q)*.7}"/>`}
   if(t<T.promesa){ // HOOK: a bad bead
     const c=960,q=eOut(lin(t,.05,1.1)),z=1+.35*eIO(lin(t,1.1,1.6))-.0*0;
     let w=plate(c);const n=Math.round(60*q);let d='';
@@ -93,7 +98,7 @@ function render(t){
     const u=t-T.promesa;
     s+=popG(540,420,pop(t,T.promesa+.05),txt(0,0,'SOLO HAY',70)+txt(0,140,'3 MOVIMIENTOS',112,A));
     ['recto','zigzag','osc'].forEach((k,i)=>{const p=pop(t,T.promesa+.4+i*.25);if(p<=0)return;const c=760+i*170;
-      s+=`<g transform="translate(540 ${c}) scale(${.5*p}) translate(-540 ${-c})">${plate(c,120)}<path d="${pathD(k,c,1)}" fill="none" stroke="${A}" stroke-width="7"/></g>`;
+      s+=`<g transform="translate(540 ${c}) scale(${.5*p}) translate(-540 ${-c})">${plate(c,120)}<path d="${pathD(k,c,1)}" fill="none" stroke="${C}" stroke-width="7" filter="url(#glow)"/></g>`;
       s+=popG(170,c,p,`<circle r="34" fill="none" stroke="${K}" stroke-width="5"/>${txt(0,16,String(i+1),46)}`)});
     // stopwatch
     const sw=pop(t,wordT('promesa',6));if(sw>0){const a=u*2.4;s+=popG(540,1330,sw,`<circle r="80" fill="none" stroke="${K}" stroke-width="7"/>${line(0,-80,0,-104,10)}${line(0,0,Math.sin(a)*60,-Math.cos(a)*60,7,A)}${txt(150,22,'30 s',64,K,'start')}`)}
@@ -107,11 +112,11 @@ function render(t){
   } else { // CLOSE: which one do you use?
     s+=popG(540,330,pop(t,T.cierre+.05),txt(0,0,'¿CUÁL USAS?',104));
     ['recto','zigzag','osc'].forEach((k,i)=>{const p=pop(t,T.cierre+.25+i*.2);if(p<=0)return;const c=640+i*230,hi=Math.floor(((t-T.cierre)*2.2)%3)===i;
-      s+=`<g transform="translate(560 ${c}) scale(${.6*p}) translate(-540 ${-c})">${plate(c,120)}${bead(k,c,1)}<path d="${pathD(k,c,1)}" fill="none" stroke="${A}" stroke-width="7"/></g>`;
+      s+=`<g transform="translate(560 ${c}) scale(${.6*p}) translate(-540 ${-c})">${plate(c,120)}${bead(k,c,1)}<path d="${pathD(k,c,1)}" fill="none" stroke="${C}" stroke-width="7" filter="url(#glow)"/></g>`;
       s+=popG(150,c,p*(hi?1.18:1),`<circle r="44" fill="${hi?A:BG}" stroke="${K}" stroke-width="5"/>${txt(0,20,String(i+1),58,hi?BG:K)}`)});
     const g=pop(t,wordT('cierre',11));if(g>0)s+=popG(540,1360,g*(1+.04*Math.sin(t*9)),`<rect x="-330" y="-70" width="660" height="140" rx="70" fill="${A}" stroke="${K}" stroke-width="5"/>${txt(0,24,'COMENTA "GUÍA"',62,BG)}`);
   }
-  s+=txt(1040,64,'@luisgabb17',28,K,'end',800);
+  s+=`<clipPath id="av"><circle cx="990" cy="90" r="46"/></clipPath><image href="avatar.png" x="944" y="44" width="92" height="92" clip-path="url(#av)"/><circle cx="990" cy="90" r="46" fill="none" stroke="${C}" stroke-width="4"/>`+txt(925,102,'@luisgabb17',30,K,'end',800);
   s+=caption(t);
   document.getElementById('s').innerHTML=s;
 }
