@@ -1,0 +1,90 @@
+{
+ "fps": 30,
+ "duration": 54.0,
+ "shots": [
+  {
+   "key": "hook",
+   "start": 0.15,
+   "end": 3.172,
+   "words": 10,
+   "text": "Construyeron un barco entero en cuatro días y quince horas."
+  },
+  {
+   "key": "cuando",
+   "start": 3.672,
+   "end": 6.961,
+   "words": 12,
+   "text": "Fue en noviembre de mil novecientos cuarenta y dos, en Richmond, California."
+  },
+  {
+   "key": "mira",
+   "start": 7.461,
+   "end": 11.839,
+   "words": 13,
+   "text": "Mira: en plena guerra, los submarinos alemanes hundían barcos de carga sin parar."
+  },
+  {
+   "key": "meses",
+   "start": 12.339,
+   "end": 15.772,
+   "words": 12,
+   "text": "Los primeros barcos de este tipo habían tardado más de doscientos días."
+  },
+  {
+   "key": "reto",
+   "start": 16.272,
+   "end": 20.306,
+   "words": 14,
+   "text": "Así que el astillero de Henry Kaiser se puso un reto que parecía imposible."
+  },
+  {
+   "key": "secreto",
+   "start": 20.806,
+   "end": 25.328,
+   "words": 15,
+   "text": "El secreto fue la soldadura. Soldar era mucho más rápido que poner miles de remaches."
+  },
+  {
+   "key": "bloques",
+   "start": 25.828,
+   "end": 30.706,
+   "words": 16,
+   "text": "Fabricaron el barco en bloques gigantes ya soldados, y en la grada solo había que unirlos."
+  },
+  {
+   "key": "ritmo",
+   "start": 31.206,
+   "end": 34.183,
+   "words": 10,
+   "text": "Día y noche, miles de trabajadores se turnaban sin parar."
+  },
+  {
+   "key": "dia",
+   "start": 34.683,
+   "end": 40.094,
+   "words": 18,
+   "text": "El ocho de noviembre pusieron la quilla. El doce, el Robert E. Peary ya flotaba en el agua."
+  },
+  {
+   "key": "total",
+   "start": 40.594,
+   "end": 44.694,
+   "words": 14,
+   "text": "Estados Unidos llegó a construir más de dos mil setecientos barcos de este tipo."
+  },
+  {
+   "key": "pero",
+   "start": 45.194,
+   "end": 48.361,
+   "words": 10,
+   "text": "Pero soldar tan rápido, con acero frágil, tuvo un precio."
+  },
+  {
+   "key": "cierre",
+   "start": 48.861,
+   "end": 53.25,
+   "words": 14,
+   "text": "Algunos de esos barcos empezaron a partirse en dos, y nadie sabía por qué."
+  }
+ ]
+}

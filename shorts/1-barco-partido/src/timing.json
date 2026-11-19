@@ -1,0 +1,90 @@
+{
+ "fps": 30,
+ "duration": 65.96,
+ "shots": [
+  {
+   "key": "hook",
+   "start": 0.15,
+   "end": 4.22,
+   "words": 12,
+   "text": "Un barco nuevo se partió en dos, estando quieto en el puerto."
+  },
+  {
+   "key": "cuando",
+   "start": 4.6,
+   "end": 8.51,
+   "words": 14,
+   "text": "Fue en enero de mil novecientos cuarenta y tres, en Portland, en plena guerra."
+  },
+  {
+   "key": "prisa",
+   "start": 8.89,
+   "end": 14.81,
+   "words": 16,
+   "text": "Mira: Estados Unidos necesitaba barcos rápido, y por eso empezó a soldarlos en vez de remacharlos."
+  },
+  {
+   "key": "rapido",
+   "start": 15.19,
+   "end": 19.57,
+   "words": 11,
+   "text": "Soldar era mucho más rápido. Los astilleros sacaban barcos en semanas."
+  },
+  {
+   "key": "noche",
+   "start": 19.95,
+   "end": 25.44,
+   "words": 13,
+   "text": "Pero una noche helada, el tanquero Schenectady, recién terminado, sonó como un cañonazo."
+  },
+  {
+   "key": "grieta",
+   "start": 25.82,
+   "end": 31.53,
+   "words": 17,
+   "text": "Una grieta cruzó la cubierta de lado a lado, y el barco quedó doblado en el muelle."
+  },
+  {
+   "key": "duda",
+   "start": 31.91,
+   "end": 36.91,
+   "words": 12,
+   "text": "No había tormenta, ni olas, ni carga. Muchos culparon a la soldadura."
+  },
+  {
+   "key": "tipper",
+   "start": 37.29,
+   "end": 43.21,
+   "words": 14,
+   "text": "Entonces una científica de Cambridge, Constance Tipper, investigó por qué se partían estos barcos."
+  },
+  {
+   "key": "frio",
+   "start": 43.59,
+   "end": 50.06,
+   "words": 17,
+   "text": "Mira: con mucho frío, ese acero se volvía frágil, como una galleta recién sacada de la nevera."
+  },
+  {
+   "key": "inicio",
+   "start": 50.44,
+   "end": 55.05,
+   "words": 15,
+   "text": "Y un defecto en una soldadura era el punto perfecto para que empezara la grieta."
+  },
+  {
+   "key": "asi",
+   "start": 55.43,
+   "end": 59.34,
+   "words": 12,
+   "text": "Así que mejoraron el acero, el diseño y la forma de soldar."
+  },
+  {
+   "key": "cierre",
+   "start": 59.72,
+   "end": 65.21,
+   "words": 17,
+   "text": "Desde entonces, el acero de los barcos se prueba en frío, antes de soldar un solo cordón."
+  }
+ ]
+}

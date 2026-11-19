@@ -64,7 +64,7 @@ const Scene = ({frame, fps}) => {
     c.setSize(size.width, size.height);
     c.addPass(new RenderPass(scene, camera));
     const bokeh = new BokehPass(scene, camera, {focus: 5, aperture: 0.0025, maxblur: 0.006});
-    c.addPass(bokeh);
+    if (!process.env.REMOTION_NOBOKEH) c.addPass(bokeh);
     c.addPass(new UnrealBloomPass(new THREE.Vector2(size.width, size.height), 0.2, 0.4, 0.92));
     c.addPass(new ShaderPass(Grade));
     c.addPass(new ShaderPass(Vignette));

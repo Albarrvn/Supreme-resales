@@ -1,0 +1,90 @@
+{
+ "fps": 30,
+ "duration": 58.3,
+ "shots": [
+  {
+   "key": "hook",
+   "start": 0.15,
+   "end": 4.11,
+   "words": 13,
+   "text": "Sueldan las vías del tren con fuego, y sin una gota de electricidad."
+  },
+  {
+   "key": "antes",
+   "start": 4.49,
+   "end": 9.24,
+   "words": 15,
+   "text": "Antes, los rieles se unían con placas y tornillos, y cada unión hacía traca, traca."
+  },
+  {
+   "key": "problema",
+   "start": 9.62,
+   "end": 13.96,
+   "words": 13,
+   "text": "Esas uniones se aflojaban con cada tren, y había que repararlas sin parar."
+  },
+  {
+   "key": "quimico",
+   "start": 14.34,
+   "end": 20.82,
+   "words": 16,
+   "text": "En mil ochocientos noventa y cinco, un químico alemán, Hans Goldschmidt, patentó una reacción muy curiosa."
+  },
+  {
+   "key": "mezcla",
+   "start": 21.2,
+   "end": 25.66,
+   "words": 12,
+   "text": "Mezcló polvo de aluminio con óxido de hierro. Es decir, con herrumbre."
+  },
+  {
+   "key": "mira",
+   "start": 26.04,
+   "end": 32.48,
+   "words": 20,
+   "text": "Mira: el aluminio le roba el oxígeno al óxido, como un ladrón, y en el robo suelta un calor brutal."
+  },
+  {
+   "key": "calor",
+   "start": 32.86,
+   "end": 36.85,
+   "words": 11,
+   "text": "Más de dos mil grados. Tanto, que el hierro sale derretido."
+  },
+  {
+   "key": "molde",
+   "start": 37.23,
+   "end": 41.38,
+   "words": 16,
+   "text": "Así que ponen un molde alrededor de la unión y encienden la mezcla en un crisol."
+  },
+  {
+   "key": "lava",
+   "start": 41.76,
+   "end": 45.43,
+   "words": 14,
+   "text": "El acero líquido cae como lava y rellena el hueco entre los dos rieles."
+  },
+  {
+   "key": "pieza",
+   "start": 45.81,
+   "end": 48.61,
+   "words": 10,
+   "text": "Al enfriarse, los dos rieles ya son una sola pieza."
+  },
+  {
+   "key": "vias",
+   "start": 48.99,
+   "end": 52.31,
+   "words": 10,
+   "text": "Así se sueldan kilómetros de vía seguidos, casi sin juntas."
+  },
+  {
+   "key": "cierre",
+   "start": 52.69,
+   "end": 57.55,
+   "words": 16,
+   "text": "Por eso muchos trenes ya casi no hacen traca, traca, gracias a un poco de óxido."
+  }
+ ]
+}

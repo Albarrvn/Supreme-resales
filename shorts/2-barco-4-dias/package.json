@@ -1,0 +1,16 @@
+{
+  "name": "story-short",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.jsx"
+  },
+  "dependencies": {
+    "@react-three/fiber": "8.17.10",
+    "@remotion/cli": "4.0.242",
+    "@remotion/three": "4.0.242",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.242",
+    "three": "0.169.0"
+  }
+}
