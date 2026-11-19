@@ -1,6 +1,6 @@
 hook | Si tu cordón se ve así, estás moviendo mal la mano.
 promesa | Solo hay tres movimientos. Apréndelos en treinta segundos.
-recto | Uno, recto. Sin moverte a los lados. Cordón fino, perfecto para el pase de raíz.
-zigzag | Dos, zig zag. De lado a lado, con una pausa en cada borde para que no se muerda.
+recto | Uno, recto. Cordón fino, perfecto para el pase de raíz.
+zigzag | Dos, zigzag. De lado a lado, con una pausa en cada borde.
 osc | Tres, oscilatorio. Pequeños círculos que funden bien los bordes. El rey en vertical hacia arriba.
-cierre | Y tú, ¿cuál usas? Comenta uno, dos o tres. O comenta guía, y te paso el resto.
+cierre | Y tú, ¿cuál usas? Comenta uno, dos o tres. O comenta guía.

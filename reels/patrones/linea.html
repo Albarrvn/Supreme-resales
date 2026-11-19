@@ -98,10 +98,10 @@ function render(t){
     // stopwatch
     const sw=pop(t,wordT('promesa',6));if(sw>0){const a=u*2.4;s+=popG(540,1330,sw,`<circle r="80" fill="none" stroke="${K}" stroke-width="7"/>${line(0,-80,0,-104,10)}${line(0,0,Math.sin(a)*60,-Math.cos(a)*60,7,A)}${txt(150,22,'30 s',64,K,'start')}`)}
   } else if(t<T.zigzag){
-    s+=section('recto',t,T.recto,T.zigzag,{chips:[[wordT('recto',8),'FINO'],[wordT('recto',12),'PASE DE RAÍZ']]});
+    s+=section('recto',t,T.recto,T.zigzag,{chips:[[wordT('recto',3),'FINO'],[wordT('recto',7),'PASE DE RAÍZ']]});
   } else if(t<T.osc){
-    s+=section('zigzag',t,T.zigzag,T.osc,{chips:[[wordT('zigzag',3),'LADO A LADO'],[wordT('zigzag',9),'PAUSA EN BORDES']],
-      extra:(u,c,q)=>{const a=lin(t,wordT('zigzag',9),wordT('zigzag',9)+.3);if(a<=0)return'';let g='';for(let i=0;i<8;i++)for(const sy of [-1,1]){const px=X0+LEN*(i+(sy<0?.5:0)+.25)/8-LEN/32;g+=`<circle cx="${px+LEN/32}" cy="${c+sy*52}" r="${12*a}" fill="none" stroke="${A}" stroke-width="4"/>`}return g}});
+    s+=section('zigzag',t,T.zigzag,T.osc,{chips:[[wordT('zigzag',2),'LADO A LADO'],[wordT('zigzag',8),'PAUSA EN BORDES']],
+      extra:(u,c,q)=>{const a=lin(t,wordT('zigzag',8),wordT('zigzag',8)+.3);if(a<=0)return'';let g='';for(let i=0;i<8;i++)for(const sy of [-1,1]){const px=X0+LEN*(i+(sy<0?.5:0)+.25)/8-LEN/32;g+=`<circle cx="${px+LEN/32}" cy="${c+sy*52}" r="${12*a}" fill="none" stroke="${A}" stroke-width="4"/>`}return g}});
   } else if(t<T.cierre){
     s+=section('osc',t,T.osc,T.cierre,{chips:[[wordT('osc',5),'FUNDE LOS BORDES'],[wordT('osc',12),'VERTICAL ↑']]});
   } else { // CLOSE: which one do you use?

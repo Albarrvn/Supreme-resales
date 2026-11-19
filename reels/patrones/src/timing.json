@@ -1,48 +1,48 @@
 {
  "fps": 30,
- "duration": 31.27,
+ "duration": 24.12,
  "shots": [
   {
    "key": "hook",
    "start": 0.15,
-   "end": 3.381,
+   "end": 3.07,
    "words": 11,
    "text": "Si tu cordón se ve así, estás moviendo mal la mano."
   },
   {
    "key": "promesa",
-   "start": 3.669,
-   "end": 7.054,
+   "start": 3.37,
+   "end": 6.28,
    "words": 8,
    "text": "Solo hay tres movimientos. Apréndelos en treinta segundos."
   },
   {
    "key": "recto",
-   "start": 7.342,
-   "end": 12.333,
-   "words": 15,
-   "text": "Uno, recto. Sin moverte a los lados. Cordón fino, perfecto para el pase de raíz."
+   "start": 6.58,
+   "end": 10.17,
+   "words": 10,
+   "text": "Uno, recto. Cordón fino, perfecto para el pase de raíz."
   },
   {
    "key": "zigzag",
-   "start": 12.621,
-   "end": 17.612,
-   "words": 18,
-   "text": "Dos, zig zag. De lado a lado, con una pausa en cada borde para que no se muerda."
+   "start": 10.47,
+   "end": 13.91,
+   "words": 12,
+   "text": "Dos, zigzag. De lado a lado, con una pausa en cada borde."
   },
   {
    "key": "osc",
-   "start": 17.9,
-   "end": 24.121,
+   "start": 14.21,
+   "end": 19.13,
    "words": 15,
    "text": "Tres, oscilatorio. Pequeños círculos que funden bien los bordes. El rey en vertical hacia arriba."
   },
   {
    "key": "cierre",
-   "start": 24.41,
-   "end": 30.515,
-   "words": 17,
-   "text": "Y tú, ¿cuál usas? Comenta uno, dos o tres. O comenta guía, y te paso el resto."
+   "start": 19.43,
+   "end": 23.37,
+   "words": 12,
+   "text": "Y tú, ¿cuál usas? Comenta uno, dos o tres. O comenta guía."
   }
  ]
 }
