@@ -1,0 +1,11 @@
+hook | Se puede soldar una pared de acero de treinta centímetros, en un solo pase, de abajo hacia arriba.
+mira | Mira, soldar en vertical es difícil, porque el metal fundido quiere caerse.
+pases | Y en una pieza así de gruesa, un soldador necesitaría decenas de pases.
+kiev | En mil novecientos cuarenta y nueve, en un instituto de Kiev, probaron otra idea.
+placas | Pusieron las dos placas de pie, con un hueco entre ellas.
+zapatas | A los lados, dos zapatas de cobre enfriadas con agua, para que nada se escape.
+polvo | Dentro, un polvo especial que se derrite y forma una capa de escoria.
+pero | Pero entonces pasa algo raro. El arco se apaga, y la soldadura sigue.
+mira2 | Mira, la escoria líquida deja pasar la corriente, y se calienta como la resistencia de una estufa.
+sube | Así que el metal se va fundiendo, y las zapatas suben solas, centímetro a centímetro.
+cierre | Una pared de acero entera, soldada sin arco, y sin que caiga ni una gota.
