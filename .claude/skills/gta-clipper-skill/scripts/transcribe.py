@@ -45,7 +45,11 @@ def main():
     print(f"Loading whisper '{a.model}' on {device}…")
     model = WhisperModel(a.model, device=device, compute_type=ctype)
 
-    segs, info = model.transcribe(wav, language=a.language, word_timestamps=True,
+    import numpy as np  # decode via ffmpeg: some PyAV builds reject faster-whisper's open() kwargs
+    pcm = subprocess.run(["ffmpeg", "-v", "error", "-i", wav, "-f", "s16le", "-ac", "1", "-ar", "16000", "-"],
+                         capture_output=True, check=True).stdout
+    audio = np.frombuffer(pcm, np.int16).astype(np.float32) / 32768.0
+    segs, info = model.transcribe(audio, language=a.language, word_timestamps=True,
                                   vad_filter=True, beam_size=5)
     print(f"Language: {info.language}  |  Duration: {ts(info.duration)}")
 
