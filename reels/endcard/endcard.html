@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:P;src:url(poppins900.ttf);font-weight:900}@font-face{font-family:P;src:url(poppins800.ttf);font-weight:800}
+html,body{margin:0;background:#0B1C22;width:1080px;height:1920px;overflow:hidden}text{font-family:P;font-weight:900}</style></head><body>
+<svg id="s" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+<script>
+const K='#E6F1F3',A='#FF8C2A',C='#38E1FF',O='#06141A';
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),lin=(t,a,b)=>clamp((t-a)/(b-a),0,1);
+const bOut=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const pop=(t,t0,d=.35)=>t<t0?0:bOut(lin(t,t0,t0+d));
+const rnd=i=>{const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+const P=(x,y,p,s)=>p<=0?'':`<g transform="translate(${x} ${y}) scale(${p})">${s}</g>`;
+const T=(y,s,z,c=K,w=900)=>`<text x="0" y="${y}" font-size="${z}" fill="${c}" text-anchor="middle" font-weight="${w}">${s}</text>`;
+function render(t){
+  let s=`<defs><radialGradient id="g" cx=".5" cy=".42" r=".8"><stop offset="0" stop-color="#14505C"/><stop offset=".55" stop-color="#0B2A33"/><stop offset="1" stop-color="#06141A"/></radialGradient>
+  <filter id="gl" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <clipPath id="av"><circle cx="0" cy="0" r="230"/></clipPath></defs><rect width="1080" height="1920" fill="url(#g)"/>`;
+  for(let i=0;i<34;i++){const q=((t*.18)+rnd(i))%1;s+=`<circle cx="${rnd(i+50)*1080+Math.sin(t*2+i)*20}" cy="${1920-q*1920}" r="${2+rnd(i+7)*4}" fill="${A}" opacity="${(1-q)*.8}"/>`}
+  const a=pop(t,.05,.45);
+  s+=P(540,700,a*(1+.015*Math.sin(t*4)),`<circle r="250" fill="none" stroke="${C}" stroke-width="10" filter="url(#gl)"/><image href="avatar.png" x="-230" y="-230" width="460" height="460" clip-path="url(#av)"/>`);
+  s+=P(540,1110,pop(t,.35),T(0,'SÍGUEME',150,K));
+  s+=P(540,1220,pop(t,.7),T(0,'para más contenido',58,'#BFE7EE',800)+T(75,'de soldadura 🔥'.replace(' 🔥',''),58,'#BFE7EE',800));
+  const ig=pop(t,2.35,.4),pul=1+.04*Math.sin(t*9);
+  s+=P(540,1480,ig*pul,`<rect x="-360" y="-80" width="720" height="160" rx="80" fill="${A}" stroke="#FFB45A" stroke-width="6"/>
+    <rect x="-310" y="-40" width="80" height="80" rx="24" fill="none" stroke="${O}" stroke-width="9"/><circle cx="-270" cy="0" r="19" fill="none" stroke="${O}" stroke-width="9"/><circle cx="-246" cy="-24" r="6" fill="${O}"/>
+    <text x="40" y="26" font-size="76" fill="${O}" text-anchor="middle">@luisgabb17</text>`);
+  s+=P(540,1610,pop(t,2.7),T(0,'INSTAGRAM',40,C,800));
+  document.getElementById('s').innerHTML=s;
+}
+window.render=render;render(0);
+</script></body></html>

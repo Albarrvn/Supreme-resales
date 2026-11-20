@@ -15,3 +15,6 @@ reels/patrones/video_linea.mp4
 reels/patrones/raw.wav
 reels/patrones/video_hd.mp4
 shorts/**/avance_*.mp4
+shorts/**/final_con_cierre.mp4
+reels/**/*_con_cierre.mp4
+reels/endcard/card_*.mp4
