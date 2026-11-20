@@ -1,0 +1,7 @@
+hook | Dicen que el que suelda con hilo, no es soldador de verdad. ¿Será cierto?
+e1 | Primero, el electrodo. Una varilla con recubrimiento, que se derrite mientras sueldas.
+e2 | Aguanta el viento, el campo, y hasta el metal oxidado. Pero cada rato cambias varilla, y tienes que quitar la escoria.
+h1 | Ahora, el hilo. Un alambre que sale solo de la pistola, protegido por gas.
+h2 | Sueldas largo, rápido y limpio. Pero si hay viento, se va el gas, y el cordón se llena de poros.
+v | O sea, el electrodo gana afuera. El hilo gana en el taller.
+cierre | Pero si solo pudieras usar uno toda la vida, ¿cuál escoges? Comenta, electrodo o hilo.

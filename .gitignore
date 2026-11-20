@@ -29,3 +29,5 @@ reels/*/stills/
 reels/*/st_*.jpg
 reels/*/sheet*.jpg
 reels/*/*.wav
+reels/*/video_hd.mp4
+reels/*/render.log

@@ -19,7 +19,7 @@ for k, t in shots:
     ws = t.split(); last = norm(ws[-1]); prev = norm(ws[-2]) if len(ws) > 1 else ''; best = None
     near = lambda w, x: w and (w == x or lev(w, x) <= max(2, len(x)//3))
     for j in range(idx, min(len(W), idx + 60)):  # match the last two words so a repeated short word can't end the shot early
-        if near(norm(W[j][2]), last) and (not prev or j == 0 or norm(W[j-1][2]) == prev or lev(norm(W[j-1][2]), prev) <= len(prev)//3 or len(last) > 4): best = j; break
+        if near(norm(W[j][2]), last) and (not prev or j == 0 or norm(W[j-1][2]) == prev or lev(norm(W[j-1][2]), prev) <= len(prev)//3 or (len(last) > 4 and norm(W[j][2]) == last)): best = j; break  # fuzzy matches must also match the previous word
     if k == shots[-1][0]: best = len(W) - 1  # the last shot always ends with the audio
     if best is None: sys.exit(f'no match for end of {k}: {last}')
     bounds.append((idx, best)); idx = best + 1
