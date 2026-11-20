@@ -8,7 +8,7 @@ THREE.ColorManagement.enabled = false;
 
 const TM = await (await fetch('timing.json')).json();
 const AMP = await (await fetch('amp.json')).json();
-const PX = 1080, PY = 1920, SS = 2, JIT = +(new URLSearchParams(location.search).get('jit') || 3);
+const PX = 1080, PY = 1920, SS = +(new URLSearchParams(location.search).get('ss') || 2), JIT = +(new URLSearchParams(location.search).get('jit') || 3);
 const BG = '#0B1C22', INK = '#E6F1F3', CY = '#38E1FF', OR = '#FF8C2A', DIM = '#7FA6AF';
 const S = Object.fromEntries(TM.shots.map(s => [s.key, s]));
 const KEYS = TM.shots.map(s => s.key);
@@ -90,7 +90,7 @@ function aimRod(tip, inPlaneDeg, travelDeg) { // inPlaneDeg: angle from the base
 const quadCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1), quadGeo = new THREE.PlaneGeometry(2, 2);
 const VQ = `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`;
 const edgeMat = new THREE.ShaderMaterial({
-  uniforms: { tC: { value: null }, tN: { value: null }, px: { value: new THREE.Vector2() }, rS: { value: 2.9 }, rO: { value: 1.8 }, rC: { value: 1.1 }, thD: { value: 0.0016 }, thO: { value: 0.012 }, thN: { value: 0.12 } },
+  uniforms: { tC: { value: null }, tN: { value: null }, px: { value: new THREE.Vector2() }, rS: { value: 2.9 * SS / 2 }, rO: { value: 1.8 * SS / 2 }, rC: { value: 1.1 * SS / 2 }, thD: { value: 0.0016 }, thO: { value: 0.012 }, thN: { value: 0.12 } },
   vertexShader: VQ, fragmentShader: `
   uniform sampler2D tC, tN; uniform vec2 px; uniform float rS, rO, rC, thD, thO, thN; varying vec2 vUv;
   float iz(vec4 s){ return s.a>0. ? 1./s.a : 0.; }
@@ -260,7 +260,7 @@ function pill(t, t0, x, y, text, col) { if (t < t0) return; const p = back(seg(t
 
 function overlay(t) {
   ov.clearRect(0, 0, PX, PY); if (QS.get("clean")) return; const k = ST.k, tg = TG.position, lg = LGp.position, V = (x, y, z = 0, o = tg) => new THREE.Vector3(x, y, z).add(o);
-  if (k === 'hook') { title(t, .1, '', 'JUNTA EN T', 'Y DE SOLAPE'); tag(t, 1.6, V(0, 60, 0), -150, -170, 'T', CY); tag(t, 2.6, V(60, 16, 0, lg), 120, -200, 'SOLAPE', CY);
+  if (k === 'hook') { title(t, .1, '', 'JUNTA EN T', 'Y DE SOLAPE'); tag(t, 1.6, V(5, 70, 0), 150, -60, 'T', CY); tag(t, 2.6, V(-11, 16, 0, lg), -60, -200, 'SOLAPE', CY);
     if (t > W('hook', 10)) pill(t, W('hook', 10), 540, 1180, '⚠ TRAMPA', OR); }
   else if (k[0] === 't') { title(t, T.t1, '1', 'JUNTA EN T');
     if (k === 't1' && t > W('t1', 12)) tag(t, W('t1', 12), V(0, 100, 0), 160, -120, 'FORMA DE T', CY);
