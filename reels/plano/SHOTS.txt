@@ -1,0 +1,5 @@
+hook | Si sueldas en plano y aun así te sale feo, mira esto.
+uno | Uno, inclina el electrodo unos quince grados, hacia donde avanzas.
+dos | Dos, arco corto, más o menos el grosor del electrodo.
+tres | Tres, velocidad constante. El charco siempre del mismo tamaño.
+cierre | Domina el plano, y todo lo demás se hace fácil.

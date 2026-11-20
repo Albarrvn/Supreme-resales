@@ -1,0 +1,127 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;src:url(poppins900.ttf);font-weight:900}
+@font-face{font-family:P;src:url(poppins800.ttf);font-weight:800}
+html,body{margin:0;background:#0B1C22;width:1080px;height:1920px;overflow:hidden}
+text{font-family:P;font-weight:900}
+</style></head>
+<body>
+<svg id="s" xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+<script src="timing.js"></script>
+<script>
+const K='#E6F1F3', BG='#0B1C22', A='#FF8C2A', G='#5F8590', C='#38E1FF';
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)), lin=(t,a,b)=>clamp((t-a)/(b-a),0,1), mix=(a,b,k)=>a+(b-a)*k;
+const eOut=x=>1-Math.pow(1-x,3), eIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const bOut=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const pop=(t,t0,d=.3)=>t<t0?0:bOut(lin(t,t0,t0+d));
+const rnd=i=>{const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+/* ---- timing from the voice (src/timing.json is injected as window.TIMING) ---- */
+const TM=window.TIMING;
+const S=Object.fromEntries(TM.shots.map(s=>[s.key,s]));
+const cut=k=>{const i=TM.shots.findIndex(s=>s.key===k);return i===0?0:(TM.shots[i-1].end+TM.shots[i].start)/2};
+const wordT=(k,i)=>S[k].start+(S[k].end-S[k].start)*i/S[k].words;
+const T={uno:cut('uno'),dos:cut('dos'),tres:cut('tres'),cierre:cut('cierre'),end:TM.duration};
+
+const BGDEF=`<defs><radialGradient id="bgg" cx=".5" cy=".45" r=".8"><stop offset="0" stop-color="#14505C"/><stop offset=".55" stop-color="#0B2A33"/><stop offset="1" stop-color="#06141A"/></radialGradient>
+<filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="14" cy="14" r="2" fill="rgba(56,225,255,.08)"/></pattern></defs>
+<rect width="1080" height="1920" fill="url(#bgg)"/><rect width="1080" height="1920" fill="url(#dots)"/>`;
+/* ---- line helpers ---- */
+const line=(x1,y1,x2,y2,w=5,c=K)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+const txt=(x,y,s,z,c=K,anchor='middle',w=900)=>`<text x="${x}" y="${y}" font-size="${z}" fill="${c}" text-anchor="${anchor}" font-weight="${w}">${esc(s)}</text>`;
+function pill(x,y,s,z=36,c=K,fill='none'){const w=s.length*z*.64+56,h=z*1.7;return `<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="${h/2}" fill="${fill==='none'?BG:fill}" stroke="${c}" stroke-width="4"/>${txt(x,y+z*.36,s,z,fill==='none'?c:BG)}`}
+const popG=(x,y,p,inner)=>p<=0?'':`<g transform="translate(${x} ${y}) scale(${p})">${inner}</g>`;
+
+/* ---- the three hand movements ---- */
+const X0=200, LEN=680;
+const PAT={
+  recto:{w:40,f:(p,c)=>[X0+LEN*p,c]},
+  zigzag:{w:130,f:(p,c)=>{const u=p*8;return [X0+LEN*p,c+52*(4*Math.abs(((u+.25)%1)-.5)-1)]}},
+  osc:{w:120,f:(p,c)=>{const th=2*Math.PI*7*p;return [X0+LEN*p-40*Math.sin(th),c-40*Math.cos(th)]}},
+};
+const warpZig=q=>{const u=q*8;return (u-.75*Math.sin(4*Math.PI*(u-.25))/(4*Math.PI))/8};
+function pathD(k,c,q){const n=Math.max(2,Math.round(500*q));let d='';for(let i=0;i<=n;i++){const [x,y]=PAT[k].f(q*i/n,c);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}return d}
+function plate(c,h=150){return `<rect x="120" y="${c-h}" width="840" height="${h*2}" rx="10" fill="none" stroke="${K}" stroke-width="5"/>`+line(120,c,960,c,3,G)+`<line x1="140" y1="${c-h+22}" x2="200" y2="${c-h+22}" stroke="${G}" stroke-width="3"/>`}
+function bead(k,c,q){if(q<=0)return'';const w=PAT[k].w,x1=X0+LEN*q;let g=`<rect x="${X0-w/2}" y="${c-w/2}" width="${x1-X0+w/2}" height="${w}" rx="${w/2}" fill="none" stroke="${K}" stroke-width="4"/>`;
+  for(let x=X0;x<x1-8;x+=16)g+=`<path d="M${x} ${c-w/2+7} Q${x+12} ${c} ${x} ${c+w/2-7}" fill="none" stroke="${G}" stroke-width="2.5"/>`;return g}
+function torch(x,y,t,on){let g=line(x,y,x+120,y-260,7)+`<circle cx="${x+120}" cy="${y-260}" r="16" fill="${BG}" stroke="${K}" stroke-width="5"/>`;
+  if(on){g+=`<circle cx="${x}" cy="${y}" r="${22+4*Math.sin(t*40)}" fill="none" stroke="${A}" stroke-width="5"/><circle cx="${x}" cy="${y}" r="7" fill="${A}"/>`;
+    for(let i=0;i<10;i++){const k=((t*2.6)+rnd(i))%1,a=rnd(i+9)*6.28;const x2=x+Math.cos(a)*(30+k*90),y2=y+Math.sin(a)*(30+k*70)+k*k*50;g+=line(x+Math.cos(a)*(22+k*80),y+Math.sin(a)*(22+k*62)+k*k*44,x2,y2,3,A).replace('/>',` opacity="${1-k}"/>`)}}
+  return g}
+
+/* ---- captions (minimal: black, active word orange) ---- */
+const WORDS=[];
+TM.shots.forEach(s=>{const ws=s.text.split(' ');const tot=ws.reduce((q,w)=>q+w.length+2,0);let c=s.start;for(let i=0;i<ws.length;i+=3)WORDS.push(ws.slice(i,i+3).map(w=>{const d=(s.end-s.start)*(w.length+2)/tot;const it={w,a:c,b:c+d};c+=d;return it}))});
+function caption(t){const ch=WORDS.find(c=>t>=c[0].a-.05&&t<c[c.length-1].b+.1);if(!ch)return'';const p=bOut(lin(t,ch[0].a-.05,ch[0].a+.1));
+  let s=`<g transform="translate(540 1560) scale(${.9+.1*p}) translate(-540 -1560)"><text x="540" y="1580" font-size="66" text-anchor="middle" fill="${K}">`;
+  ch.forEach((it,i)=>{const act=t>=it.a&&t<it.b+.05;s+=`<tspan fill="${act?A:K}">${esc(it.w.toUpperCase())}${i<ch.length-1?' ':''}</tspan>`});return s+`</text></g>`}
+
+/* ---- camera: zoom group ---- */
+function cam(inner,cx,cy,z,shake=0){const sx=shake*Math.sin(performance_t*90),sy=shake*Math.cos(performance_t*77);return `<g transform="translate(${540+sx} ${960+sy}) scale(${z}) translate(${-cx} ${-cy})">${inner}</g>`}
+let performance_t=0;
+
+/* ---- flat-position scenes ---- */
+const PY=1080; // plate top (side view)
+function sidePlate(){return `<rect x="110" y="${PY}" width="860" height="70" rx="6" fill="none" stroke="${K}" stroke-width="5"/>`+line(110,PY+35,970,PY+35,2,G)}
+function electrode(x,y,deg,len=520,on=true,t=0){const a=deg*Math.PI/180,dx=Math.sin(a),dy=-Math.cos(a);const x2=x+dx*len,y2=y+dy*len;
+  let g=`<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${K}" stroke-width="30" stroke-linecap="round"/><line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${BG}" stroke-width="20" stroke-linecap="round"/>`;
+  g+=line(x+dx*14,y+dy*14,x2,y2,6,G);
+  if(on){g+=`<circle cx="${x}" cy="${(y+PY)/2}" r="${26+5*Math.sin(t*40)}" fill="none" stroke="${A}" stroke-width="5" filter="url(#glow)"/>`;for(let i=0;i<9;i++){const k=((t*2.6)+rnd(i))%1,b=-Math.PI*rnd(i+9);g+=line(x+Math.cos(b)*(24+k*70),PY-4+Math.sin(b)*(24+k*60)+k*k*30,x+Math.cos(b)*(30+k*90),PY-4+Math.sin(b)*(30+k*80)+k*k*40,3,A).replace('/>',` opacity="${1-k}"/>`)}}
+  return g}
+function beadTop(c,q,good=true,x0=200,len=680){if(q<=0)return'';const x1=x0+len*q;let d1='',d2='';const n=60;
+  for(let i=0;i<=n;i++){const p=i/n*q,x=x0+len*p,w=good?34:22+18*Math.sin(p*23)+10*Math.sin(p*7);d1+=(i?'L':'M')+x+' '+(c-w);d2=(i?'L':'M')+x+' '+(c+w)+d2.replace(/^M/,'L')}
+  let g=`<path d="${d1}${d2.replace(/^L/,'L')}Z" fill="none" stroke="${good?C:K}" stroke-width="4" ${good?'filter="url(#glow)"':''}/>`;
+  for(let x=x0;x<x1-6;x+=16){const p=(x-x0)/len,w=good?34:22+18*Math.sin(p*23)+10*Math.sin(p*7);g+=`<path d="M${x} ${c-w+6} Q${x+10} ${c} ${x} ${c+w-6}" fill="none" stroke="${G}" stroke-width="2.5"/>`}
+  return g}
+function render(t){
+  performance_t=t;let s=BGDEF;
+  for(let i=0;i<26;i++){const q=((t*.12)+rnd(i))%1;s+=`<circle cx="${rnd(i+50)*1080+Math.sin(t+i)*20}" cy="${1900-q*1900}" r="${2+rnd(i+7)*3}" fill="${A}" opacity="${(1-q)*.7}"/>`}
+  if(t<T.uno){ // HOOK: ugly flat bead
+    const c=980,q=eOut(lin(t,.05,1.3));
+    let w=`<rect x="120" y="${c-150}" width="840" height="300" rx="10" fill="none" stroke="${K}" stroke-width="5"/>`+beadTop(c,q,false);
+    const xp=pop(t,wordT('hook',8));if(xp>0)w+=popG(540,c,xp,`${line(-140,-140,140,140,16,A)}${line(140,-140,-140,140,16,A)}`);
+    s+=cam(w,540,c,1+.25*eIO(lin(t,1.3,1.9)),t>wordT('hook',8)&&t<wordT('hook',8)+.35?12:0);
+    s+=popG(540,330,pop(t,.1),txt(0,0,'¿SOLDANDO EN',84)+txt(0,110,'PLANO?',120,A));
+    s+=popG(540,1330,pop(t,wordT('hook',10)),pill(0,0,'MIRA ESTO 👇'.replace(' 👇',''),50,C));
+  } else if(t<T.dos){ // 1: 15 degrees
+    const u=t-T.uno,x=mix(300,700,lin(u,.3,T.dos-T.uno-.2)),ang=15*eOut(lin(t,wordT('uno',2),wordT('uno',5)));
+    let w=sidePlate()+`<line x1="300" y1="${PY-3}" x2="${x}" y2="${PY-3}" stroke="${C}" stroke-width="12" stroke-linecap="round" filter="url(#glow)"/>`+electrode(x,PY-22,ang,520,true,t);
+    const lp=lin(t,wordT('uno',5),wordT('uno',6)+.2);
+    if(lp>0){w+=`<line x1="${x}" y1="${PY-22}" x2="${x}" y2="${PY-380}" stroke="${G}" stroke-width="4" stroke-dasharray="12 10" opacity="${lp}"/>`;
+      const a=15*Math.PI/180;w+=`<path d="M${x} ${PY-322} A300 300 0 0 1 ${x+300*Math.sin(a)} ${PY-22-300*Math.cos(a)}" fill="none" stroke="${A}" stroke-width="6" opacity="${lp}"/>`+popG(x+120,PY-350,pop(t,wordT('uno',6)),txt(0,0,'15°',80,A))}
+    const ar=lin(t,wordT('uno',8),wordT('uno',9));if(ar>0)w+=`<g opacity="${ar}">${line(560,PY+170,820,PY+170,8,C)}<path d="M820 ${PY+150} L860 ${PY+170} L820 ${PY+190}Z" fill="${C}"/>${txt(690,PY+250,'AVANCE',44,C)}</g>`;
+    s+=cam(w,mix(540,x,.6),PY-160,1.25+.1*lin(u,0,4));
+    s+=popG(540,300,pop(t,T.uno+.05),`<circle cx="0" cy="-60" r="54" fill="none" stroke="${K}" stroke-width="6"/>${txt(0,-36,'1',70)}${txt(0,90,'ÁNGULO',104)}`);
+  } else if(t<T.tres){ // 2: short arc
+    const u=t-T.dos,x=540,gap=mix(90,26,eIO(lin(t,wordT('dos',1),wordT('dos',3))));
+    let w=sidePlate()+electrode(x,PY-gap,15,520,true,t);
+    const m=lin(t,wordT('dos',4),wordT('dos',5));
+    if(m>0){w+=`<g opacity="${m}">${line(x-70,PY-gap,x-70,PY,4,C)}${line(x-84,PY-gap,x-56,PY-gap,4,C)}${line(x-84,PY,x-56,PY,4,C)}${txt(x-150,PY-gap/2+12,'ARCO',30,C)}</g>`;
+      const g2=lin(t,wordT('dos',7),wordT('dos',9));if(g2>0){const ex=x+(150-gap)*Math.tan(15*Math.PI/180);w+=`<g opacity="${g2}">${line(ex-17,PY-150,ex+17,PY-150,5,A)}${line(ex-17,PY-160,ex-17,PY-140,4,A)}${line(ex+17,PY-160,ex+17,PY-140,4,A)}${txt(ex+90,PY-138,'= Ø',40,A)}</g>`}}
+    const z=mix(1.2,2.6,eIO(lin(u,.2,1.2)));
+    s+=cam(w,x,PY-60,z);
+    s+=popG(540,300,pop(t,T.dos+.05),`<circle cx="0" cy="-60" r="54" fill="none" stroke="${K}" stroke-width="6"/>${txt(0,-36,'2',70)}${txt(0,90,'ARCO CORTO',96)}`);
+  } else if(t<T.cierre){ // 3: constant speed, same puddle
+    const u=t-T.tres,D=T.cierre-T.tres,q=lin(u,.3,D-.4);
+    let w=`<rect x="120" y="610" width="840" height="260" rx="10" fill="none" stroke="${K}" stroke-width="4"/>`+beadTop(740,q,false)+txt(150,660,'IRREGULAR',34,G,'start');
+    w+=`<rect x="120" y="1010" width="840" height="260" rx="10" fill="none" stroke="${K}" stroke-width="4"/>`+beadTop(1140,q,true)+txt(150,1060,'CONSTANTE',34,C,'start');
+    const xb=200+680*q;w+=`<circle cx="${xb}" cy="1140" r="${36+2*Math.sin(t*20)}" fill="none" stroke="${A}" stroke-width="6" filter="url(#glow)"/>`;
+    const xa=200+680*q;w+=`<circle cx="${xa}" cy="740" r="${30+18*Math.sin(t*9)}" fill="none" stroke="${A}" stroke-width="5"/>`;
+    if(u>D*.5)w+=popG(900,740,pop(t,T.tres+D*.5),`<circle r="40" fill="${BG}" stroke="${A}" stroke-width="6"/>${line(-16,-16,16,16,7,A)}${line(16,-16,-16,16,7,A)}`)+popG(900,1140,pop(t,T.tres+D*.55),`<circle r="40" fill="${BG}" stroke="${C}" stroke-width="6"/><path d="M-18 2 L-5 15 L19 -13" fill="none" stroke="${C}" stroke-width="7" stroke-linecap="round"/>`);
+    s+=cam(w,540,940,1.05);
+    s+=popG(540,300,pop(t,T.tres+.05),`<circle cx="0" cy="-60" r="54" fill="none" stroke="${K}" stroke-width="6"/>${txt(0,-36,'3',70)}${txt(0,90,'VELOCIDAD',100)}`);
+  } else { // CLOSE
+    const c=900;let w=`<rect x="120" y="${c-150}" width="840" height="300" rx="10" fill="none" stroke="${K}" stroke-width="5"/>`+beadTop(c,eOut(lin(t,T.cierre,T.cierre+1.2)),true);
+    s+=cam(w,540,c,1);
+    s+=popG(540,330,pop(t,T.cierre+.05),txt(0,0,'DOMINA',110)+txt(0,120,'EL PLANO',110,A));
+    ['15°','ARCO CORTO','VELOCIDAD ='].forEach((l,i)=>{s+=popG(540,1150+i*100,pop(t,T.cierre+.6+i*.25),pill(0,0,l,46,i===1?A:C))});
+  }
+  s+=`<clipPath id="av"><circle cx="990" cy="90" r="46"/></clipPath><image href="avatar.png" x="944" y="44" width="92" height="92" clip-path="url(#av)"/><circle cx="990" cy="90" r="46" fill="none" stroke="${C}" stroke-width="4"/>`+txt(925,102,'@luisgabb17',30,K,'end',800);
+  s+=caption(t);
+  document.getElementById('s').innerHTML=s;
+}
+window.render=render;render(0);
+</script></body></html>
