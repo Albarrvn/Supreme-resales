@@ -127,7 +127,7 @@ export const Full = () => {
         <Scene frame={frame} fps={fps} />
       </ThreeCanvas>
       <AbsoluteFill style={{backgroundColor: '#f6ecd6', opacity: dip}} />
-      <Caption t={frame / fps} />
+      {!process.env.REMOTION_NOCAPTION && <Caption t={frame / fps} />}
     </AbsoluteFill>
   );
 };

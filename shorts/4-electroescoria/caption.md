@@ -1,6 +1,7 @@
 # Soldar en vertical: la soldadura por electroescoria
 
-**Título (YouTube):** Soldaron 30 cm de acero en UN solo pase… ¡y el arco se apaga! 🔥
+**Título (YouTube):** ¿30 cm de acero en un solo pase?
+**Miniatura:** SIN ARCO
 
 **Caption:**
 Soldar en vertical cuesta… y en acero de 30 cm serían decenas de pases 😳
