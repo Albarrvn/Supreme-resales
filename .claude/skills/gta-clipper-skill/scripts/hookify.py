@@ -12,6 +12,7 @@ OUT = f"{WD}/final"
 os.makedirs(OUT, exist_ok=True)
 HOOK_T = 3.0
 TEASE = 1.6
+HY = int(os.environ.get("HOOK_Y", 170))  # top of the hook band; move it down for facecam-on-top layouts
 # climax moment (source seconds) shown first as a flash-forward
 CLIMAX = {int(k): v for k, v in json.load(open(f"{WD}/climax.json")).items()}
 REGION = json.load(open(f"{WD}/climax_region.json")) if os.path.exists(f"{WD}/climax_region.json") else [0.03, 0.99]
@@ -62,11 +63,11 @@ for c in clips:
         "[0:v][0:a][1:v][1:a]concat=n=2:v=1:a=1[cv][ca];[cv]scale=w='1080*(1+0.22*exp(-pow(t/0.28,2)))':h='1920*(1+0.22*exp(-pow(t/0.28,2)))':eval=frame,"
         "crop=1080:1920,"
         "eq=brightness='0.45*exp(-pow(t/0.07,2))':eval=frame,"
-        f"drawbox=x=0:y=170:w=1080:h=330:color=black@0.55:t=fill:enable='lt(t,{HOOK_T})',"
+        f"drawbox=x=0:y={HY}:w=1080:h=330:color=black@0.55:t=fill:enable='lt(t,{HOOK_T})',"
         f"drawtext=fontfile={FONT}:textfile={t1}:fontsize='{fs1}*{pop}':fontcolor=0xFFE600:"
-        f"borderw=10:bordercolor=black:x=(w-tw)/2:y=200:enable='lt(t,{HOOK_T})',"
+        f"borderw=10:bordercolor=black:x=(w-tw)/2:y={HY + 30}:enable='lt(t,{HOOK_T})',"
         f"drawtext=fontfile={FONT}:textfile={t2}:fontsize='{fs2}*{pop}':fontcolor=white:"
-        f"borderw=6:bordercolor=black:x=(w-tw)/2:y=360:enable='lt(t,{HOOK_T})'[v]"
+        f"borderw=6:bordercolor=black:x=(w-tw)/2:y={HY + 190}:enable='lt(t,{HOOK_T})'[v]"
     )
     af = (
         f"[ca]volume='if(lt(t,{duck:.2f}),0.25,1)':eval=frame[g];"
