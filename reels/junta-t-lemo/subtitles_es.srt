@@ -1,0 +1,135 @@
+1
+00:00:00,150 --> 00:00:02,204
+Junta en T y junta de solape.
+
+2
+00:00:02,204 --> 00:00:03,337
+Parecen fáciles,
+
+3
+00:00:03,337 --> 00:00:05,674
+pero las dos esconden una trampa.
+
+4
+00:00:05,966 --> 00:00:06,585
+Primero,
+
+5
+00:00:06,585 --> 00:00:07,669
+la junta en T.
+
+6
+00:00:07,669 --> 00:00:08,985
+Una placa de pie,
+
+7
+00:00:08,985 --> 00:00:10,533
+sobre otra acostada,
+
+8
+00:00:10,533 --> 00:00:11,694
+formando una T.
+
+9
+00:00:11,985 --> 00:00:13,792
+Aquí no se suelda la orilla,
+
+10
+00:00:13,792 --> 00:00:15,211
+se rellena la esquina.
+
+11
+00:00:15,211 --> 00:00:17,276
+A ese cordón se le llama filete.
+
+12
+00:00:17,567 --> 00:00:21,313
+Pon el electrodo a cuarenta y cinco grados entre las dos placas,
+
+13
+00:00:21,313 --> 00:00:23,713
+y unos quince grados hacia donde avanzas.
+
+14
+00:00:24,004 --> 00:00:27,121
+La meta es que las dos patas del cordón queden iguales.
+
+15
+00:00:27,412 --> 00:00:29,744
+Si apuntas mucho a la placa de pie,
+
+16
+00:00:29,744 --> 00:00:30,410
+se muerde,
+
+17
+00:00:30,410 --> 00:00:32,742
+y te queda una ranura en la orilla.
+
+18
+00:00:33,033 --> 00:00:33,506
+Ahora,
+
+19
+00:00:33,506 --> 00:00:35,005
+la junta de solape.
+
+20
+00:00:35,005 --> 00:00:37,214
+Una placa encima de la otra,
+
+21
+00:00:37,214 --> 00:00:38,082
+como tejas.
+
+22
+00:00:38,373 --> 00:00:41,781
+El cordón va en la esquina que forma el borde de la placa de arriba.
+
+23
+00:00:42,072 --> 00:00:44,880
+La trampa aquí es quemar ese borde.
+
+24
+00:00:44,880 --> 00:00:45,762
+Es delgado,
+
+25
+00:00:45,762 --> 00:00:47,286
+y se derrite antes.
+
+26
+00:00:47,577 --> 00:00:51,212
+Así que apunta un poco más a la placa de abajo,
+
+27
+00:00:51,212 --> 00:00:54,538
+y deja que el charco suba a mojar el borde.
+
+28
+00:00:54,830 --> 00:00:55,255
+En T,
+
+29
+00:00:55,255 --> 00:00:56,443
+patas iguales.
+
+30
+00:00:56,443 --> 00:00:57,293
+En solape,
+
+31
+00:00:57,293 --> 00:00:58,566
+cuida el borde.
+
+32
+00:00:58,566 --> 00:01:00,265
+¿Cuál te cuesta más?
+
+33
+00:01:00,265 --> 00:01:00,944
+Comenta,
+
+34
+00:01:00,944 --> 00:01:01,878
+T o solape.

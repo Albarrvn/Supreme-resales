@@ -16,10 +16,11 @@ def lev(a, b):
     return d[-1]
 idx = 0; bounds = []
 for k, t in shots:
-    last = norm(t.split()[-1]); best = None
-    for j in range(idx, min(len(W), idx + 60)):
-        w = norm(W[j][2])
-        if w and (w == last or lev(w, last) <= max(2, len(last)//3)): best = j; break
+    ws = t.split(); last = norm(ws[-1]); prev = norm(ws[-2]) if len(ws) > 1 else ''; best = None
+    near = lambda w, x: w and (w == x or lev(w, x) <= max(2, len(x)//3))
+    for j in range(idx, min(len(W), idx + 60)):  # match the last two words so a repeated short word can't end the shot early
+        if near(norm(W[j][2]), last) and (not prev or j == 0 or norm(W[j-1][2]) == prev or lev(norm(W[j-1][2]), prev) <= len(prev)//3 or len(last) > 4): best = j; break
+    if k == shots[-1][0]: best = len(W) - 1  # the last shot always ends with the audio
     if best is None: sys.exit(f'no match for end of {k}: {last}')
     bounds.append((idx, best)); idx = best + 1
 # build pieces: each shot = list of speech segments; inner pauses longer than 0.3 s are shortened to 0.22 s

@@ -22,3 +22,10 @@ reels/plano/video_hd.mp4
 reels/plano/*.wav
 reels/plano/st_*.jpg
 reels/plano/plano_sin_cierre.mp4
+
+# reel working files
+reels/*/out/
+reels/*/stills/
+reels/*/st_*.jpg
+reels/*/sheet*.jpg
+reels/*/*.wav

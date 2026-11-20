@@ -1,0 +1,11 @@
+hook | Junta en T y junta de solape. Parecen fáciles, pero las dos esconden una trampa.
+t1 | Primero, la junta en T. Una placa de pie, sobre otra acostada, formando una T.
+t2 | Aquí no se suelda la orilla, se rellena la esquina. A ese cordón se le llama filete.
+t3 | Pon el electrodo a cuarenta y cinco grados entre las dos placas, y unos quince grados hacia donde avanzas.
+t4 | La meta es que las dos patas del cordón queden iguales.
+t5 | Si apuntas mucho a la placa de pie, se muerde, y te queda una ranura en la orilla.
+s1 | Ahora, la junta de solape. Una placa encima de la otra, como tejas.
+s2 | El cordón va en la esquina que forma el borde de la placa de arriba.
+s3 | La trampa aquí es quemar ese borde. Es delgado, y se derrite antes.
+s4 | Así que apunta un poco más a la placa de abajo, y deja que el charco suba a mojar el borde.
+cierre | En T, patas iguales. En solape, cuida el borde. ¿Cuál te cuesta más? Comenta, T o solape.
