@@ -266,7 +266,7 @@ function overlay(t) {
     if (k === 't1' && t > W('t1', 12)) tag(t, W('t1', 12), V(0, 100, 0), 160, -120, 'FORMA DE T', CY);
     if (k === 't2' && t > W('t2', 5)) tag(t, W('t2', 5), V(8, 13, 0), 200, -150, 'ESQUINA', OR);
     if (k === 't2' && t > W('t2', 13)) pill(t, W('t2', 13), 540, 1180, 'FILETE', CY);
-    if (k === 't3') { arcGlow(t, ST.arc); angleArc(t, W('t3', 4), V(8, 13, 0), 0, Math.PI / 4, 170, '45°'); if (t > W('t3', 13)) pill(t, W('t3', 13), 540, 1180, '+15° HACIA DONDE AVANZAS', OR); }
+    if (k === 't3') { arcGlow(t, ST.arc); angleArc(t, W('t3', 4), V(8, 13, 0), 0, Math.PI / 4, 170, '45°'); if (t > W('t3', 13)) pill(t, W('t3', 13), 540, 1255, '+15° HACIA DONDE AVANZAS', OR); }
     if (k === 't4') { dim(t, W('t4', 4), V(5, 10), V(15, 10), 60, 'PATA'); dim(t, W('t4', 5), V(5, 10), V(5, 20), -60, 'PATA'); if (t > W('t4', 9)) pill(t, W('t4', 9), 540, 1180, 'PATAS IGUALES', CY); }
     if (k === 't5') { arcGlow(t, ST.arc); if (t > W('t5', 9)) tag(t, W('t5', 9), V(4, 22, 0), 190, -160, 'MORDEDURA', '#FF4D4D'); } }
   else if (k[0] === 's') { title(t, T.s1, '2', 'JUNTA DE SOLAPE');
@@ -274,8 +274,8 @@ function overlay(t) {
     if (k === 's2' && t > W('s2', 8)) tag(t, W('s2', 8), V(-11, 16, 0, lg), -200, -170, 'BORDE', OR);
     if (k === 's3') { arcGlow(t, ST.arc); if (t > W('s3', 4)) tag(t, W('s3', 4), V(-10, 15, 0, lg), 200, -170, 'SE QUEMA', '#FF4D4D'); }
     if (k === 's4') { arcGlow(t, ST.arc); if (t > W('s4', 8)) pill(t, W('s4', 8), 540, 1180, 'APUNTA ABAJO', CY); } }
-  else { title(t, T.cierre, '', 'RESUMEN'); tag(t, W('cierre', 1), V(10, 15, 0), 40, 200, 'PATAS IGUALES', CY); tag(t, W('cierre', 5), V(-11, 14, 0, lg), -40, 300, 'CUIDA EL BORDE', OR);
-    if (t > W('cierre', 10)) pill(t, W('cierre', 10), 540, 1200, 'COMENTA: T o SOLAPE', OR); }
+  else { title(t, T.cierre, '', 'RESUMEN'); tag(t, W('cierre', 1), V(10, 15, 0), 40, 200, 'PATAS IGUALES', CY); tag(t, W('cierre', 5), V(-11, 14, 0, lg), -40, 225, 'CUIDA EL BORDE', OR);
+    if (t > W('cierre', 10)) pill(t, W('cierre', 10), 540, 1262, 'COMENTA: T o SOLAPE', OR); }
   brand(); presenter(t); subs(t);
 }
 
