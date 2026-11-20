@@ -7,7 +7,11 @@ N=$(python3 -c "import json;print(round(json.load(open('src/timing.json'))['dura
 for ((s=0; s<N; s+=300)); do
   e=$((s+299 < N-1 ? s+299 : N-1)); f=out/chunks/c_$(printf %05d $s).mp4
   if [ ! -s "$f" ]; then
-    REMOTION_NOBOKEH=1 npx remotion render src/index.jsx Story "$f.tmp.mp4" --frames=$s-$e --gl=swangle --concurrency=${CONC:-3} --image-format=jpeg --jpeg-quality=92 --crf=16 --scale=${SCALE:-1} --browser-executable=/usr/bin/google-chrome >> out/render.log 2>&1 && mv "$f.tmp.mp4" "$f" || { echo "FAILED chunk $s" >> out/render.log; exit 1; }
+    for try in 1 2 3; do  # retry: a busy machine can time out one chunk
+      REMOTION_NOBOKEH=1 npx remotion render src/index.jsx Story "$f.tmp.mp4" --frames=$s-$e --gl=swangle --concurrency=${CONC:-3} --image-format=jpeg --jpeg-quality=92 --crf=16 --scale=${SCALE:-1} --timeout=120000 --browser-executable=/usr/bin/google-chrome >> out/render.log 2>&1 && mv "$f.tmp.mp4" "$f" && break
+      echo "retry chunk $s ($try)" >> out/render.log
+    done
+    [ -s "$f" ] || { echo "FAILED chunk $s" >> out/render.log; exit 1; }
   fi
   echo "file 'c_$(printf %05d $s).mp4'" >> out/chunks/list.txt
 done
