@@ -93,8 +93,8 @@ function render(t){
   const push=k=>1+.06*eIO(lin(t,T[k],nx(k)));
   let g='', z=1, ccx=540, ccy=960, sh=0;
   if(t<T.e1){ // HOOK: versus
-    s+=popG(540,250,pop(t,.05),txt(0,0,'ELECTRODO',96)+txt(0,115,'VS',84,A)+txt(0,225,'HILO',96,C));
-    g=popG(270,1000,pop(t,.25)*.88,stinger(0,0,55,230,true,t))+popG(660,1000,pop(t,.45)*.85,gun(0,0,64,t,true,1));
+    s+=popG(540,250,pop(t,-.3),txt(0,0,'ELECTRODO',96)+txt(0,115,'VS',84,A)+txt(0,225,'HILO',96,C));
+    g=popG(270,1000,pop(t,-.3)*.88,stinger(0,0,55,230,true,t))+popG(660,1000,pop(t,-.3)*.85,gun(0,0,64,t,true,1));
     g+=line(100,1000,980,1000,5,K);
     g+=stamp(560,1150,'¿NO ES SOLDADOR?',pop(t,W('hook',7),.25));
     const q=pop(t,W('hook',12));if(q>0)g+=popG(545,860,q*(1+.06*Math.sin(t*10)),txt(0,40,'¿?',130,A));
