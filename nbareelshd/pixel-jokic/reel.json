@@ -1,0 +1,46 @@
+{
+"title": "Pixel Jokić",
+"no": "P1",
+"lines": [
+{
+"id": "p1",
+"text": "Nadie lo quería. Fue el pick 41.",
+"say": "¡Nadie lo quería! ¡Fue el pick cuarenta y uno!",
+"scene": {
+"type": "hook"
+}
+},
+{
+"id": "p2",
+"text": "Draft 2014. La tele ni lo mostró: estaba en anuncios.",
+"say": "¡Draft dos mil catorce! ¡La tele ni lo mostró! ¡estaba en anuncios!",
+"scene": {
+"type": "tv"
+}
+},
+{
+"id": "p3",
+"text": "Después: MVP en 2021, 2022 y 2024.",
+"say": "¡Después! ¡MVP en dos mil veintiuno, dos mil veintidós y dos mil veinticuatro!",
+"scene": {
+"type": "level"
+}
+},
+{
+"id": "p4",
+"text": "Y en 2023, campeón y MVP de las Finales.",
+"say": "¡Y en dos mil veintitrés, campeón y MVP de las Finales!",
+"scene": {
+"type": "gold"
+}
+},
+{
+"id": "p5",
+"text": "¿El mejor pívot de la historia? Comenta.",
+"say": "¿El mejor pívot de la historia? ¡Comenta!",
+"scene": {
+"type": "menu"
+}
+}
+]
+}
