@@ -1,0 +1,5 @@
+Type: Archivo (Omnibus-Type), SIL Open Font License 1.1 (fonts/OFL-Archivo.txt), google/fonts.
+Voice: the account owner's own voice, cloned locally with Chatterbox Multilingual (Resemble AI), MIT licence.
+Music and sound effects: synthesized in code (mix.py, Lemo-Opuscar core/audio/sfx.py, MIT).
+Speech check: faster-whisper (MIT), Whisper model "small" (OpenAI, MIT).
+No league or team logos, photos or footage are used.

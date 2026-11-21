@@ -1,0 +1,71 @@
+{
+"title": "El tapón",
+"no": "05",
+"lines": [
+{
+"id": "l1",
+"text": "1:50 para el final. Juego 7. Empate. Y entonces…",
+"say": "Un minuto cincuenta para el final. Juego siete. Empate. Y entonces.",
+"scene": {
+"type": "num",
+"big": "1:50",
+"note": "juego 7 · 89–89"
+}
+},
+{
+"id": "l2",
+"text": "Finales 2016. Cavaliers contra Warriors.",
+"say": "Finales dos mil dieciséis. Cavaliers contra Warriors.",
+"scene": {
+"type": "caption",
+"rows": [
+"Finales 2016",
+"Cavaliers",
+"vs Warriors"
+]
+}
+},
+{
+"id": "l3",
+"text": "Iguodala sale solo al contraataque. LeBron cruza toda la cancha.",
+"say": "Iguodala sale solo al contraataque. LeBron cruza toda la cancha.",
+"scene": {
+"type": "cells",
+"n": 6,
+"label": "una cancha entera"
+}
+},
+{
+"id": "l4",
+"text": "Tapón.",
+"say": "Tapón.",
+"pause": true,
+"scene": {
+"type": "exception",
+"big": "TAPÓN",
+"note": "LeBron James · 1:50"
+}
+},
+{
+"id": "l5",
+"text": "Cleveland remontó un 3-1. Nunca había pasado en unas Finales.",
+"say": "Cleveland remontó un tres a uno. Nunca había pasado en unas Finales.",
+"scene": {
+"type": "caption",
+"rows": [
+"1–3",
+"→ 4–3",
+"1.ª vez en Finales"
+]
+}
+},
+{
+"id": "l6",
+"text": "¿El mejor tapón de la historia? Comenta.",
+"say": "¿El mejor tapón de la historia? Comenta.",
+"scene": {
+"type": "question"
+}
+}
+]
+}

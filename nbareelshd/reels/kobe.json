@@ -1,0 +1,6 @@
+{"title":"Kobe 81","no":"02","lines":[
+{"id":"b1","text":"Perdían por 18. Y Kobe dijo: dame la pelota.","say":"Perdían por dieciocho. Y Kobe dijo: dame la pelota.","scene":{"type":"num","big":"−18","note":"Lakers · tercer cuarto"}},
+{"id":"b2","text":"22 de enero de 2006. Lakers contra Raptors.","say":"Veintidós de enero de dos mil seis. Lakers contra Raptors.","scene":{"type":"caption","rows":["22.01.2006","Lakers","vs Raptors"]}},
+{"id":"b3","text":"Primera mitad: 26 puntos. Segunda mitad: 55.","say":"Primera mitad: veintiséis puntos. Segunda mitad: cincuenta y cinco.","scene":{"type":"bars","items":[["1.ª mitad",26],["2.ª mitad",55]],"max":60}},
+{"id":"b4","text":"81.","say":"Ochenta y uno.","pause":true,"scene":{"type":"exception","big":"81","note":"puntos · Kobe Bryant"}},
+{"id":"b5","text":"La segunda mejor anotación de la historia. ¿Sabes cuál es la primera?","say":"La segunda mejor anotación de la historia. ¿Sabes cuál es la primera?","scene":{"type":"question"}}]}
