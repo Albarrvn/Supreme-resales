@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fonts/fonts.css">
+<style>html,body{margin:0;background:#F2F0EA}</style></head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script type="module">
+// Reel cover: giant orange number + short black hook, all inside the 3:4 centre (y 240–1680) the profile grid shows
+const W=1080,H=1920,M=72,PAGE='#F2F0EA',INK='#141414',SIG='#FF5A00',G1='#DAD7CE';
+const [big,hook,name]=JSON.parse(decodeURIComponent(location.hash.slice(1)));
+await Promise.all(['500','800','900'].map(w=>document.fonts.load(`${w} 40px Archivo`)));
+const g=document.getElementById('c').getContext('2d'), f=(w,px)=>`${w} ${px}px Archivo`;
+g.fillStyle=PAGE;g.fillRect(0,0,W,H);g.fillStyle=G1;
+for(let c=0;c<=6;c++)g.fillRect(Math.round(M+c*(W-2*M)/6),0,1,H);
+g.fillStyle=INK;g.font=f(800,30);g.fillText('@NBAreelsHD',M,330);g.fillRect(M,350,W-2*M,3);
+g.font=f(800,44);g.fillText(name.toUpperCase(),M,430);
+// giant number: as wide as the frame allows, capped in height
+let px=640;const setN=()=>{g.font=f(900,px);g.letterSpacing=`${-0.02*px}px`};setN();
+while(g.measureText(big).width>W-2*M-8&&px>120){px-=4;setN()}   // measure with the final spacing
+g.fillStyle=SIG;g.fillText(big,M,470+px*.8);
+// hook: wrapped, flush left, heavy
+g.letterSpacing='-2px';g.fillStyle=INK;let hp=118;g.font=f(900,hp);
+const words=hook.split(' ');let line='';const lines=[];
+for(const w of words){const t=line?line+' '+w:w;if(g.measureText(t).width>W-2*M&&line){lines.push(line);line=w}else line=t}lines.push(line);
+if(lines.length>3){hp=96;g.font=f(900,hp);}
+const y=1540-(lines.length-1)*hp*1.02;   // hook anchored at the bottom: number top, words bottom
+lines.forEach((l,i)=>g.fillText(l,M,y+i*hp*1.02));
+g.fillRect(M,1600,180,14);
+window.READY=true;
+</script></body></html>
