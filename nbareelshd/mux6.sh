@@ -7,7 +7,7 @@ D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$V")
 J=$(ffmpeg -hide_banner -i "$A" -af loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json -f null - 2>&1 | sed -n '/^{/,/^}/p')
 g() { echo "$J" | sed -n "s/.*\"$1\" : \"\([^\"]*\)\".*/\1/p"; }
 ffmpeg -v error -y -i "$V" -i "$A" -map 0:v -map 1:a -c:v copy \
-  -af "apad,loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=$(g input_i):measured_TP=$(g input_tp):measured_LRA=$(g input_lra):measured_thresh=$(g input_thresh):offset=$(g target_offset):linear=true,aresample=48000" \
+  -af "apad,loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=$(g input_i):measured_TP=$(g input_tp):measured_LRA=$(g input_lra):measured_thresh=$(g input_thresh):offset=$(g target_offset):linear=true,aresample=48000,alimiter=limit=0.84:level=false" \
   -t "$D" -c:a aac -b:a 192k -movflags +faststart "$O.part.mp4"
 AD=$(ffprobe -v error -select_streams a -show_entries stream=duration -of csv=p=0 "$O.part.mp4")
 python3 -c "import sys; d,a=float('$D'),float('$AD'); sys.exit(0 if a>=d-0.1 else print(f'audio {a:.2f}s < video {d:.2f}s') or 1)"
