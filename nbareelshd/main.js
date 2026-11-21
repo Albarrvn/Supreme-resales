@@ -25,11 +25,11 @@ let words = {}; try { words = await (await fetch(`voices/${REEL}/words.json`)).j
 // ---- timeline: the voice drives it; every line starts on a beat ----
 let t = BEAT, L = reel.lines;
 L.forEach((l, i) => {
-  if (l.pause) t += BAR;                       // one bar of silence before the exception (the turn)
+  if (l.pause) t += BAR / 2;                   // half a bar of silence before the exception (the turn)
   l.t = ceilBeat(t); l.d = dur[l.id]; t = l.t + l.d + .25;
   if (i === 0) l.s0 = 0;                       // the hook is on screen from frame 1
 });
-L.forEach((l, i) => { l.s0 = i === 0 ? 0 : l.t - (l.pause ? BAR : E8); l.s1 = i < L.length - 1 ? L[i + 1].t - (L[i + 1].pause ? BAR : E8) : 1e9; });
+L.forEach((l, i) => { l.s0 = i === 0 ? 0 : l.t - (l.pause ? BAR / 2 : E8); l.s1 = i < L.length - 1 ? L[i + 1].t - (L[i + 1].pause ? BAR / 2 : E8) : 1e9; });
 const DUR = ceilBeat(t + 1.75);
 const EV = [];
 L.forEach((l, i) => {
@@ -87,7 +87,7 @@ const SC = {
     const px = fit(sc.big, 900, W - 2 * M, 560), y = 240 + px * .86;
     const p = steps(t, s, s + 4 * E16, 4);
     riseText(sc.big, M, y, px, 900, INK, p, q);
-    riseText(sc.note, M, y + 90, 40, 800, INK, snap(t, s + 5 * E16, E16), q);
+    riseText(sc.note, M, y + 120, 40, 800, INK, snap(t, s + 5 * E16, E16), q);
     TX.push({ id: 'big', text: sc.big + ' ' + sc.note });
   },
   caption(sc, t, s, q) {
@@ -125,11 +125,11 @@ const SC = {
     const dx = 40 * u, dy = -30 * u, x = M + dx, y = 260 + px * .82 + dy;
     g.save(); g.beginPath(); g.rect(0, 200, W, 1000); g.clip();
     g.font = font(900, px); g.letterSpacing = `${-0.02 * px}px`; g.fillStyle = SIG;
-    g.fillText(sc.big, x, y + (1 - land) * px);
+    g.fillText(sc.big, x, y + (1 - land) * px - q * px * 1.2);
     g.restore();
     const col = (dx / (CW + GUT)).toFixed(2), off = u > .02;
     g.font = font(500, 22); g.fillStyle = off ? SIG : G2;
-    if (land > 0) g.fillText(`col ${(1 + +col).toFixed(2)} · row ${(-dy / 160).toFixed(2)} · ${off ? 'off grid' : 'on grid'}`, colX(0), y + 70);
+    if (land > 0 && q <= 0) g.fillText(`col ${(1 + +col).toFixed(2)} · row ${(-dy / 160).toFixed(2)} · ${off ? 'off grid' : 'on grid'}`, colX(0), y + 70);
     riseText(sc.note, M, y + 150, 44, 800, INK, snap(t, l.t + E8, E16), q);
     TX.push({ id: 'exc', text: sc.big + ' ' + sc.note });
   },
@@ -162,13 +162,13 @@ function subtitle(l, t) {
 
 window.DUR = DUR; window.EV = EV;
 window.TEXTS = tt => { TX.length = 0; render(tt); return TX.map(x => ({ ...x, x0: M, y0: 200, x1: W - M, y1: 1450 })); };
-const i0 = l => l === L[0] ? -3 * E16 : l.s0;   // the hook lands by frame 3: it is the reel's cover
+const i0 = l => l === L[0] ? -5 * E16 : l.s0;   // the hook lands by frame 3: it is the reel's cover
 function render(t) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = PAGE; g.fillRect(0, 0, W, H); TX.length = 0;
   grid(t); chrome(t);
   for (const l of L) {
     if (t < l.s0 || t >= l.s1 + E8) continue;
-    const s = i0(l) + (l.pause ? BAR : 0), q = l.s1 < 1e8 ? snap(t, l.s1 + E8, E8) : 0;
+    const s = i0(l) + (l.pause ? BAR / 2 : 0), q = l.s1 < 1e8 ? snap(t, l.s1 + E8, E8) : 0;
     if (l.pause && t < l.t - E8) continue;                  // the silent bar: empty grid after the knife cut
     SC[l.scene.type](l.scene, t, s, q, l);
     subtitle(l, t);
