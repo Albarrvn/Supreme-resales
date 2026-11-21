@@ -33,3 +33,5 @@ reels/*/video_hd.mp4
 reels/*/render.log
 reels/*/stills/
 reels/*/out/
+__pycache__/
+reels/_lemo/chain.log
