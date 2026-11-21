@@ -48,7 +48,7 @@ function overlay(t, st) {
   const k = st.k;
   if (k === 'hook') { title(t, -1, '', '¿AGUANTA', 'UN CARRO?');
     if (t < W('hook', 8)) tag(t, W('hook', 1), P(0, 63, 7), 180, -160, 'CORDÓN', CY);
-    else tag(t, W('hook', 12), P(-120, -330, 8), -40, -150, '1.5 TON', OR); }
+    else tag(t, W('hook', 12), P(-120, -330, 8), 20, -170, '1.5 TON', OR); }
   else if (k === 'c1') { title(t, T.c1, '', 'FILETE');
     dim(t, W('c1', 4), P(25, 66, 4), P(25, 60, 4), 70, '6 mm'); dim(t, W('c1', 7), P(-25, 60, 10), P(25, 60, 10), -70, '5 cm'); }
   else if (k === 'c2') { title(t, T.c2, '', 'LA', 'GARGANTA');
