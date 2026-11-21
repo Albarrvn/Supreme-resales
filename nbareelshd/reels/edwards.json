@@ -5,7 +5,7 @@
 {
 "id": "a1",
 "text": "320 triples. Nadie metió más en toda la liga.",
-"say": "Trescientos veinte triples. Nadie metió más en toda la liga.",
+"say": "¡Trescientos veinte triples! ¡Nadie metió más en toda la liga!",
 "scene": {
 "type": "num",
 "big": "320",
@@ -15,7 +15,7 @@
 {
 "id": "a2",
 "text": "Temporada 2024-25. Anthony Edwards. Timberwolves.",
-"say": "Temporada dos mil veinticuatro, veinticinco. Anthony Edwards. Timberwolves.",
+"say": "¡Temporada dos mil veinticuatro, veinticinco! ¡Anthony Edwards! ¡Timberwolves!",
 "scene": {
 "type": "caption",
 "rows": [
@@ -28,7 +28,7 @@
 {
 "id": "a3",
 "text": "Dos finales del Oeste seguidas.",
-"say": "Dos finales del Oeste seguidas.",
+"say": "¡Dos finales del Oeste seguidas!",
 "scene": {
 "type": "cells",
 "n": 2,
@@ -38,7 +38,7 @@
 {
 "id": "a4",
 "text": "Y solo tenía 23 años.",
-"say": "Y solo tenía veintitrés años.",
+"say": "¡Y solo tenía veintitrés años!",
 "scene": {
 "type": "exception",
 "big": "23",
@@ -49,7 +49,7 @@
 {
 "id": "a5",
 "text": "¿Será la próxima cara de la NBA? Comenta.",
-"say": "¿Será la próxima cara de la ene be a? Comenta.",
+"say": "¿Será la próxima cara de la ene be a? ¡Comenta!",
 "scene": {
 "type": "question"
 }

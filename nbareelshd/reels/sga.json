@@ -5,7 +5,7 @@
 {
 "id": "s1",
 "text": "32,7 puntos por partido. Máximo anotador de la liga.",
-"say": "Treinta y dos coma siete puntos por partido. Máximo anotador de la liga.",
+"say": "¡Treinta y dos coma siete puntos por partido! ¡Máximo anotador de la liga!",
 "scene": {
 "type": "num",
 "big": "32,7",
@@ -15,7 +15,7 @@
 {
 "id": "s2",
 "text": "Temporada 2024-25. Shai Gilgeous-Alexander. Thunder.",
-"say": "Temporada dos mil veinticuatro, veinticinco. Shai Gilgeous Alexander. Thunder.",
+"say": "¡Temporada dos mil veinticuatro, veinticinco! ¡Shai Gilgeous Alexander! ¡Thunder!",
 "scene": {
 "type": "caption",
 "rows": [
@@ -28,7 +28,7 @@
 {
 "id": "s3",
 "text": "Máximo anotador. MVP. Y campeón.",
-"say": "Máximo anotador. MVP. Y campeón.",
+"say": "¡Máximo anotador! ¡MVP! ¡Y campeón!",
 "scene": {
 "type": "cells",
 "n": 3,
@@ -38,7 +38,7 @@
 {
 "id": "s4",
 "text": "Y MVP de las Finales. Todo en un solo año.",
-"say": "Y MVP de las Finales. Todo en un solo año.",
+"say": "¡Y MVP de las Finales! ¡Todo en un solo año!",
 "scene": {
 "type": "exception",
 "big": "MVP",
@@ -49,7 +49,7 @@
 {
 "id": "s5",
 "text": "¿Es el mejor jugador del mundo ahora mismo? Comenta.",
-"say": "¿Es el mejor jugador del mundo ahora mismo? Comenta.",
+"say": "¿Es el mejor jugador del mundo ahora mismo? ¡Comenta!",
 "scene": {
 "type": "question"
 }

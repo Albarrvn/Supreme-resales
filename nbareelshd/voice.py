@@ -14,6 +14,6 @@ for reel in sys.argv[1:] or ['sga', 'jokic', 'luka', 'giannis', 'wemby', 'edward
     for L in json.load(open(os.path.join(HERE, 'reels', reel + '.json')))['lines']:
         out = os.path.join(d, L['id'] + '.wav')
         if os.path.exists(out) and L['id'] in dur: continue
-        wav = m.generate(L['say'], language_id='es', audio_prompt_path=REF, exaggeration=.6, cfg_weight=.4)
+        wav = m.generate(L['say'], language_id='es', audio_prompt_path=REF, exaggeration=float(os.environ.get('EXAG', .95)), cfg_weight=float(os.environ.get('CFG', .3)))
         y = trim(wav.squeeze(0).numpy(), m.sr); sf.write(out, y, m.sr)
         dur[L['id']] = round(len(y) / m.sr, 3); json.dump(dur, open(durf, 'w'), indent=0); print(reel, L['id'], dur[L['id']], flush=True)

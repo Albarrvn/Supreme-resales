@@ -5,7 +5,7 @@
 {
 "id": "j1",
 "text": "Fue el pick 41. Y la tele ni lo mostró: estaba en anuncios.",
-"say": "Fue el pick cuarenta y uno. Y la tele ni lo mostró: estaba en anuncios.",
+"say": "¡Fue el pick cuarenta y uno! ¡Y la tele ni lo mostró! ¡estaba en anuncios!",
 "scene": {
 "type": "num",
 "big": "41",
@@ -15,7 +15,7 @@
 {
 "id": "j2",
 "text": "Draft 2014. Nikola Jokić. Serbia.",
-"say": "Draft dos mil catorce. Nikola Yókich. Serbia.",
+"say": "¡Draft dos mil catorce! ¡Nikola Yókich! ¡Serbia!",
 "scene": {
 "type": "caption",
 "rows": [
@@ -28,7 +28,7 @@
 {
 "id": "j3",
 "text": "Tres veces MVP: 2021, 2022 y 2024.",
-"say": "Tres veces MVP: dos mil veintiuno, dos mil veintidós y dos mil veinticuatro.",
+"say": "¡Tres veces MVP! ¡dos mil veintiuno, dos mil veintidós y dos mil veinticuatro!",
 "scene": {
 "type": "cells",
 "n": 3,
@@ -38,7 +38,7 @@
 {
 "id": "j4",
 "text": "Y en 2023, campeón y MVP de las Finales.",
-"say": "Y en dos mil veintitrés, campeón y MVP de las Finales.",
+"say": "¡Y en dos mil veintitrés, campeón y MVP de las Finales!",
 "scene": {
 "type": "exception",
 "big": "2023",
@@ -49,7 +49,7 @@
 {
 "id": "j5",
 "text": "¿El mejor pívot de la historia? Comenta.",
-"say": "¿El mejor pívot de la historia? Comenta.",
+"say": "¿El mejor pívot de la historia? ¡Comenta!",
 "scene": {
 "type": "question"
 }

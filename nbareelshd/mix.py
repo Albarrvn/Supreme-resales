@@ -65,11 +65,20 @@ for e in ev['ev']:
     if e['type'] != 'voice': continue
     y, sr = sf.read(os.path.join(HERE, 'voices', REEL, e['id'] + '.wav'))
     if y.ndim > 1: y = y.mean(1)
-    y = hp(resample_poly(y, SR, sr), 90); y = norm(sfx.compress(y / (np.abs(y).max() + 1e-9), thr=.3, ratio=3, att=.003, rel=.1), .9)
+    # broadcast chain: low cut, presence lift (2.5–5 kHz), heavy compression, like a commentary mic
+    y = hp(resample_poly(y, SR, sr), 120); y = y + .6 * bp(y, 2500, 5000) + .25 * bp(y, 150, 300)
+    y = norm(sfx.compress(y / (np.abs(y).max() + 1e-9), thr=.2, ratio=5, att=.002, rel=.08), .9)
     add(vo, y, e['t'], .8); s = int(e['t'] * SR); vad[s:s + len(y)] = 1
 vad = uniform_filter1d(maximum_filter1d(vad, size=int(.16 * SR)), size=int(.25 * SR))
 mus *= (1 - .68 * vad)[:, None] * .8
-mix = mus + vo + fol
+# arena crowd bed: filtered noise breathing slowly, swelling into a roar when the record (section E) lands
+nz = lambda: bp(rng.standard_normal(N), 250, 2500)
+crowd = np.stack([nz(), nz()], 1); crowd /= np.abs(crowd).max()
+tt = np.arange(N) / SR; lvl = .05 + .015 * np.sin(2 * np.pi * .23 * tt)
+for a, s_ in secs:
+    if s_ == 'E': lvl += .22 * np.clip((tt - a + .3) / .3, 0, 1) * np.exp(-np.clip(tt - a, 0, None) / 1.6)
+crowd *= lvl[:, None] * (1 - .5 * vad)[:, None]
+mix = mus + vo + fol + crowd
 for c in range(2): mix[:, c] = sfx.limit(mix[:, c], .95)
 assert np.isfinite(mix).all()
 sf.write(os.path.join(HERE, 'out', REEL, 'mix.wav'), mix.astype(np.float32), SR, subtype='FLOAT')

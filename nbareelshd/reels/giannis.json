@@ -5,7 +5,7 @@
 {
 "id": "g1",
 "text": "50 puntos para cerrar unas Finales.",
-"say": "Cincuenta puntos para cerrar unas Finales.",
+"say": "¡Cincuenta puntos para cerrar unas Finales!",
 "scene": {
 "type": "num",
 "big": "50",
@@ -15,7 +15,7 @@
 {
 "id": "g2",
 "text": "20 de julio de 2021. Giannis contra los Suns.",
-"say": "Veinte de julio de dos mil veintiuno. Yanis contra los Suns.",
+"say": "¡Veinte de julio de dos mil veintiuno! ¡Yanis contra los Suns!",
 "scene": {
 "type": "caption",
 "rows": [
@@ -28,7 +28,7 @@
 {
 "id": "g3",
 "text": "Años antes vendía cosas en la calle en Atenas. Fue el pick 15.",
-"say": "Años antes vendía cosas en la calle en Atenas. Fue el pick quince.",
+"say": "¡Años antes vendía cosas en la calle en Atenas! ¡Fue el pick quince!",
 "scene": {
 "type": "caption",
 "rows": [
@@ -41,7 +41,7 @@
 {
 "id": "g4",
 "text": "Milwaukee no ganaba un título desde 1971.",
-"say": "Milwaukee no ganaba un título desde mil novecientos setenta y uno.",
+"say": "¡Milwaukee no ganaba un título desde mil novecientos setenta y uno!",
 "scene": {
 "type": "exception",
 "big": "1971",
@@ -52,7 +52,7 @@
 {
 "id": "g5",
 "text": "¿Quién merece su próximo anillo? Comenta.",
-"say": "¿Quién merece su próximo anillo? Comenta.",
+"say": "¿Quién merece su próximo anillo? ¡Comenta!",
 "scene": {
 "type": "question"
 }
