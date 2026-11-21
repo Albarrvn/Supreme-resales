@@ -171,11 +171,28 @@ function subs(t) { const ch = WORDS.find(c => t >= c[0].a - .05 && t < c[c.lengt
   ch.forEach((it, i) => { ov.fillStyle = t >= it.a && t < it.b + .05 ? OR : INK; ov.fillText(parts[i], x, 1500); x += ov.measureText(parts[i]).width; }); }
 function brand() { ov.save(); ov.beginPath(); ov.arc(990, 90, 46, 0, 7); ov.clip(); ov.drawImage(AV, 944, 44, 92, 92); ov.restore();
   ov.strokeStyle = CY; ov.lineWidth = 4; ov.beginPath(); ov.arc(990, 90, 46, 0, 7); ov.stroke(); ov.font = F(30, 800); ov.fillStyle = INK; ov.textAlign = 'right'; ov.fillText('@luisgabb17', 925, 102); ov.textAlign = 'left'; }
+// "despiece" subtitles: top centre, two lines of ~3 words; spoken = INK, upcoming = dim, current = white; key words boxed in cyan
+let SUBTOP = null;
+const norm = w => w.toLowerCase().normalize('NFD').replace(/[^a-z0-9ñ]/g, '');
+function subsTop(t) { const words = WORDS.flat(), i0 = words.findIndex(w => t < w.b + .1); if (i0 < 0 || t < words[0].a - .05) return;
+  const g = Math.floor(i0 / 6) * 6, grp = words.slice(g, g + 6); if (t < grp[0].a - .05) return;
+  ov.font = F(58, 800); ov.textBaseline = 'alphabetic';
+  [grp.slice(0, 3), grp.slice(3, 6)].forEach((line, li) => { if (!line.length) return;
+    const parts = line.map((w, i) => w.w + (i < line.length - 1 ? ' ' : '')), tw = parts.reduce((q, p) => q + ov.measureText(p).width, 0); let x = 540 - tw / 2; const y = 270 + li * 78;
+    line.forEach((w, i) => { const cur = t >= w.a && t < w.b + .05, done = t >= w.b + .05, ww = ov.measureText(w.w).width;
+      if (SUBTOP.has(norm(w.w)) && t >= w.a) { ov.strokeStyle = CY; ov.lineWidth = 3; ov.fillStyle = 'rgba(56,225,255,0.18)'; ov.beginPath(); ov.roundRect(x - 6, y - 52, ww + 12, 66, 8); ov.fill(); ov.stroke(); }
+      ov.font = F(58, cur ? 900 : 800); ov.fillStyle = cur ? '#FFFFFF' : done ? INK : 'rgba(230,241,243,0.45)'; ov.fillText(parts[i], x, y); x += ov.measureText(parts[i]).width; ov.font = F(58, 800); }); }); }
+// comment bubbles for the "lo pidieron en comentarios" beat
+export function comments(t, t0, list, y0 = 1040) { list.forEach((txt, i) => { const ti = t0 + i * .35; if (t < ti) return; const p = back(seg(t, ti, ti + .3));
+  ov.save(); ov.font = F(36, 800); const w = ov.measureText(txt).width + 110, x = 540 - w / 2, y = y0 + i * 96; ov.translate(540, y + 36); ov.scale(p, p); ov.translate(-540, -(y + 36));
+  ov.fillStyle = BG; ov.strokeStyle = CY; ov.lineWidth = 3; ov.beginPath(); ov.roundRect(x, y, w, 72, 36); ov.fill(); ov.stroke();
+  ov.fillStyle = OR; ov.beginPath(); ov.arc(x + 38, y + 36, 18, 0, 7); ov.fill(); ov.fillStyle = INK; ov.fillText(txt, x + 70, y + 49); ov.restore(); }); }
 export function pill(t, t0, x, y, text, col) { if (t < t0) return; const p = back(seg(t, t0, t0 + .3)); ov.save(); ov.translate(x, y); ov.scale(p, p); ov.font = F(44); const w = ov.measureText(text).width + 60;
   ov.strokeStyle = col; ov.lineWidth = 4; ov.fillStyle = BG; ov.beginPath(); ov.roundRect(-w / 2, -40, w, 80, 40); ov.fill(); ov.stroke(); ov.fillStyle = col; ov.textAlign = 'center'; ov.fillText(text, 0, 15); ov.restore(); ov.textAlign = 'left'; }
 
 // ---------- page contract (?off=&len= renders a time window for resumable chunks) ----------
-export async function start({ camKeys, setScene, overlay, shake: shk = () => 0 }) {
+export async function start({ camKeys, setScene, overlay, shake: shk = () => 0, subStyle = 'side', keys = [] }) {
+  SUBTOP = subStyle === 'top' ? new Set(keys.map(norm)) : null;
   CAMK = track(camKeys); const OFF = +(QS.get('off') || 0);
   window.DUR = QS.get('len') ? Math.min(+QS.get('len'), T.end - OFF) : T.end;
   window.render = (t) => { t += OFF;
@@ -186,7 +203,7 @@ export async function start({ camKeys, setScene, overlay, shake: shk = () => 0 }
       const clip = st.clipZ == null ? [] : [new THREE.Plane(new THREE.Vector3(0, 0, -1), st.clipZ)]; pass(cam, clip, 1 / JIT); }
     quad.material = copyMat; copyMat.uniforms.tA.value = RT.a.texture; renderer.setRenderTarget(null); renderer.setClearColor(0x000000, 0); renderer.clear(); renderer.render(quadScene, quadCam);
     camAt(t, [sh, 0]); ov.clearRect(0, 0, PX, PY); if (QS.get('clean')) return;
-    overlay(t, st); brand(); presenter(t); subs(t);
+    overlay(t, st); brand(); presenter(t); SUBTOP ? subsTop(t) : subs(t);
   };
   await document.fonts.load('900 40px P'); await document.fonts.load('800 40px P');
   await Promise.all([PRES, AV].map(i => i.decode()));
