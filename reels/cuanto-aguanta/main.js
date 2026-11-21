@@ -46,7 +46,7 @@ function setScene(t) {
 const P = (x, y, z = 0) => new THREE.Vector3(x, y, z);
 function overlay(t, st) {
   const k = st.k;
-  if (k === 'hook') { title(t, 0, '', '¿AGUANTA', 'UN CARRO?');
+  if (k === 'hook') { title(t, -0.6, '', '¿AGUANTA', 'UN CARRO?');
     if (t < W('hook', 8)) tag(t, W('hook', 1), P(0, 63, 7), 180, -160, 'CORDÓN', CY);
     else tag(t, W('hook', 12), P(-120, -330, 8), -40, -150, '1.5 TON', OR); }
   else if (k === 'c1') { title(t, T.c1, '', 'FILETE');
