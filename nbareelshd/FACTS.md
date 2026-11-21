@@ -11,3 +11,6 @@
 - Manute Bol (listed 7'7", 2.31 m) and Muggsy Bogues (5'3", 1.60 m, shortest player in NBA history) were teammates on the 1987-88 Washington Bullets: 71 cm apart.
 - Wilt Chamberlain, 2 Mar 1962 vs Knicks: 100 points; not televised, no video exists, only partial radio audio of the 4th quarter. Nobody has reached 100 since (closest: Kobe 81).
 - Kareem Abdul-Jabbar became the all-time leading scorer on 5 Apr 1984; LeBron James passed him on 7 Feb 2023, aged 38 (record held ~38 years 10 months). LeBron became the first to 40,000 points on 2 Mar 2024.
+- Kobe Bryant, 22 Jan 2006 vs Toronto: 81 points (26 first half, 55 second half); the Lakers trailed by 18 in the 3rd quarter.
+- Stephen Curry: 286 threes in 2014-15 (then the record, his own), 402 in 2015-16 (+116, +40.6 %).
+- Klay Thompson, 23 Jan 2015 vs Sacramento: 37 points in the 3rd quarter, 13/13 FG, 9/9 3PT, NBA record for a quarter.

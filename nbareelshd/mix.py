@@ -20,11 +20,29 @@ def knife(d=.3):
     tt = t_(d); f = np.linspace(1500, 6000, len(tt)); x = bp(noise(d), 1500, 7000) * (tt / d) ** 1.5
     sn = t_(.08); x[-len(sn):] += (np.sin(2 * np.pi * 4200 * sn) * env_exp(.08, .012) + hp(noise(.08), 4000) * env_exp(.08, .003)) * .8; return norm(x)
 def stamp(): d = .18; tt = t_(d); return norm(np.sin(2 * np.pi * 140 * tt) * env_exp(d, .03) + bp(noise(d), 600, 3000) * env_exp(d, .008))
-FOL = {'thunk': (thunk, .22), 'paper': (paper, .26), 'snap': (snapf, .14), 'thump': (thump, .5), 'knife': (knife, .25), 'stamp': (stamp, .35)}
+def boom():   # cinematic impact on frame 1: pitch-dropping sub + noise burst
+    d = 1.1; tt = t_(d); f = 40 + 45 * np.exp(-tt / .08)
+    return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * env_exp(d, .35) + lp(noise(d), 3000) * env_exp(d, .04) * .7)
+def dribble(): # basketball bounce: low rubbery thud + short ping of the floor
+    d = .14; tt = t_(d); f = 70 + 50 * np.exp(-tt / .015)
+    return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * env_exp(d, .035) + np.sin(2 * np.pi * 640 * tt) * env_exp(d, .008) * .3 + bp(noise(d), 800, 3000) * env_exp(d, .003) * .4)
+def squeak(): # sneaker on hardwood: fast rising glide with vibrato
+    d = .13; tt = t_(d); f = 2400 + 900 * tt / d + 120 * np.sin(2 * np.pi * 45 * tt)
+    return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * tt / d) ** .5)
+def riser(d):  # tension sweep that ends exactly on the record
+    tt = t_(d); out = np.zeros(len(tt)); n = noise(d); hop = 512
+    for i in range(0, len(n), hop):
+        fc = 400 + 5000 * (i / len(n)) ** 2; seg = bp(n[max(0, i - 2048):i + hop], fc * .7, min(fc * 1.4, 20000))[-hop:]; out[i:i + len(seg)] = seg
+    return norm(out * (tt / d) ** 2)
+def horn():    # arena buzzer: two detuned square-ish tones
+    d = .75; tt = t_(d); x = sum(np.tanh(4 * np.sin(2 * np.pi * f * tt)) for f in (220, 233))
+    return norm(lp(x, 2500) * np.minimum(1, tt / .01) * np.minimum(1, (d - tt) / .05))
+FOL = {'riser': (None, .28), 'boom': (boom, .7), 'dribble': (dribble, .32), 'squeak': (squeak, .07), 'horn': (horn, .16),
+       'whoosh': (lambda: sfx.whoosh(.35), .14), 'thunk': (thunk, .22), 'paper': (paper, .26), 'snap': (snapf, .14), 'thump': (thump, .5), 'knife': (knife, .25), 'stamp': (stamp, .35)}
 fol = np.zeros((N, 2))
 for e in ev['ev']:
     if e['type'] in FOL:
-        fn, gain = FOL[e['type']]; x = fn(); at = e['t'] - (len(x) / SR - .03 if e['type'] == 'knife' else 0)
+        fn, gain = FOL[e['type']]; x = riser(e['d']) if e['type'] == 'riser' else fn(); at = e['t'] - (len(x) / SR - .03 if e['type'] == 'knife' else 0)
         add(fol, x, max(0, at), gain * e.get('g', 1), pan=float(rng.uniform(-.2, .2)))
 
 # ---------- score: motorik 120 bpm, A minor; one layer per section ----------

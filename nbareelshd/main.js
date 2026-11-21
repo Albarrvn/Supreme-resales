@@ -39,9 +39,12 @@ L.forEach((l, i) => {
   if (l.pause) { EV.push({ t: l.s0, type: 'section', name: 'D' }); EV.push({ t: l.s0 + E8, type: 'knife' }); EV.push({ t: l.t - E8, type: 'section', name: 'E' }); }
   if (sc.type === 'num') for (let k = 1; k <= 4; k++) EV.push({ t: s + k * E16, type: 'thunk' });
   if (sc.type === 'caption') sc.rows.forEach((_, k) => EV.push({ t: s + k * E8, type: 'paper' }));
-  if (sc.type === 'cells') { sc.iv = Math.max(E16, Math.min(E8, Math.floor((l.d - .5) / sc.n / E16) * E16)); for (let k = 0; k < sc.n; k++) EV.push({ t: s + k * sc.iv, type: 'snap' }); if (sc.cut) EV.push({ t: s + sc.n * sc.iv + E8, type: 'knife' }); }
+  if (sc.type === 'cells') { sc.iv = Math.max(E16, Math.min(E8, Math.floor((l.d - .5) / sc.n / E16) * E16)); for (let k = 0; k < sc.n; k++) EV.push({ t: s + k * sc.iv, type: 'dribble' }); if (sc.cut) EV.push({ t: s + sc.n * sc.iv + E8, type: 'knife' }); }
   if (sc.type === 'bars') sc.items.forEach((_, k) => { for (let j = 1; j <= 4; j++) EV.push({ t: s + k * BEAT + j * E16, type: 'snap', g: .6 }); });
-  if (sc.type === 'exception') EV.push({ t: l.t, type: 'thump' });
+  if (sc.type === 'exception') { EV.push({ t: l.t, type: 'thump' }); EV.push({ t: l.t, type: 'horn' }); }
+  if (i === 0) EV.push({ t: 0, type: 'boom' });
+  else if (l.pause) EV.push({ t: l.s0, type: 'riser', d: l.t - l.s0 });
+  else { EV.push({ t: l.s0, type: 'whoosh' }); EV.push({ t: l.s0 + E8, type: 'squeak' }); }
   if (sc.type === 'question') EV.push({ t: s + BEAT, type: 'stamp' });
 });
 EV.push({ t: DUR - E8, type: 'section', name: 'end' });
@@ -141,7 +144,8 @@ const SC = {
     lines.forEach((ln, k) => riseText(ln, M, 420 + k * 116, 104, 900, INK, snap(t, s + k * E16, E16)));
     const p = snap(t, s + BEAT, E16);
     if (p > 0) { g.fillStyle = INK; g.fillRect(M, 420 + lines.length * 116, 420 * p, 84); g.font = font(800, 40); g.fillStyle = PAGE; if (p >= 1) g.fillText('@NBAreelsHD', M + 24, 420 + lines.length * 116 + 56); }
-    TX.push({ id: 'q', text: l.text + ' @NBAreelsHD' });
+    riseText('+ SÍGUENOS PARA MÁS', M, 420 + lines.length * 116 + 170, 48, 900, INK, snap(t, s + BEAT + E8, E16));
+    TX.push({ id: 'q', text: l.text + ' @NBAreelsHD + SÍGUENOS PARA MÁS' });
   },
 };
 
@@ -172,9 +176,13 @@ function render(t) {
     if (t < l.s0 || t >= l.s1 + E8) continue;
     const s = i0(l) + (l.pause ? BAR / 2 : 0), q = l.s1 < 1e8 ? snap(t, l.s1 + E8, E8) : 0;
     if (l.pause && t < l.t - E8) continue;                  // the silent bar: empty grid after the knife cut
+    const slam = l === L[0] && t < .17 ? 1 + .35 * (1 - E(t / .17)) : 1;
+    if (slam > 1) { g.save(); g.translate(M, 560); g.scale(slam, slam); g.translate(-M, -560); }
     SC[l.scene.type](l.scene, t, s, q, l);
+    if (slam > 1) g.restore();
     subtitle(l, t);
   }
+  if (t < .09) { g.save(); g.globalCompositeOperation = 'difference'; g.fillStyle = '#fff'; g.fillRect(0, 0, W, H); g.restore(); }
   // knife cut of the previous scene at the start of the silent bar
   L.forEach((l, i) => { if (l.pause && i > 0 && t >= l.s0 && t < l.s0 + E8 * 2) { const p = L[i - 1]; knifeCut(t, l.s0, 240, 1120, () => { SC[p.scene.type](p.scene, l.s0 - .001, i0(p), 0, p); }); } });
 }

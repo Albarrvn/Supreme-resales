@@ -1,0 +1,58 @@
+{
+"title": "Klay 37",
+"no": "15",
+"lines": [
+{
+"id": "k1",
+"text": "13 tiros. 13 canastas. En un solo cuarto.",
+"say": "¡Trece tiros! ¡Trece canastas! ¡En un solo cuarto!",
+"scene": {
+"type": "num",
+"big": "13/13",
+"note": "tiros de campo · un cuarto"
+}
+},
+{
+"id": "k2",
+"text": "23 de enero de 2015. Klay Thompson contra los Kings.",
+"say": "¡Veintitrés de enero de dos mil quince! ¡Klay Thompson contra los Kings!",
+"scene": {
+"type": "caption",
+"rows": [
+"23.01.2015",
+"Klay Thompson",
+"vs Kings"
+]
+}
+},
+{
+"id": "k3",
+"text": "9 de 9 en triples.",
+"say": "¡Nueve de nueve en triples!",
+"scene": {
+"type": "cells",
+"n": 9,
+"label": "triples 9/9"
+}
+},
+{
+"id": "k4",
+"text": "37 puntos en 12 minutos. Récord de la NBA.",
+"say": "¡Treinta y siete puntos en doce minutos! ¡Récord de la ene be a!",
+"scene": {
+"type": "exception",
+"big": "37",
+"note": "puntos en un cuarto · récord"
+},
+"pause": true
+},
+{
+"id": "k5",
+"text": "Etiqueta al amigo que nunca falla.",
+"say": "¡Etiqueta al amigo que nunca falla!",
+"scene": {
+"type": "question"
+}
+}
+]
+}

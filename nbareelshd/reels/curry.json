@@ -1,0 +1,67 @@
+{
+"title": "Curry 402",
+"no": "14",
+"lines": [
+{
+"id": "c1",
+"text": "El récord de triples era 286. Curry metió 402.",
+"say": "¡El récord de triples era doscientos ochenta y seis! ¡Curry metió cuatrocientos dos!",
+"scene": {
+"type": "num",
+"big": "286",
+"note": "triples · récord anterior"
+}
+},
+{
+"id": "c2",
+"text": "Y el récord anterior también era suyo.",
+"say": "¡Y el récord anterior también era suyo!",
+"scene": {
+"type": "caption",
+"rows": [
+"2014–15",
+"Stephen Curry",
+"286 triples"
+]
+}
+},
+{
+"id": "c3",
+"text": "Temporada 2015-16: 116 triples más.",
+"say": "¡Temporada dos mil quince, dieciséis! ¡ciento dieciséis triples más!",
+"scene": {
+"type": "bars",
+"items": [
+[
+"2014–15",
+286
+],
+[
+"2015–16",
+402
+]
+],
+"max": 420
+}
+},
+{
+"id": "c4",
+"text": "402. Un 40 % más.",
+"say": "¡Cuatrocientos dos! ¡Un cuarenta por ciento más!",
+"scene": {
+"type": "exception",
+"big": "402",
+"note": "triples · una temporada"
+},
+"pause": true
+},
+{
+"id": "c5",
+"text": "Mándaselo al que dice que Curry no cambió el juego.",
+"say": "¡Mándaselo al que dice que Curry no cambió el juego!",
+"scene": {
+"type": "question"
+}
+}
+]
+}
