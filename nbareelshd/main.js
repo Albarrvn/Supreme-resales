@@ -112,10 +112,12 @@ const SC = {
   },
   bars(sc, t, s, q) {
     sc.items.forEach(([lab, v], k) => {
-      const y = 330 + k * 300, w = (W - 2 * M) * v / sc.max, p = steps(t, s + k * BEAT, s + k * BEAT + 4 * E16, 4);
-      riseText(lab, M, y, 40, 800, INK, snap(t, s + k * BEAT, E16), q);
-      g.fillStyle = INK; g.fillRect(M, y + 30, w * p * (1 - q), 120);
-      riseText(String(Math.round(v * p)), M, y + 270, 110, 900, INK, snap(t, s + k * BEAT, E16), q);
+      // one row per item: number + name on one line, the bar under it (rows never overlap, up to 3 items)
+      const rh = sc.items.length > 2 ? 250 : 330, y = 360 + k * rh, w = (W - 2 * M) * v / sc.max, p = steps(t, s + k * BEAT, s + k * BEAT + 4 * E16, 4);
+      const num = String(Math.round(v * p)); g.font = font(900, 96); const nw = g.measureText(String(v)).width;
+      riseText(num, M, y, 96, 900, INK, snap(t, s + k * BEAT, E16), q);
+      riseText(lab, M + nw + 24, y, 40, 800, INK, snap(t, s + k * BEAT, E16), q);
+      g.fillStyle = INK; g.fillRect(M, y + 36, w * p * (1 - q), rh > 300 ? 140 : 100);
     });
     TX.push({ id: 'bars', text: sc.items.map(x => x.join(' ')).join(' ') });
   },
