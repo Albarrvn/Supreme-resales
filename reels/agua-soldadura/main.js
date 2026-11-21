@@ -70,7 +70,7 @@ function bigX(t, t0, x, y, r) { if (t < t0) return; const p = eo(seg(t, t0, t0 +
 
 function overlay(t, st) {
   const k = st.k;
-  if (k === 'hook') { title(t, -0.6, '', '¿LE ECHAS', 'AGUA?');
+  if (k === 'hook') { title(t, -1, '', '¿LE ECHAS', 'AGUA?');
     const [sx, sy] = proj(P(2, 18)); steam(t, sx, sy, 10, seg(t, W('hook', 4), W('hook', 5)));
     if (t > W('hook', 8)) pill(t, W('hook', 8), 540, 1200, '⚠ PUEDE ROMPERLA', OR); }
   else if (k === 'a1') { title(t, T.a1, '', 'RECIÉN', 'SOLDADO');

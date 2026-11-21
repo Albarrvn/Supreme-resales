@@ -66,7 +66,7 @@ function spinArrow(t, t0, x, y, r) { if (t < t0) return; const p = eo(seg(t, t0,
 function overlay(t, st) {
   const k = st.k, tp = tip();
   if (st.arc) arcGlow(t, st.arc);
-  if (k === 'hook') { title(t, -0.6, '', '¿SE TE PEGA', 'EL ELECTRODO?');
+  if (k === 'hook') { title(t, -1, '', '¿SE TE PEGA', 'EL ELECTRODO?');
     if (st.stuck) tag(t, .8, P(tp.x, 11), -170, -150, 'PEGADO', RED);
     const [mx, my] = proj(P(-125, 40, -25)); bigX(t, W('hook', 7), mx, my, 80);
     if (t > W('hook', 11)) pill(t, W('hook', 11), 540, 1220, '3 CAUSAS', OR); }
