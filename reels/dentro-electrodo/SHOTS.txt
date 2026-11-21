@@ -1,0 +1,10 @@
+hook | ¿Qué hay dentro de un electrodo? Por fuera parece un palito de metal, pero trae su propio gas, su propio escudo, y hasta una manta.
+pide | Este video lo pidieron en los comentarios.
+alma | Por dentro tiene un alambre de acero, el alma. Conduce la corriente, y al derretirse se convierte en el cordón.
+forro | Pero lo importante es el forro. Es un polvo de minerales, prensado alrededor del alma.
+gas | Al quemarse, suelta una nube de gas que empuja el aire, como un paraguas sobre el charco.
+copa | Y como el forro se quema más lento que el alma, forma una copita en la punta, que apunta el arco como una boquilla.
+escoria | Lo que sobra del forro flota encima del charco y se endurece en una costra, la escoria. Es una manta que lo protege mientras se enfría.
+humedad | Pero ese polvo chupa la humedad del aire. Un electrodo húmedo mete hidrógeno, y el cordón se agrieta. Por eso algunos se guardan en horno.
+sintesis | El alma pone el metal. El forro pone todo lo demás.
+cierre | ¿Qué otra herramienta quieres que desmontemos? Escríbelo en comentarios.

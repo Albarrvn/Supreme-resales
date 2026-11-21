@@ -36,3 +36,4 @@ reels/*/out/
 __pycache__/
 reels/_lemo/chain.log
 reels/_lemo/redo.log
+reels/*/dev/
