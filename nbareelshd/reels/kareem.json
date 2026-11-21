@@ -1,0 +1,61 @@
+{
+"title": "39 años",
+"no": "12",
+"lines": [
+{
+"id": "r1",
+"text": "Un récord intocable durante casi 39 años.",
+"say": "¡Un récord intocable durante casi treinta y nueve años!",
+"scene": {
+"type": "num",
+"big": "39",
+"note": "años · récord intocable"
+}
+},
+{
+"id": "r2",
+"text": "1984. Kareem Abdul-Jabbar, máximo anotador de la historia.",
+"say": "¡Mil novecientos ochenta y cuatro! ¡Kareem Abdul Jabbar, máximo anotador de la historia!",
+"scene": {
+"type": "caption",
+"rows": [
+"05.04.1984",
+"Kareem",
+"Abdul-Jabbar"
+]
+}
+},
+{
+"id": "r3",
+"text": "Hasta 2023. LeBron James lo superó… con 38 años.",
+"say": "¡Hasta dos mil veintitrés! ¡LeBron James lo superó! ¡Con treinta y ocho años!",
+"scene": {
+"type": "caption",
+"rows": [
+"07.02.2023",
+"LeBron",
+"James"
+]
+}
+},
+{
+"id": "r4",
+"text": "Y en 2024, el primero en llegar a 40.000 puntos.",
+"say": "¡Y en dos mil veinticuatro, el primero en llegar a cuarenta mil puntos!",
+"scene": {
+"type": "exception",
+"big": "40.000",
+"note": "puntos · el primero de la historia"
+},
+"pause": true
+},
+{
+"id": "r5",
+"text": "¿Alguien lo superará algún día? Comenta.",
+"say": "¿Alguien lo superará algún día? ¡Comenta!",
+"scene": {
+"type": "question"
+}
+}
+]
+}

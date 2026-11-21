@@ -8,3 +8,6 @@
 - Jayson Tatum: 51 points in Game 7 vs Philadelphia (14 May 2023), most in a Game 7 in NBA history; champion 2024, Boston's 18th title (league record).
 - Jaylen Brown: 5-year, $304M supermax (2023), the largest contract in NBA history at the time; Boston won the 2024 Finals 4–1 vs Dallas; Brown was Finals MVP.
 - LeBron James: chase-down block on Andre Iguodala, Game 7 of the 2016 Finals, ~1:50 left at 89–89; Cleveland the first team to come back from 1–3 in the Finals.
+- Manute Bol (listed 7'7", 2.31 m) and Muggsy Bogues (5'3", 1.60 m, shortest player in NBA history) were teammates on the 1987-88 Washington Bullets: 71 cm apart.
+- Wilt Chamberlain, 2 Mar 1962 vs Knicks: 100 points; not televised, no video exists, only partial radio audio of the 4th quarter. Nobody has reached 100 since (closest: Kobe 81).
+- Kareem Abdul-Jabbar became the all-time leading scorer on 5 Apr 1984; LeBron James passed him on 7 Feb 2023, aged 38 (record held ~38 years 10 months). LeBron became the first to 40,000 points on 2 Mar 2024.

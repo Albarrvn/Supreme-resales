@@ -1,0 +1,67 @@
+{
+"title": "71 cm",
+"no": "10",
+"lines": [
+{
+"id": "h1",
+"text": "71 cm de diferencia. Y jugaban en el mismo equipo.",
+"say": "¡Setenta y un centímetros de diferencia! ¡Y jugaban en el mismo equipo!",
+"scene": {
+"type": "num",
+"big": "71 cm",
+"note": "de diferencia · mismo equipo"
+}
+},
+{
+"id": "h2",
+"text": "Temporada 1987-88. Washington Bullets.",
+"say": "¡Temporada mil novecientos ochenta y siete, ochenta y ocho! ¡Washington Bullets!",
+"scene": {
+"type": "caption",
+"rows": [
+"1987–88",
+"Washington",
+"Bullets"
+]
+}
+},
+{
+"id": "h3",
+"text": "Manute Bol: 2,31. Muggsy Bogues: 1,60.",
+"say": "¡Manute Bol! ¡dos treinta y uno! ¡Muggsy Bogues! ¡uno sesenta!",
+"scene": {
+"type": "bars",
+"items": [
+[
+"Bol",
+231
+],
+[
+"Bogues",
+160
+]
+],
+"max": 240
+}
+},
+{
+"id": "h4",
+"text": "Bogues: el más bajo de la historia de la NBA.",
+"say": "¡Bogues! ¡el más bajo de la historia de la ene be a!",
+"scene": {
+"type": "exception",
+"big": "1,60",
+"note": "metros · el más bajo de la historia"
+},
+"pause": true
+},
+{
+"id": "h5",
+"text": "Etiqueta a tu amigo más bajito.",
+"say": "¡Etiqueta a tu amigo más bajito!",
+"scene": {
+"type": "question"
+}
+}
+]
+}
