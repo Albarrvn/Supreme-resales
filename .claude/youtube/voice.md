@@ -9,3 +9,4 @@ Inferred from 6 of the creator's own reels (cordón, día 1 vs hoy, 5 señales, 
 - Recurring CTA: "Comenta GUÍA" (guide "El cordón perfecto no es suerte", link in bio).
 - Never claims what he can't show; no fake numbers. Uses real welding words: cordón, charco, escoria, pase de raíz, arco, electrodo.
 - ALWAYS end every video with the end card "Sígueme para más contenido de soldadura" + "Instagram @luisgabb17" (avatar, IG colors). Tool: reels/endcard/add_endcard.sh INPUT OUTPUT (auto-matches 30/60 fps).
+- NARRATION VOICE: use the creator's own cloned voice (reels/_lemo/voz/: referencia.flac + voz.py, Chatterbox, EX=1.0, then build_voice --tempo 1.08), with energy, not calm. Piper es_MX-claude-high is only the fallback.
