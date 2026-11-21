@@ -1,0 +1,6 @@
+hook | Este cordón, del tamaño de tu dedo, puede aguantar el peso de un carro.
+c1 | Es un filete de seis milímetros, y cinco centímetros de largo.
+c2 | La fuerza pasa por la garganta, la parte más delgada del cordón.
+c3 | Con buena fusión, ese pedacito aguanta más de cinco toneladas antes de romperse.
+c4 | Pero si no fundió bien, el mismo cordón se despega con un martillazo.
+cierre | No es el tamaño, es la fusión. ¿Le confiarías tu carro a tu soldadura? Comenta sí o no.

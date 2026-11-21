@@ -1,0 +1,6 @@
+hook | Este cubo de agua puede romper una soldadura perfecta. Y casi nadie lo sabe.
+a1 | Cuando terminas de soldar, el cordón está a más de mil grados.
+a2 | Si le echas agua, la superficie se enfría de golpe, pero el centro sigue caliente.
+a3 | Esa diferencia lo jala por dentro. Y en aceros con más carbono, se pone duro y quebradizo, como vidrio.
+a4 | Resultado: grietas que no se ven, hasta que la pieza falla.
+cierre | Déjalo enfriar solo, al aire. ¿Tú le echas agua? Sé honesto en los comentarios.

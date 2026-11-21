@@ -1,0 +1,6 @@
+hook | Si se te pega el electrodo, no es la máquina. Es una de estas tres cosas.
+p1 | Uno: el amperaje muy bajo. No hay calor suficiente, y la punta se suelda a la pieza.
+p2 | Dos: el arco muy corto. Si hundes la varilla en el charco, se pega.
+p3 | Tres: lo golpeas como martillo. Mejor ráyalo, como un fósforo, y levanta un poquito.
+p4 | La distancia correcta es más o menos el grosor del electrodo.
+cierre | Y si ya se pegó, gíralo y jálalo, no lo dobles. ¿Cuántas veces se te ha pegado hoy? Comenta.

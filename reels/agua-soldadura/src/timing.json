@@ -1,0 +1,48 @@
+{
+ "fps": 30,
+ "duration": 34.11,
+ "shots": [
+  {
+   "key": "hook",
+   "start": 0.15,
+   "end": 5.05,
+   "words": 14,
+   "text": "Este cubo de agua puede romper una soldadura perfecta. Y casi nadie lo sabe."
+  },
+  {
+   "key": "a1",
+   "start": 5.43,
+   "end": 9.7,
+   "words": 12,
+   "text": "Cuando terminas de soldar, el cordón está a más de mil grados."
+  },
+  {
+   "key": "a2",
+   "start": 10.08,
+   "end": 15.51,
+   "words": 15,
+   "text": "Si le echas agua, la superficie se enfría de golpe, pero el centro sigue caliente."
+  },
+  {
+   "key": "a3",
+   "start": 15.89,
+   "end": 22.82,
+   "words": 19,
+   "text": "Esa diferencia lo jala por dentro. Y en aceros con más carbono, se pone duro y quebradizo, como vidrio."
+  },
+  {
+   "key": "a4",
+   "start": 23.2,
+   "end": 27.31,
+   "words": 11,
+   "text": "Resultado: grietas que no se ven, hasta que la pieza falla."
+  },
+  {
+   "key": "cierre",
+   "start": 27.69,
+   "end": 33.36,
+   "words": 14,
+   "text": "Déjalo enfriar solo, al aire. ¿Tú le echas agua? Sé honesto en los comentarios."
+  }
+ ]
+}
