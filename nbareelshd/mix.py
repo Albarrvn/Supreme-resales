@@ -32,7 +32,7 @@ def squeak(): # sneaker on hardwood: fast rising glide with vibrato
 def riser(d):  # tension sweep that ends exactly on the record
     tt = t_(d); out = np.zeros(len(tt)); n = noise(d); hop = 512
     for i in range(0, len(n), hop):
-        fc = 400 + 5000 * (i / len(n)) ** 2; seg = bp(n[max(0, i - 2048):i + hop], fc * .7, min(fc * 1.4, 20000))[-hop:]; out[i:i + len(seg)] = seg
+        fc = 400 + 5000 * (i / len(n)) ** 2; seg = bp(n[max(0, i - 2048):i + hop], fc * .7, min(fc * 1.4, 20000))[-hop:]; m = len(out[i:i + hop]); out[i:i + m] = seg[-m:]
     return norm(out * (tt / d) ** 2)
 def horn():    # arena buzzer: two detuned square-ish tones
     d = .75; tt = t_(d); x = sum(np.tanh(4 * np.sin(2 * np.pi * f * tt)) for f in (220, 233))

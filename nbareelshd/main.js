@@ -30,7 +30,7 @@ L.forEach((l, i) => {
   if (i === 0) l.s0 = 0;                       // the hook is on screen from frame 1
 });
 L.forEach((l, i) => { l.s0 = i === 0 ? 0 : l.t - (l.pause ? BAR / 2 : E8); l.s1 = i < L.length - 1 ? L[i + 1].t - (L[i + 1].pause ? BAR / 2 : E8) : 1e9; });
-const DUR = ceilBeat(t + 1.75);
+const DUR = ceilBeat(t + .75);   // short end card: a static tail costs retention
 const EV = [];
 L.forEach((l, i) => {
   EV.push({ t: l.t, type: 'voice', id: l.id });
