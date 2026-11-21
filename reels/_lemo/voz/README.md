@@ -2,6 +2,7 @@
 
 - `referencia.flac`: 22 s of the creator's own voice (uploaded recording, silence trimmed, loudness normalized to -18 LUFS). Use only for this creator's own videos.
 - `voz.py`: Chatterbox Multilingual (MIT license, free, runs on CPU, about 8x slower than real time). One take per line of `SHOTS.txt`; Whisper transcribes each take and retries up to 4 times until every word matches.
+- Each take is also rejected if it runs longer than 0.6 s per word + 1.5 s, since Chatterbox sometimes adds babble that Whisper ignores.
 - Energy: `EX=1.0` (default, energetic). 0.5 is calm. Above about 1.2 the intonation can turn odd. Then speed it up with `build_voice.py REEL --tempo 1.08`.
 
 ## Setup (once per new machine), in a venv outside the repo

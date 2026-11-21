@@ -23,6 +23,7 @@ for d in sys.argv[2:]:
         txt = l.split('|', 1)[1].strip(); best = None
         for k in range(4):
             w = m.generate(txt, language_id='es', audio_prompt_path=ref, exaggeration=EX, cfg_weight=.5); h = heard(w); e = wer(norm(txt), norm(h))
+            if w.shape[-1] / m.sr > .6 * len(txt.split()) + 1.5: e += 1  # babble the ASR ignores makes the take too long
             if best is None or e < best[0]: best = (e, w, h)
             if e == 0: break
         print(f'{d} wer={best[0]:.2f} tries={k+1} | {best[2].strip()}', flush=True)
