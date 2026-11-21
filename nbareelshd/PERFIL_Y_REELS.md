@@ -74,7 +74,7 @@ Orden sugerido de publicación = número. Cada reel acaba en pregunta para dispa
 - 2023. Jaylen Brown. Boston Celtics.
 - Muchos dijeron que no los valía. Un año después: Finales.
 - Y Brown fue el MVP de las Finales.
-- ¿Valió cada dólar? Sí o no.
+- ¿Se merece cada dólar? Sí o no.
 **Caption:** Dijeron que no valía 304M… 💰 #jaylenbrown #celtics #nba #nbafinals
 
 ### 09 — LeBron  (`lebron.mp4`)

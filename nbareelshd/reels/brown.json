@@ -48,8 +48,8 @@
 },
 {
 "id": "n5",
-"text": "¿Valió cada dólar? Sí o no.",
-"say": "¿Valió cada dólar? ¡Sí o no!",
+"text": "¿Se merece cada dólar? Sí o no.",
+"say": "¿Se merece cada dólar? ¡Sí o no!",
 "scene": {
 "type": "question"
 }
