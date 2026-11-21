@@ -31,3 +31,5 @@ reels/*/sheet*.jpg
 reels/*/*.wav
 reels/*/video_hd.mp4
 reels/*/render.log
+reels/*/stills/
+reels/*/out/

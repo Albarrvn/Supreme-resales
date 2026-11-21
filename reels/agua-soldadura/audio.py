@@ -1,0 +1,12 @@
+import sys; sys.path.insert(0, '../_lemo')
+from sfx import *
+whooshes(); add(.1, pop(), .6)
+add(.2, crackle(W('hook', 3) - .2), .3); add(W('hook', 3), pour(W('hook', 6) - W('hook', 3)), .5); add(W('hook', 4), hiss(2.2), .9)
+add(W('hook', 8), thud(), .9)
+add(W('a1', 5), pop(), .6); add(W('a1', 8), ding(1568), .5)
+add(W('a2', 3), hiss(1.8), .7); add(W('a2', 5), pop(), .6); add(W('a2', 11), pop(), .6)
+add(W('a3', 2), sweep(.8), .5); add(W('a3', 9), pop(), .6); add(W('a3', 14), thud(), .8)
+for i, d in enumerate([0, .15, .32]): add(W('a4', 1) + d, crack(), .9)
+add(W('a4', 9), crack(), 1.); add(W('a4', 9), thud(), 1.)
+add(W('cierre', 4), ding(), .6); add(W('cierre', 9), pop(), .7)
+write_mix(drops=[W('a4', 1), W('a4', 9)])
