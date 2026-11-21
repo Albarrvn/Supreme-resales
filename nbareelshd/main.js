@@ -75,7 +75,7 @@ function grid(t) {
 }
 function chrome(t) {
   g.fillStyle = INK; g.font = font(800, 26); g.fillText('@NBAreelsHD', M, 132);
-  g.font = font(500, 22); g.fillStyle = G2; g.fillText(`${reel.no} / 05 · ${reel.title.toUpperCase()}`, colX(3), 132);
+  g.font = font(500, 22); g.fillStyle = G2; g.fillText(`${reel.no} / 09 · ${reel.title.toUpperCase()}`, colX(3), 132);
   g.fillStyle = INK; g.fillRect(M, 150, W - 2 * M, 2);
   const bar = Math.floor(t / BAR) + 1, b = Math.floor(t / BEAT) % 4 + 1;
   g.font = font(500, 20); g.fillStyle = G2; g.fillText(`bar ${String(bar).padStart(2, '0')}.${b}  ·  ${BPM} bpm  ·  6 col × ${Math.round(CW)} px`, M, 1490);

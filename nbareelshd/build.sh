@@ -3,7 +3,7 @@
 set -e
 LIB=${LIB:-/root/lemo-opuscar}; export LIB
 HERE=$(cd "$(dirname "$0")" && pwd)
-for R in ${@:-klay kobe wilt curry lebron}; do
+for R in ${@:-sga jokic luka giannis wemby edwards tatum brown lebron}; do
   mkdir -p "$HERE/out/$R"; cd "$LIB"
   node core/render/events.mjs "$HERE" --size 1080x1920 --q "reel=$R" --out "$HERE/out/$R/events.json"
   node core/render/video.mjs "$HERE" --size 1080x1920 --q "reel=$R" --fps 24 --workers 4 --out "$HERE/out/$R/video.mp4"

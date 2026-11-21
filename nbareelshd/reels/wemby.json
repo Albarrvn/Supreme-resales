@@ -1,0 +1,58 @@
+{
+"title": "Wemby",
+"no": "05",
+"lines": [
+{
+"id": "v1",
+"text": "Mide más de 2,20. Y tira triples.",
+"say": "Mide más de dos veinte. Y tira triples.",
+"scene": {
+"type": "num",
+"big": "2,20+",
+"note": "metros · y tira triples"
+}
+},
+{
+"id": "v2",
+"text": "Draft 2023. Victor Wembanyama. Número 1.",
+"say": "Draft dos mil veintitrés. Víctor Wembanyama. Número uno.",
+"scene": {
+"type": "caption",
+"rows": [
+"Draft 2023",
+"Victor",
+"Wembanyama"
+]
+}
+},
+{
+"id": "v3",
+"text": "En su primer año fue líder de la liga en tapones.",
+"say": "En su primer año fue líder de la liga en tapones.",
+"scene": {
+"type": "cells",
+"n": 6,
+"label": "líder en tapones · novato"
+}
+},
+{
+"id": "v4",
+"text": "Y novato del año por unanimidad.",
+"say": "Y novato del año por unanimidad.",
+"scene": {
+"type": "exception",
+"big": "100%",
+"note": "de los votos · novato del año"
+},
+"pause": true
+},
+{
+"id": "v5",
+"text": "¿Cuántos MVP va a ganar? Comenta un número.",
+"say": "¿Cuántos MVP va a ganar? Comenta un número.",
+"scene": {
+"type": "question"
+}
+}
+]
+}

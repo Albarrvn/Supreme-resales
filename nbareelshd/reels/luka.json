@@ -1,0 +1,71 @@
+{
+"title": "Luka",
+"no": "03",
+"lines": [
+{
+"id": "d1",
+"text": "73 puntos. En un solo partido.",
+"say": "Setenta y tres puntos. En un solo partido.",
+"scene": {
+"type": "num",
+"big": "73",
+"note": "puntos · un partido"
+}
+},
+{
+"id": "d2",
+"text": "26 de enero de 2024. Luka Dončić contra los Hawks.",
+"say": "Veintiséis de enero de dos mil veinticuatro. Luka Dóncich contra los Hawks.",
+"scene": {
+"type": "caption",
+"rows": [
+"26.01.2024",
+"Luka Dončić",
+"vs Hawks"
+]
+}
+},
+{
+"id": "d3",
+"text": "Solo Wilt Chamberlain y Kobe Bryant han anotado más.",
+"say": "Solo Wilt Chamberlain y Kobe Bryant han anotado más.",
+"scene": {
+"type": "bars",
+"items": [
+[
+"Wilt",
+100
+],
+[
+"Kobe",
+81
+],
+[
+"Luka",
+73
+]
+],
+"max": 100
+}
+},
+{
+"id": "d4",
+"text": "Un año después, Dallas lo traspasó a los Lakers.",
+"say": "Un año después, Dallas lo traspasó a los Lakers.",
+"scene": {
+"type": "exception",
+"big": "LAL",
+"note": "traspaso · febrero 2025"
+},
+"pause": true
+},
+{
+"id": "d5",
+"text": "¿El traspaso más loco de la historia? Comenta.",
+"say": "¿El traspaso más loco de la historia? Comenta.",
+"scene": {
+"type": "question"
+}
+}
+]
+}

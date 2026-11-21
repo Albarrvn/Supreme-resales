@@ -1,4 +1,4 @@
-# @NBAreelsHD — Perfil + 5 Reels
+# @NBAreelsHD — Perfil + 9 reels
 
 ## Perfil
 **Nombre (campo buscable):** NBA Reels HD | Highlights
@@ -8,56 +8,82 @@
 🔥 Top jugadas · Récords · Datos que no sabías
 📲 Reel nuevo cada día · Activa 🔔
 ```
-**Foto:** foto_perfil_NBAreelsHD.png (1080×1080, ya centrada para el recorte circular)
+**Foto:** foto_perfil_NBAreelsHD.png
 
----
+## Reels (estilo Swiss Motion, tu voz clonada)
+Orden sugerido de publicación = número. Cada reel acaba en pregunta para disparar comentarios.
 
-## Reel 1 — Klay 37 en un cuarto
-**Gancho (0–2 s, texto + voz):** "13 tiros. 13 canastas. En UN cuarto."
-- 2–5 s: Klay vs Kings, 23 ene 2015. Contador en pantalla subiendo: 0 → 37.
-- 5–15 s: los triples seguidos, cada uno con el número grande (9/9 desde tres).
-- 15–20 s: "Nadie ha anotado más en un cuarto en la NBA."
-- Cierre: "¿Quién lo supera? 👇"
-**Caption:** 37 puntos en 12 minutos. Klay entró en otra dimensión 🔥 #klaythompson #nba #warriors #nbahighlights
+### 01 — Shai  (`sga.mp4`)
+**Gancho:** 32,7 puntos por partido. Máximo anotador de la liga.
+- Temporada 2024-25. Shai Gilgeous-Alexander. Thunder.
+- Máximo anotador. MVP. Y campeón.
+- Y MVP de las Finales. Todo en un solo año.
+- ¿Es el mejor jugador del mundo ahora mismo? Comenta.
+**Caption:** Un año perfecto: anotador, MVP y campeón 🏆 #shaigilgeousalexander #sga #okcthunder #nba #nbahighlights
 
-## Reel 2 — Kobe 81
-**Gancho:** "Perdían por 18… y Kobe dijo: dame la pelota."
-- Marcador real en pantalla: Raptors arriba, 3er cuarto.
-- Montaje rápido: 26 pts en la 1.ª mitad → 55 en la 2.ª.
-- Golpe final, pantalla negra: "81." (22 ene 2006)
-- Cierre: "La 2.ª mejor anotación de la historia. ¿Cuál es la 1.ª? 👀" (te lleva al Reel 3)
-**Caption:** 81. Sin más palabras. 🐍 #kobebryant #mamba #lakers #nba
+### 02 — Jokić  (`jokic.mp4`)
+**Gancho:** Fue el pick 41. Y la tele ni lo mostró: estaba en anuncios.
+- Draft 2014. Nikola Jokić. Serbia.
+- Tres veces MVP: 2021, 2022 y 2024.
+- Y en 2023, campeón y MVP de las Finales.
+- ¿El mejor pívot de la historia? Comenta.
+**Caption:** De pick 41 a 3 MVPs 🃏 #jokic #nikolajokic #nuggets #nba #joker
 
-## Reel 3 — Wilt 100 (el partido que nadie vio)
-**Gancho:** "El mayor récord de la NBA… y NO existe un solo video."
-- Fotos de archivo + la famosa hoja con "100" escrita a mano.
-- Datos: 2 mar 1962, Warriors vs Knicks, Hershey (Pensilvania).
-- "Solo hay audio de radio de los minutos finales."
-- Cierre: "¿Crees que alguien llegue a 100 algún día? Sí / No 👇"
-**Caption:** El récord fantasma de la NBA 🏀👻 #wiltchamberlain #nbahistory #nba
+### 03 — Luka  (`luka.mp4`)
+**Gancho:** 73 puntos. En un solo partido.
+- 26 de enero de 2024. Luka Dončić contra los Hawks.
+- Solo Wilt Chamberlain y Kobe Bryant han anotado más.
+- Un año después, Dallas lo traspasó a los Lakers.
+- ¿El traspaso más loco de la historia? Comenta.
+**Caption:** 73 puntos y luego… el traspaso 🤯 #lukadoncic #luka #lakers #nba #mavs
 
-## Reel 4 — Curry 402
-**Gancho:** "El récord de triples era 286. Curry metió 402."
-- Barra que crece: 286 (su propio récord, 2014-15) → 402 (2015-16).
-- Montaje de triples desde el logo, en orden creciente de distancia.
-- Texto: "+116 en una temporada. Rompió su propio récord por un 40 %."
-- Cierre: "Guarda esto para cuando alguien diga que Curry no cambió el juego."
-**Caption:** Curry no rompió el récord, lo pulverizó 🎯 #stephcurry #warriors #nba
+### 04 — Giannis  (`giannis.mp4`)
+**Gancho:** 50 puntos para cerrar unas Finales.
+- 20 de julio de 2021. Giannis contra los Suns.
+- Años antes vendía cosas en la calle en Atenas. Fue el pick 15.
+- Milwaukee no ganaba un título desde 1971.
+- ¿Quién merece su próximo anillo? Comenta.
+**Caption:** De vender en la calle a 50 en unas Finales 🦌 #giannis #giannisantetokounmpo #bucks #nba #greekfreak
 
-## Reel 5 — El tapón
-**Gancho:** "1:50 para el final. Juego 7. Empate. Y entonces…"
-- Pausa en Iguodala en el contraataque → LeBron cruzando toda la cancha (flecha + cronómetro).
-- Cámara lenta del tapón. Corte de audio en seco → grito del estadio.
-- Contexto: Cavs remontaron un 3-1, algo nunca visto en unas Finales.
-- Cierre: "¿El mejor tapón de la historia? Comenta 🔒"
+### 05 — Wemby  (`wemby.mp4`)
+**Gancho:** Mide más de 2,20. Y tira triples.
+- Draft 2023. Victor Wembanyama. Número 1.
+- En su primer año fue líder de la liga en tapones.
+- Y novato del año por unanimidad.
+- ¿Cuántos MVP va a ganar? Comenta un número.
+**Caption:** Un alien en la NBA 👽 #wembanyama #wemby #spurs #nba #victorwembanyama
+
+### 06 — Ant  (`edwards.mp4`)
+**Gancho:** 320 triples. Nadie metió más en toda la liga.
+- Temporada 2024-25. Anthony Edwards. Timberwolves.
+- Dos finales del Oeste seguidas.
+- Y solo tenía 23 años.
+- ¿Será la próxima cara de la NBA? Comenta.
+**Caption:** Ant no pide permiso 🐜 #anthonyedwards #antman #timberwolves #nba
+
+### 07 — Tatum  (`tatum.mp4`)
+**Gancho:** 51 puntos en un juego 7. Nadie había anotado tanto.
+- 14 de mayo de 2023. Jayson Tatum contra los 76ers.
+- Un año después, campeón con Boston.
+- Título número 18. Ningún equipo tiene más.
+- ¿Tatum o Jaylen Brown? Comenta.
+**Caption:** 51 en un juego 7 y luego el anillo ☘️ #jaysontatum #celtics #nba #boston
+
+### 08 — Brown  (`brown.mp4`)
+**Gancho:** 304 millones de dólares. El contrato más grande de su momento.
+- 2023. Jaylen Brown. Boston Celtics.
+- Muchos dijeron que no los valía. Un año después: Finales.
+- Y Brown fue el MVP de las Finales.
+- ¿Valió cada dólar? Sí o no.
+**Caption:** Dijeron que no valía 304M… 💰 #jaylenbrown #celtics #nba #nbafinals
+
+### 09 — LeBron  (`lebron.mp4`)
+**Gancho:** 1:50 para el final. Juego 7. Empate. Y entonces…
+- Finales 2016. Cavaliers contra Warriors.
+- Iguodala sale solo al contraataque. LeBron cruza toda la cancha.
+- Tapón.
+- Cleveland remontó un 3-1. Nunca había pasado en unas Finales.
+- ¿El mejor tapón de la historia? Comenta.
 **Caption:** BLOCKED BY JAMES 🔒 #lebronjames #cavs #nbafinals #nba
 
----
-
-### Reglas de gancho que siguen los 5
-1. Número o contradicción en los primeros 2 s, nunca "hola" o un logo.
-2. Texto grande en la mitad de arriba (abajo lo tapa la UI de IG).
-3. 15–25 s, bucle: la última frase enlaza con la primera.
-4. Cierre con pregunta o "guarda": son los que más suben en el algoritmo.
-
-⚠️ Los clips de la NBA tienen copyright. Añade análisis, texto o voz propios (uso transformativo) y no subas partidos completos.
+⚠️ Revisa FACTS.md antes de publicar: los récords cambian.

@@ -1,0 +1,58 @@
+{
+"title": "Brown",
+"no": "08",
+"lines": [
+{
+"id": "n1",
+"text": "304 millones de dólares. El contrato más grande de su momento.",
+"say": "Trescientos cuatro millones de dólares. El contrato más grande de su momento.",
+"scene": {
+"type": "num",
+"big": "$304M",
+"note": "contrato · 5 años · 2023"
+}
+},
+{
+"id": "n2",
+"text": "2023. Jaylen Brown. Boston Celtics.",
+"say": "Dos mil veintitrés. Jaylen Brown. Boston Celtics.",
+"scene": {
+"type": "caption",
+"rows": [
+"2023",
+"Jaylen Brown",
+"Celtics"
+]
+}
+},
+{
+"id": "n3",
+"text": "Muchos dijeron que no los valía. Un año después: Finales.",
+"say": "Muchos dijeron que no los valía. Un año después: Finales.",
+"scene": {
+"type": "cells",
+"n": 4,
+"label": "4 victorias · Finales 2024"
+}
+},
+{
+"id": "n4",
+"text": "Y Brown fue el MVP de las Finales.",
+"say": "Y Brown fue el MVP de las Finales.",
+"scene": {
+"type": "exception",
+"big": "MVP",
+"note": "de las Finales · 2024"
+},
+"pause": true
+},
+{
+"id": "n5",
+"text": "¿Valió cada dólar? Sí o no.",
+"say": "¿Valió cada dólar? Sí o no.",
+"scene": {
+"type": "question"
+}
+}
+]
+}

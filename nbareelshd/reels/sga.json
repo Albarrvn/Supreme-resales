@@ -1,0 +1,58 @@
+{
+"title": "Shai",
+"no": "01",
+"lines": [
+{
+"id": "s1",
+"text": "32,7 puntos por partido. Máximo anotador de la liga.",
+"say": "Treinta y dos coma siete puntos por partido. Máximo anotador de la liga.",
+"scene": {
+"type": "num",
+"big": "32,7",
+"note": "puntos por partido · 2024–25"
+}
+},
+{
+"id": "s2",
+"text": "Temporada 2024-25. Shai Gilgeous-Alexander. Thunder.",
+"say": "Temporada dos mil veinticuatro, veinticinco. Shai Gilgeous Alexander. Thunder.",
+"scene": {
+"type": "caption",
+"rows": [
+"2024–25",
+"Shai Gilgeous-",
+"Alexander"
+]
+}
+},
+{
+"id": "s3",
+"text": "Máximo anotador. MVP. Y campeón.",
+"say": "Máximo anotador. MVP. Y campeón.",
+"scene": {
+"type": "cells",
+"n": 3,
+"label": "anotador · MVP · anillo"
+}
+},
+{
+"id": "s4",
+"text": "Y MVP de las Finales. Todo en un solo año.",
+"say": "Y MVP de las Finales. Todo en un solo año.",
+"scene": {
+"type": "exception",
+"big": "MVP",
+"note": "de las Finales · 2025"
+},
+"pause": true
+},
+{
+"id": "s5",
+"text": "¿Es el mejor jugador del mundo ahora mismo? Comenta.",
+"say": "¿Es el mejor jugador del mundo ahora mismo? Comenta.",
+"scene": {
+"type": "question"
+}
+}
+]
+}

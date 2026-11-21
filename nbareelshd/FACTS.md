@@ -1,6 +1,10 @@
-# Facts used in the reels (check before posting; records can change)
-- Klay Thompson, 23 Jan 2015 vs Sacramento: 37 points in the 3rd quarter, 13/13 FG, 9/9 3PT — NBA record for points in a single quarter.
-- Kobe Bryant, 22 Jan 2006 vs Toronto: 81 points (26 in the 1st half, 55 in the 2nd); the Lakers trailed by 18 in the 3rd quarter. Second-highest total in NBA history.
-- Wilt Chamberlain, 2 Mar 1962 vs Knicks (Hershey, PA): 100 points. Not televised; no video exists, only partial radio audio from the 4th quarter.
-- Stephen Curry: 286 threes in 2014-15 (then the record), 402 in 2015-16 (+116, +40.6 %).
-- 2016 Finals, Game 7: LeBron James blocks Andre Iguodala with ~1:50 left and the score 89–89; Cleveland became the first team to come back from 1–3 in the Finals.
+# Facts used in the reels (verify before posting; checked against knowledge up to mid-2025, records can change)
+- SGA, 2024-25: 32.7 ppg (scoring title), regular-season MVP, NBA champion with OKC and Finals MVP (2025).
+- Nikola Jokić: drafted 41st in 2014 (the TV broadcast was in a commercial break); MVP 2021, 2022, 2024; champion and Finals MVP 2023.
+- Luka Dončić: 73 points vs Atlanta, 26 Jan 2024; only Wilt Chamberlain (100, 78) and Kobe Bryant (81) have scored more in a game. Traded to the Lakers in Feb 2025.
+- Giannis Antetokounmpo: 50 points in Game 6 of the 2021 Finals vs Phoenix (20 Jul 2021); sold goods on the streets of Athens as a youth; drafted 15th in 2013; Milwaukee's previous title was 1971.
+- Victor Wembanyama: #1 pick 2023; listed over 2.20 m; led the league in blocks as a rookie (2023-24); unanimous Rookie of the Year 2024.
+- Anthony Edwards, 2024-25: 320 threes, most in the league; Western Conference Finals in 2024 and 2025; 23 years old that season.
+- Jayson Tatum: 51 points in Game 7 vs Philadelphia (14 May 2023), most in a Game 7 in NBA history; champion 2024, Boston's 18th title (league record).
+- Jaylen Brown: 5-year, $304M supermax (2023), the largest contract in NBA history at the time; Boston won the 2024 Finals 4–1 vs Dallas; Brown was Finals MVP.
+- LeBron James: chase-down block on Andre Iguodala, Game 7 of the 2016 Finals, ~1:50 left at 89–89; Cleveland the first team to come back from 1–3 in the Finals.

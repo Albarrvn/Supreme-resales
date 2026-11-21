@@ -8,7 +8,7 @@ m = ChatterboxMultilingualTTS.from_pretrained(device='cpu')
 def trim(y, sr, thr=.02):
     a = np.abs(y); idx = np.where(a > thr * a.max())[0]
     s, e = max(0, idx[0] - int(.03 * sr)), min(len(y), idx[-1] + int(.12 * sr)); return y[s:e]
-for reel in sys.argv[1:] or ['klay', 'kobe', 'wilt', 'curry', 'lebron']:
+for reel in sys.argv[1:] or ['sga', 'jokic', 'luka', 'giannis', 'wemby', 'edwards', 'tatum', 'brown', 'lebron']:
     d = os.path.join(HERE, 'voices', reel); os.makedirs(d, exist_ok=True)
     durf = os.path.join(d, 'dur.json'); dur = json.load(open(durf)) if os.path.exists(durf) else {}
     for L in json.load(open(os.path.join(HERE, 'reels', reel + '.json')))['lines']:

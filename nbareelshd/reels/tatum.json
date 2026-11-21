@@ -1,0 +1,58 @@
+{
+"title": "Tatum",
+"no": "07",
+"lines": [
+{
+"id": "t1",
+"text": "51 puntos en un juego 7. Nadie había anotado tanto.",
+"say": "Cincuenta y un puntos en un juego siete. Nadie había anotado tanto.",
+"scene": {
+"type": "num",
+"big": "51",
+"note": "puntos · juego 7"
+}
+},
+{
+"id": "t2",
+"text": "14 de mayo de 2023. Jayson Tatum contra los 76ers.",
+"say": "Catorce de mayo de dos mil veintitrés. Jayson Tatum contra los setenta y seis.",
+"scene": {
+"type": "caption",
+"rows": [
+"14.05.2023",
+"Jayson Tatum",
+"vs 76ers"
+]
+}
+},
+{
+"id": "t3",
+"text": "Un año después, campeón con Boston.",
+"say": "Un año después, campeón con Boston.",
+"scene": {
+"type": "cells",
+"n": 18,
+"label": "títulos de Boston"
+}
+},
+{
+"id": "t4",
+"text": "Título número 18. Ningún equipo tiene más.",
+"say": "Título número dieciocho. Ningún equipo tiene más.",
+"scene": {
+"type": "exception",
+"big": "18",
+"note": "títulos · récord de la liga"
+},
+"pause": true
+},
+{
+"id": "t5",
+"text": "¿Tatum o Jaylen Brown? Comenta.",
+"say": "¿Tatum o Jaylen Brown? Comenta.",
+"scene": {
+"type": "question"
+}
+}
+]
+}
