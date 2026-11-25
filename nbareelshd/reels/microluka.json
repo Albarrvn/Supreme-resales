@@ -1,0 +1,78 @@
+{
+"title": "Micro Luka",
+"no": "M1",
+"lines": [
+{
+"id": "m0",
+"text": "Dallas traspasó a Luka Doncic. Y nadie lo vio venir.",
+"say": "¡Dallas traspasó a Luka Dóncich! ¡Y nadie lo vio venir!",
+"scene": {
+"type": "term",
+"cmd": "¡TRASPÁSALO!"
+}
+},
+{
+"id": "m1",
+"text": "Debutó como profesional a los 16.",
+"say": "¡Debutó como profesional a los dieciséis!",
+"scene": {
+"type": "crayon",
+"cmd": "¡DEBUTA!"
+}
+},
+{
+"id": "m2",
+"text": "A los 19, MVP de la Euroliga. El más joven de la historia.",
+"say": "¡A los diecinueve, MVP de la Euroliga! ¡El más joven de la historia!",
+"scene": {
+"type": "riso",
+"cmd": "¡GANA EL MVP!"
+}
+},
+{
+"id": "m3",
+"text": "En la NBA: 60 puntos, 21 rebotes y 10 asistencias.",
+"say": "¡En la ene be a! ¡sesenta puntos, veintiún rebotes y diez asistencias!",
+"scene": {
+"type": "pixel",
+"cmd": "¡TRIPLE-DOBLE!"
+}
+},
+{
+"id": "m4",
+"text": "Luego, 73 puntos en un solo partido.",
+"say": "¡Luego, setenta y tres puntos en un solo partido!",
+"scene": {
+"type": "blue",
+"cmd": "¡ANOTA 73!"
+}
+},
+{
+"id": "m5",
+"text": "Solo Wilt y Kobe anotaron más.",
+"say": "¡Solo Wilt y Kobe anotaron más!",
+"scene": {
+"type": "swiss",
+"cmd": "¡SUPÉRALOS!"
+}
+},
+{
+"id": "m6",
+"text": "Y aun así, lo cambiaron por Anthony Davis.",
+"say": "¡Y aun así, lo cambiaron por Anthony Davis!",
+"scene": {
+"type": "term2",
+"cmd": "¡TRASPÁSALO!"
+}
+},
+{
+"id": "m7",
+"text": "¿El traspaso más loco de la historia? Comenta LUKA.",
+"say": "¿El traspaso más loco de la historia? ¡Comenta LUKA!",
+"scene": {
+"type": "end",
+"cmd": ""
+}
+}
+]
+}
