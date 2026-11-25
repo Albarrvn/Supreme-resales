@@ -1,8 +1,8 @@
-hook | Hay cuatro formas de soldar. Y una es tan difícil, que la llaman el arte de la soldadura. ¿Cuál es?
-e | Uno, electrodo. La varilla trae su propio forro, así que suelda con viento, en la calle, y sobre metal oxidado.
-m | Dos, MIG. Un alambre sale solo de la pistola, protegido por gas. Rápido, limpio, y el más fácil de aprender.
-f | Tres, tubular. Es alambre como el MIG, pero hueco y relleno de fundente. No necesita gas, así que también aguanta el viento.
-t | Y cuatro, TIG. Una mano sostiene la antorcha, la otra mete la varilla, y el pie controla la corriente.
-t2 | Es lenta, pero el cordón sale perfecto, como monedas apiladas. Por eso le dicen el arte de la soldadura.
-v | Electrodo para la calle, MIG para el taller, tubular para estructuras, y TIG para acero inoxidable y aluminio.
-cierre | ¿Cuál dominas tú? Comenta: electrodo, MIG, tubular o TIG.
+hook | ¡Acho! Hay cuatro maneras de soldar… y una es tan difícil que le dicen el arte de la soldadura. ¿Tú sabes cuál es?
+e | La primera: electrodo. La varilla trae su propio forro, así que suelda con viento, en la calle, y hasta encima de hierro mohoso.
+m | La segunda: MIG. El alambre sale solito de la pistola, protegido por gas. Rápida, limpia, y la más fácil de aprender.
+f | La tercera: tubular. Es alambre igualito que la MIG, pero hueco y relleno de fundente. No necesita gas, así que el viento no le hace na’.
+t | Y la cuarta: TIG. Una mano aguanta la antorcha, la otra mete la varilla, y el pie controla la corriente. ¡Las dos manos y un pie, mano!
+t2 | Es lenta, pero el cordón sale brutal, como moneditas apiladas. Por eso le dicen el arte de la soldadura.
+v | Electrodo pa’ la calle, MIG pa’l taller, tubular pa’ estructuras, y TIG pa’l inoxidable y el aluminio.
+cierre | ¿Y tú, cuál dominas? Escríbelo en los comentarios: electrodo, MIG, tubular o TIG. ¡Wepa!

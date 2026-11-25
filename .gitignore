@@ -37,3 +37,6 @@ __pycache__/
 reels/_lemo/chain.log
 reels/_lemo/redo.log
 reels/*/dev/
+reels/*/st_*.jpg
+reels/*/sin_cierre.mp4
+reels/*/*.part
