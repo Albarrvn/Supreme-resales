@@ -4,8 +4,10 @@ set -e
 LIB=${LIB:-/root/lemo-opuscar}; export LIB
 HERE=$(cd "$(dirname "$0")" && pwd)
 mkdir -p "$HERE/voices" "$HERE/out"
-# narration 12 % faster for the frenzy (pitch kept), durations re-measured
-for f in "$HERE/../voices/microluka/"*.wav; do ffmpeg -v error -y -i "$f" -filter:a atempo=1.12 "$HERE/voices/$(basename "$f")"; done
+# VOICE=microluka (cloned, sped up 12 %) or VOICE=microluka_el (ElevenLabs take, already fast); durations re-measured
+VOICE=${VOICE:-microluka_el}; TEMPO=${TEMPO:-$([ "$VOICE" = microluka ] && echo 1.12 || echo 1.0)}
+rm -f "$HERE/voices/"*.wav
+for f in "$HERE/../voices/$VOICE/"*.wav; do ffmpeg -v error -y -i "$f" -filter:a atempo=$TEMPO "$HERE/voices/$(basename "$f")"; done
 python3 -c "import json,glob,os,subprocess as s; print(json.dumps({os.path.basename(f)[:-4]: float(s.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',f])) for f in glob.glob('$HERE/voices/*.wav')}))" > "$HERE/voices/dur.json"
 cp "$HERE/../reels/microluka.json" "$HERE/reel.json"
 cd "$LIB"

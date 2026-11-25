@@ -56,6 +56,8 @@ games.forEach((l, i) => {
   })[l.scene.type]();
 });
 ev(END.dark, 'section', { name: 'dark' }); ev(END.v - .05, 'finalstab'); ev(END.v, 'voice', { id: END.id }); ev(END.v, 'crowd');
+const CARDS = END.scene.cards || [[.9, 'COMENTA "LUKA"']];
+CARDS.forEach(([c]) => ev(END.v + c, 'stab'));
 ev(DUR - .1, 'section', { name: 'end' });
 for (const l of games) if (l.speed !== undefined) BEATS.push([l.speed, 136]);
 window.TEMPO = [[0, 118], ...BEATS];
@@ -284,8 +286,11 @@ function render(t) {
       outlined(g, '¿EL TRASPASO', 0, -60, { font: '108px Titan', lw: 18, fill: P.white, shadow: P.mag, sd: [6, 10] });
       outlined(g, 'MÁS LOCO?', 0, 70, { font: '140px Titan', lw: 20, fill: P.gold, shadow: P.mag, sd: [6, 10] });
       g.restore();
-      if (lt > .9) { const k2 = lt < 1.02 ? lerp(1.8, 1, eo((lt - .9) / .12)) : 1; g.save(); g.translate(W / 2, 1000); g.scale(k2, k2); g.fillStyle = P.gold; g.strokeStyle = P.ink; g.lineWidth = 10; g.beginPath(); g.roundRect(-380, -90, 760, 150, 40); g.fill(); g.stroke(); outlined(g, 'COMENTA "LUKA"', 0, 22, { font: '90px Titan', lw: 14, fill: P.white, stroke: P.ink }); g.restore(); }
-      outlined(g, '@NBAreelsHD · SÍGUENOS', W / 2, 1180, { font: '56px Lilita', lw: 10, fill: P.white, stroke: P.ink });
+      // end cards slam in on the words that say them (times relative to the last line, from reel.json)
+      CARDS.forEach(([c, txt], i) => { if (lt <= c) return; const k2 = lt < c + .12 ? lerp(1.8, 1, eo((lt - c) / .12)) : 1, y = 1000 + i * 190;
+        g.save(); g.translate(W / 2, y); g.scale(k2, k2); g.rotate(i ? .04 : -.03); g.fillStyle = i ? P.mag : P.gold; g.strokeStyle = P.ink; g.lineWidth = 10; g.beginPath(); g.roundRect(-400, -90, 800, 150, 40); g.fill(); g.stroke();
+        outlined(g, txt, 0, 22, { font: '84px Titan', lw: 14, fill: P.white, stroke: P.ink }); g.restore(); });
+      outlined(g, '@NBAreelsHD · SÍGUENOS', W / 2, 1000 + CARDS.length * 190, { font: '56px Lilita', lw: 10, fill: P.white, stroke: P.ink });
     }
   } else if (!l) {
     // stage between games: TV shows a sunburst test card; SPEED UP banner
