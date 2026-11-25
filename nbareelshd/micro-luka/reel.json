@@ -67,18 +67,18 @@
 },
 {
 "id": "m7",
-"text": "¿El traspaso más loco de la historia? Déjame saber en los comentarios. Luka, la cabra.",
+"text": "¿El traspaso más loco de la historia? Luka, la cabra.",
 "say": "¿El traspaso más loco de la historia? ¡Comenta LUKA!",
 "scene": {
 "type": "end",
 "cmd": "",
 "cards": [
 [
-2.2,
+1.85,
 "COMENTA ABAJO"
 ],
 [
-3.65,
+2.4,
 "LUKA, LA CABRA"
 ]
 ]

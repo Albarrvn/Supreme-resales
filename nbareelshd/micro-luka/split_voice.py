@@ -6,7 +6,7 @@ n = lambda s: unicodedata.normalize('NFD', s.lower()).encode('ascii', 'ignore').
 # first word of each line, found in order (the "a" after "16," and the "y" after "más" split the two merged sentences)
 starts = ['dallas', 'debuto', 'a', 'en', 'luego', 'solo', 'y', 'el']; idx = []; j = 0
 for k, s in enumerate(starts):
-    prev = {'a': '16', 'y': 'mas', 'solo': 'partido'}.get(s)
+    prev = {'a': '16', 'y': 'mas', 'solo': 'partido', 'en': 'historia'}.get(s)
     while not (n(W[j][0]) == s and (prev is None or n(W[j - 1][0]) == prev)): j += 1
     idx.append(j); j += 1
 idx.append(len(W)); dur = {}
