@@ -1,0 +1,84 @@
+{
+"title": "Micro Giannis",
+"no": "M2",
+"lines": [
+{
+"id": "m0",
+"text": "Los Bucks traspasaron a Giannis a Miami. Y se acabó una era.",
+"say": "¡Los Bucks traspasaron a Yanis a Miami! ¡Y se acabó una era!",
+"scene": {
+"type": "term",
+"cmd": "¡TRASPÁSALO!"
+}
+},
+{
+"id": "m1",
+"text": "Lo eligieron en el pick 15 de 2013.",
+"say": "¡Lo eligieron en el pick quince de dos mil trece!",
+"scene": {
+"type": "crayon",
+"cmd": "¡ELÍGELO!"
+}
+},
+{
+"id": "m2",
+"text": "Dos MVP seguidos y Defensor del Año.",
+"say": "¡Dos MVP seguidos y Defensor del Año!",
+"scene": {
+"type": "riso",
+"cmd": "¡GANA EL MVP!"
+}
+},
+{
+"id": "m3",
+"text": "En 2021, 50 puntos para cerrar las Finales. Campeón.",
+"say": "¡En dos mil veintiuno, cincuenta puntos para cerrar las Finales! ¡Campeón!",
+"scene": {
+"type": "pixel",
+"cmd": "¡ANOTA 50!"
+}
+},
+{
+"id": "m4",
+"text": "13 años y 895 partidos con los Bucks.",
+"say": "¡Trece años y ochocientos noventa y cinco partidos con los Bucks!",
+"scene": {
+"type": "blue",
+"cmd": "¡AGUANTA!"
+}
+},
+{
+"id": "m5",
+"text": "Pero en su última temporada jugó solo 36 partidos.",
+"say": "¡Pero en su última temporada jugó solo treinta y seis partidos!",
+"scene": {
+"type": "swiss",
+"cmd": "¡JUEGA!"
+}
+},
+{
+"id": "m6",
+"text": "Miami dio cuatro jugadores y tres primeras rondas.",
+"say": "¡Miami dio cuatro jugadores y tres primeras rondas!",
+"scene": {
+"type": "term2",
+"cmd": "¡TRASPÁSALO!"
+}
+},
+{
+"id": "m7",
+"text": "¿Quién ganó el traspaso: Miami o Milwaukee? Comenta.",
+"say": "¡¿Quién ganó el traspaso! Miami o Milwaukee? ¡Comenta!",
+"scene": {
+"type": "end",
+"cmd": "",
+"cards": [
+[
+0.9,
+"COMENTA: MIA o MIL"
+]
+]
+}
+}
+]
+}

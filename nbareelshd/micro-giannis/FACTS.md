@@ -1,0 +1,5 @@
+# Facts (checked 2026-11-26)
+- Trade agreed 22 Jun 2026 (reported late Monday), official 6 Jul 2026: Giannis + Bobby Portis to Miami; Bucks get Tyler Herro, Kel'el Ware, Jaime Jaquez Jr., Kasparas Jakučionis, three 1st-round picks (2026 No. 13, 2031, 2033), a 2030 1st-round swap and a 2033 2nd. — NBC Miami, SI, Yahoo Sports.
+- Drafted No. 15 in 2013; 13 years, 895 games with the Bucks; two consecutive MVPs (2019, 2020) + Defensive Player of the Year (2020); 2021 title with 50 points in the clinching Game 6. — NBC Miami, Yahoo Sports.
+- 2025-26: 36 games (injuries), Bucks 32-50. — NBC Miami, Yahoo Sports.
+Sources: https://www.nbcmiami.com/nba/heat-acquire-giannis-antetokounmpo-in-blockbuster-trade-with-bucks/3755910/ · https://www.si.com/nba/heat/onsi/miami-heat-officially-complete-blockbuster-giannis-antetokounmpo-trade-01kww9qqm5z1 · https://sports.yahoo.com/nba/breaking-news/article/giannis-antetokounmpo-traded-to-heat-in-blockbuster-deal-that-spells-the-end-of-an-era-for-bucks-035417099.html
