@@ -1,9 +1,9 @@
-hook | Acho, ojo La TIG es la soldadura m�s difícil que hay… pero el que la domina, se cotiza. Te la explico pieza por pieza.
-tung | Primero: el tungsteno. Esa puntita gris no se derrite, no se gasta. Ahí nace el arco. Y se afila a lo largo, como un l�piz, nunca d�ndole vueltas.
-gas | Segundo: el gas. Argón puro, mano. Sale por la copa de cer�mica y le hace una burbuja al charco pa’ que el aire no lo dañe.
+hook | Ojo. La TIG es la soldadura más difícil que hay… pero el que la domina, se cotiza. Te la explico pieza por pieza.
+tung | Primero: el tungsteno. Esa puntita gris no se derrite, no se gasta. Ahí nace el arco. Y se afila a lo largo, como un lápiz, nunca dándole vueltas.
+gas | Segundo: el gas. Argón puro, mano. Sale por la copa de cerámica y le hace una burbuja al charco pa’ que el aire no lo dañe.
 varilla | Tercero: la varilla. Con la otra mano la vas metiendo en el charco… mete, saca, mete, saca. Y eso es lo que hace las moneditas.
-pedal | Cuarto: el pedal. Pisas m�s, m�s corriente. Sueltas, menos. Tú controlas el calor con el pie, como acelerando un carro.
-acdc | Y aquí est� el truco: pa’l acero y el inoxidable, corriente directa. Pa’l aluminio, alterna, que va limpiando el óxido mientras suelda.
-error | �El error de todo principiante? Tocar el charco con el tungsteno. Pum Se contamina, el arco se pone loco, y pa’ afilar otra vez.
-limpio | Y lo m�s importante: limpieza. La TIG no perdona na’. Metal sucio, grasa o pintura, y el cordón te sale lleno de poros.
-cierre | Dos manos, un pie y mucha paciencia. �Tú te atreves con la TIG o te quedas con el electrodo? Déjamelo en los comentarios. Wepa
+pedal | Cuarto: el pedal. Pisas más, más corriente. Sueltas, menos. Tú controlas el calor con el pie, como acelerando un carro.
+acdc | Y aquí está el truco: pa’l acero y el inoxidable, corriente directa. Pa’l aluminio, alterna, que va limpiando el óxido mientras suelda.
+error | ¿El error de todo principiante? Tocar el charco con el tungsteno. Pum. Se contamina, el arco se pone loco, y pa’ afilar otra vez.
+limpio | Y lo más importante: limpieza. La TIG no perdona na’. Metal sucio, grasa o pintura, y el cordón te sale lleno de poros.
+cierre | Dos manos, un pie y mucha paciencia. ¿Tú te atreves con la TIG o te quedas con el electrodo? Déjamelo en los comentarios. Estamos activos.

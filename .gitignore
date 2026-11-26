@@ -40,3 +40,4 @@ reels/*/dev/
 reels/*/st_*.jpg
 reels/*/sin_cierre.mp4
 reels/*/*.part
+reels/*/finish.sh
