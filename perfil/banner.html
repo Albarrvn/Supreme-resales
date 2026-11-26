@@ -1,0 +1,57 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>@font-face{font-family:P;src:url(poppins900.ttf);font-weight:900}html,body{margin:0;width:2560px;height:1440px;overflow:hidden;background:#0B1C22}svg{display:block}text{font-family:P;font-weight:900}</style></head>
+<body>
+<svg id="s" xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440"></svg>
+<script src="bust.js"></script><script>
+// YouTube banner 2560x1440. Mobile-safe area: x 507-2053, y 508-931 (name, tagline and face live there).
+const rnd = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const star = (x, y, r, f, sw = 7) => { let p = ''; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; p += (i ? 'L' : 'M') + (x + Math.cos(a) * rr).toFixed(1) + ' ' + (y + Math.sin(a) * rr).toFixed(1); } return `<path d="${p}Z" fill="${f}" stroke="${O}" stroke-width="${sw}" stroke-linejoin="round"/>`; };
+const cv = document.createElement('canvas').getContext('2d');
+const tw = (t, n) => { cv.font = `900 ${n}px P`; return cv.measureText(t).width; };
+const fit = (t, n, w) => { while (tw(t, n) > w) n -= 4; return n; };
+const txt = (x, y, t, n, fill, sw = 18) => `<text x="${x}" y="${y}" font-size="${n}" fill="${fill}" stroke="${O}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke">${t}</text>`;
+function draw() {
+  let s = `<defs><radialGradient id="bg" cx="45%" cy="50%" r="65%"><stop offset="0" stop-color="#1F7A8C"/><stop offset=".55" stop-color="#14505C"/><stop offset="1" stop-color="#0B1C22"/></radialGradient>
+  <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="#9FE8FF" stop-opacity=".8"/><stop offset="1" stop-color="#38E1FF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="warm" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFE066" stop-opacity=".9"/><stop offset="1" stop-color="#FF8C2A" stop-opacity="0"/></radialGradient></defs>
+  <rect width="2560" height="1440" fill="url(#bg)"/>`;
+  for (let i = 0; i < 140; i++) s += `<circle cx="${rnd(i) * 2560}" cy="${rnd(i + 300) * 1440}" r="${4 + rnd(i + 99) * 10}" fill="#fff" opacity="${.3 + rnd(i + 7) * .5}"/>`;
+  // snow ground
+  s += `<path d="M0 1300 Q400 1230 800 1290 Q1280 1350 1760 1280 Q2200 1220 2560 1300 L2560 1440 L0 1440Z" fill="#E9F4F7" stroke="${O}" stroke-width="8"/>`;
+  // string lights across the top
+  const LC = ['#E63946', '#FFE066', '#2ECC71', '#38E1FF', '#FF8C2A'];
+  for (const [x0, x1] of [[0, 1280], [1280, 2560]]) { const mx = (x0 + x1) / 2; s += `<path d="M${x0} 380 Q${mx} 560 ${x1} 380" fill="none" stroke="${O}" stroke-width="7"/>`;
+    for (let i = 0; i < 11; i++) { const u = (i + .5) / 11, x = (1 - u) ** 2 * x0 + 2 * u * (1 - u) * mx + u * u * x1, y = (1 - u) ** 2 * 380 + 2 * u * (1 - u) * 560 + u * u * 380, c = LC[(i + (x0 ? 2 : 0)) % 5];
+      s += `<circle cx="${x}" cy="${y + 30}" r="44" fill="${c}" opacity=".25"/><rect x="${x - 11}" y="${y}" width="22" height="18" rx="4" fill="#3B4252" stroke="${O}" stroke-width="5"/><ellipse cx="${x}" cy="${y + 36}" rx="18" ry="24" fill="${c}" stroke="${O}" stroke-width="6"/><ellipse cx="${x - 6}" cy="${y + 28}" rx="5" ry="8" fill="#fff" opacity=".7"/>`; } }
+  // right: Christmas tree made of welded beads (stacked rows of "dimes"), spark-star on top
+  const TX = 2290; s += `<rect x="${TX - 30}" y="1180" width="60" height="110" fill="#7A4A2A" stroke="${O}" stroke-width="7"/>`;
+  for (let r = 0; r < 9; r++) { const y = 1150 - r * 62, w = 300 - r * 30; for (let x = -w; x <= w; x += 38) s += `<ellipse cx="${TX + x}" cy="${y}" rx="38" ry="34" fill="${r % 2 ? '#2E8B57' : '#38B26A'}" stroke="${O}" stroke-width="5"/>`;
+    s += `<path d="M${TX - w + 10} ${y - 4} Q${TX} ${y + 26} ${TX + w - 10} ${y - 4}" fill="none" stroke="#38E1FF" stroke-width="6" opacity=".8"/>`; }
+  for (let i = 0; i < 14; i++) { const r = Math.floor(rnd(i + 40) * 8), y = 1150 - r * 62, w = 300 - r * 30; s += `<circle cx="${TX + (rnd(i + 60) * 2 - 1) * (w - 30)}" cy="${y + 10}" r="16" fill="${LC[i % 5]}" stroke="${O}" stroke-width="5"/>`; }
+  s += `<circle cx="${TX}" cy="580" r="140" fill="url(#warm)"/><circle cx="${TX}" cy="580" r="100" fill="url(#glow)"/>` + star(TX, 580, 80, '#FFE066', 8);
+  for (let i = 0; i < 8; i++) { const a = i * .8, r = 130 + rnd(i) * 60; s += star(TX + Math.cos(a) * r, 580 + Math.sin(a) * r * .8, 10 + rnd(i + 3) * 8, i % 2 ? '#FFE066' : '#fff', 5); }
+  // gifts under the tree
+  [[2050, 1260, 150, 120, '#E63946'], [2520, 1270, 130, 100, '#3E6DB5']].forEach(([x, y, w, h, c]) => s += `<g stroke="${O}" stroke-width="7"><rect x="${x - w / 2}" y="${y - h}" width="${w}" height="${h}" rx="10" fill="${c}"/><rect x="${x - 14}" y="${y - h}" width="28" height="${h}" fill="#FFE066"/><path d="M${x} ${y - h} q-50 -60 -66 -10 q20 20 66 10Z M${x} ${y - h} q50 -60 66 -10 q-20 20 -66 10Z" fill="#FFE066"/></g>`);
+  // left: snowman welder with a holder throwing star sparks
+  const SX = 260; s += `<g stroke="${O}" stroke-width="8"><circle cx="${SX}" cy="1150" r="150" fill="#fff"/><circle cx="${SX}" cy="930" r="110" fill="#fff"/><circle cx="${SX}" cy="760" r="84" fill="#fff"/>
+    <path d="M${SX - 100} 690 Q${SX - 100} 600 ${SX} 600 Q${SX + 100} 600 ${SX + 100} 690 Q${SX} 670 ${SX - 100} 690Z" fill="#23262E"/><rect x="${SX - 56}" y="624" width="112" height="34" rx="14" fill="#38E1FF" stroke-width="5"/>
+    <circle cx="${SX - 30}" cy="750" r="10" fill="${O}"/><circle cx="${SX + 30}" cy="750" r="10" fill="${O}"/><path d="M${SX} 770 L${SX + 60} 784 L${SX} 790Z" fill="#FF8C2A" stroke-width="5"/>
+    <path d="M${SX - 80} 830 Q${SX} 870 ${SX + 80} 830 L${SX + 90} 870 Q${SX} 910 ${SX - 90} 870Z" fill="#E63946"/>
+    ${[880, 950, 1020].map(y => `<circle cx="${SX}" cy="${y}" r="12" fill="${O}"/>`).join('')}
+    <path d="M${SX + 100} 920 L${SX + 220} 840" stroke="#7A4A2A" stroke-width="12" stroke-linecap="round"/>
+    <rect x="${SX + 200}" y="790" width="30" height="80" rx="8" fill="#F5C518" transform="rotate(50 ${SX + 215} 830)"/><path d="M${SX + 250} 850 L${SX + 300} 900" stroke="#7E8389" stroke-width="10" stroke-linecap="round"/></g>`;
+  s += `<circle cx="${SX + 305}" cy="905" r="90" fill="url(#glow)"/>`; for (let i = 0; i < 7; i++) { const a = -1.4 + i * .45, r = 70 + rnd(i + 20) * 70; s += star(SX + 305 + Math.cos(a) * r, 905 + Math.sin(a) * r, 9 + rnd(i) * 9, i % 2 ? '#FFE066' : '#fff', 5); }
+  // holly corners (safe-area edges)
+  // centre (mobile-safe): the welder's face + channel name + tagline
+  s += `<g transform="translate(560 488) scale(.56)">${bustSVG()}<g stroke="none"><rect x="154" y="1060" width="772" height="440" fill="#E8762B"/><rect x="332" y="1060" width="416" height="440" fill="#3E6DB5"/><rect x="402" y="1060" width="276" height="440" fill="#C98E5A"/></g><path d="M150 1076 L150 1500 M930 1076 L930 1500 M330 1076 L330 1500 M750 1076 L750 1500 M400 1076 L400 1500 M680 1076 L680 1500 M360 1076 L360 1500 M720 1076 L720 1500" stroke="${O}" stroke-width="8"/></g>`;
+  s += `<g transform="translate(1270 455) rotate(-3)"><rect x="-90" y="-46" width="400" height="84" rx="42" fill="#E63946" stroke="${O}" stroke-width="7"/>${txt(110, 18, 'FELIZ NAVIDAD', 46, '#fff', 8).replace('<text', '<text text-anchor="middle"')}</g>`;
+  const TL = 1180, TW = 2040 - TL;
+  s += txt(TL, 705, 'SOLDADURA', fit('SOLDADURA', 210, TW), '#FFE066', 22) + txt(TL, 838, 'ANIMADA', fit('ANIMADA', 150, TW), '#fff', 20);
+  const tag = 'APRENDE A SOLDAR · CORDÓN POR CORDÓN', tn = fit(tag, 44, TW - 60), w = tw(tag, tn) + 60;
+  s += `<rect x="${TL}" y="850" width="${w}" height="${tn * 1.7}" rx="${tn * .85}" fill="#38E1FF" stroke="${O}" stroke-width="7"/><text x="${TL + w / 2}" y="${850 + tn * 1.17}" font-size="${tn}" fill="${O}" text-anchor="middle">${tag}</text>`;
+  s += `<ellipse cx="862" cy="1330" rx="340" ry="70" fill="#E9F4F7" stroke="${O}" stroke-width="8"/><rect x="530" y="1335" width="664" height="110" fill="#E9F4F7"/>`;
+  document.getElementById('s').innerHTML = s;
+}
+document.fonts.load('900 100px P').then(draw);
+</script></body></html>
