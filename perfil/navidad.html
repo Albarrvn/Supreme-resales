@@ -1,0 +1,71 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;width:1080px;height:1080px;overflow:hidden;background:#0B1C22}svg{display:block}</style></head>
+<body>
+<svg id="s" xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080"></svg>
+<script>
+// Foto de perfil navideña: el soldador (estilo muñequitos de los reels) con gorro de Santa sobre la careta
+const O = '#1E1B3A', SK = '#8D5A3B', SK2 = '#7A4C31', BE = '#2A1D17';
+const rnd = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+let s = `<defs>
+<radialGradient id="bg" cx="50%" cy="42%" r="70%"><stop offset="0" stop-color="#1F7A8C"/><stop offset=".55" stop-color="#14505C"/><stop offset="1" stop-color="#0B1C22"/></radialGradient>
+<radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset=".3" stop-color="#9FE8FF" stop-opacity=".8"/><stop offset="1" stop-color="#38E1FF" stop-opacity="0"/></radialGradient>
+<radialGradient id="warm" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFE066" stop-opacity=".9"/><stop offset="1" stop-color="#FF8C2A" stop-opacity="0"/></radialGradient>
+</defs><rect width="1080" height="1080" fill="url(#bg)"/>`;
+// snowflakes
+for (let i = 0; i < 46; i++) { const x = rnd(i) * 1080, y = rnd(i + 50) * 1080, r = 4 + rnd(i + 99) * 9; s += `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity="${.35 + rnd(i + 7) * .5}"/>`; }
+// string lights arc across the top
+let d = 'M40 170 Q540 330 1040 170'; s += `<path d="${d}" fill="none" stroke="${O}" stroke-width="6"/>`;
+const LC = ['#E63946', '#FFE066', '#2ECC71', '#38E1FF', '#FF8C2A'];
+for (let i = 0; i < 13; i++) { const u = (i + .5) / 13, x = (1 - u) * (1 - u) * 40 + 2 * u * (1 - u) * 540 + u * u * 1040, y = (1 - u) * (1 - u) * 170 + 2 * u * (1 - u) * 330 + u * u * 170, c = LC[i % 5];
+  s += `<circle cx="${x}" cy="${y + 26}" r="36" fill="${c}" opacity=".25"/><rect x="${x - 9}" y="${y}" width="18" height="16" rx="3" fill="#3B4252" stroke="${O}" stroke-width="4"/><ellipse cx="${x}" cy="${y + 30}" rx="15" ry="20" fill="${c}" stroke="${O}" stroke-width="5"/><ellipse cx="${x - 5}" cy="${y + 24}" rx="4" ry="7" fill="#fff" opacity=".7"/>`; }
+// body: orange shirt, blue overall straps, brown apron
+s += `<g stroke="${O}" stroke-width="8" stroke-linejoin="round">
+<path d="M150 1080 Q170 860 330 820 L750 820 Q910 860 930 1080Z" fill="#E8762B"/>
+<path d="M330 1080 L350 860 L730 860 L750 1080Z" fill="#3E6DB5"/>
+<path d="M400 1080 L410 920 L670 920 L680 1080Z" fill="#C98E5A"/>
+<rect x="470" y="950" width="70" height="44" rx="8" fill="#fff" stroke-width="6"/><circle cx="492" cy="972" r="9" fill="#3E6DB5" stroke="none"/><rect x="508" y="966" width="22" height="8" rx="3" fill="#E63946" stroke="none"/>
+<path d="M380 860 L360 1080 M700 860 L720 1080" fill="none" stroke-width="8"/>
+<path d="M455 760 L455 830 Q540 870 625 830 L625 760Z" fill="${SK2}"/>
+</g>`;
+// head
+s += `<g stroke="${O}" stroke-width="8" stroke-linejoin="round">
+<ellipse cx="318" cy="590" rx="44" ry="58" fill="${SK}"/><ellipse cx="762" cy="590" rx="44" ry="58" fill="${SK}"/>
+<path d="M330 520 Q330 330 540 330 Q750 330 750 520 L750 620 Q750 800 540 812 Q330 800 330 620Z" fill="${SK}"/>
+<path d="M330 600 Q340 700 400 760 Q470 820 540 822 Q610 820 680 760 Q740 700 750 600 Q720 650 690 640 Q640 730 540 732 Q440 730 390 640 Q360 650 330 600Z" fill="${BE}"/>
+<path d="M440 640 Q490 606 540 628 Q590 606 640 640 Q600 650 540 646 Q480 650 440 640Z" fill="${BE}"/>
+<path d="M455 664 Q540 742 625 664 Q540 690 455 664Z" fill="#fff"/>
+<path d="M466 674 Q540 728 614 674" fill="none" stroke-width="5"/>
+<path d="M512 560 Q540 600 568 560" fill="none" stroke="${SK2}" stroke-width="10" stroke-linecap="round"/>
+<ellipse cx="452" cy="520" rx="46" ry="50" fill="#fff"/><ellipse cx="628" cy="520" rx="46" ry="50" fill="#fff"/>
+<circle cx="458" cy="526" r="24" fill="#6B3E1F"/><circle cx="622" cy="526" r="24" fill="#6B3E1F"/>
+<circle cx="458" cy="526" r="12" fill="${O}" stroke="none"/><circle cx="622" cy="526" r="12" fill="${O}" stroke="none"/>
+<circle cx="466" cy="516" r="7" fill="#fff" stroke="none"/><circle cx="630" cy="516" r="7" fill="#fff" stroke="none"/>
+<path d="M400 452 Q450 426 500 448" fill="none" stroke="${BE}" stroke-width="16" stroke-linecap="round"/><path d="M580 448 Q630 426 680 452" fill="none" stroke="${BE}" stroke-width="16" stroke-linecap="round"/>
+<ellipse cx="400" cy="600" rx="26" ry="14" fill="#C96A5A" opacity=".5" stroke="none"/><ellipse cx="680" cy="600" rx="26" ry="14" fill="#C96A5A" opacity=".5" stroke="none"/>
+</g>`;
+// welding helmet flipped up on the forehead, cyan visor
+s += `<g stroke="${O}" stroke-width="9" stroke-linejoin="round">
+<path d="M300 430 Q290 250 540 238 Q790 250 780 430 Q700 396 540 396 Q380 396 300 430Z" fill="#23262E"/>
+<rect x="392" y="286" width="296" height="74" rx="30" fill="#0F3A44"/>
+<rect x="408" y="298" width="264" height="50" rx="22" fill="#38E1FF" stroke-width="5"/>
+<rect x="428" y="306" width="90" height="12" rx="6" fill="#fff" opacity=".75" stroke="none"/>
+<circle cx="306" cy="416" r="20" fill="#3B4252"/><circle cx="774" cy="416" r="20" fill="#3B4252"/>
+</g><rect x="400" y="290" width="280" height="66" rx="30" fill="#38E1FF" opacity=".25"/>`;
+// Santa hat on top of the helmet, tip flopping right
+s += `<g stroke="${O}" stroke-width="9" stroke-linejoin="round">
+<path d="M330 268 Q380 60 600 70 Q760 80 850 230 Q870 300 830 330 Q790 250 720 200 Q760 260 750 270Z" fill="#E63946"/>
+<path d="M600 90 Q700 100 780 190" fill="none" stroke="#FF6B75" stroke-width="12" stroke-linecap="round" opacity=".8"/>
+<path d="M300 290 Q300 240 360 236 Q540 222 720 236 Q780 240 780 290 Q780 326 720 318 Q540 300 360 318 Q300 326 300 290Z" fill="#fff"/>
+<circle cx="842" cy="340" r="52" fill="#fff"/>
+</g>`;
+// welding spark shaped as a Christmas star, bottom right
+s += `<circle cx="860" cy="860" r="150" fill="url(#warm)"/><circle cx="860" cy="860" r="110" fill="url(#glow)"/>`;
+const star = (x, y, r, f) => { let p = ''; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; p += (i ? 'L' : 'M') + (x + Math.cos(a) * rr).toFixed(1) + ' ' + (y + Math.sin(a) * rr).toFixed(1); } return `<path d="${p}Z" fill="${f}" stroke="${O}" stroke-width="7" stroke-linejoin="round"/>`; };
+s += star(860, 860, 74, '#FFE066');
+for (let i = 0; i < 9; i++) { const a = i * .7 + .3, r = 120 + rnd(i) * 70; s += star(860 + Math.cos(a) * r, 860 + Math.sin(a) * r * .9, 10 + rnd(i + 3) * 10, i % 2 ? '#FFE066' : '#fff'); }
+// holly at the lower left
+s += `<g stroke="${O}" stroke-width="6" stroke-linejoin="round"><path d="M150 880 Q190 820 250 840 Q230 880 250 920 Q190 920 150 880Z" fill="#2E8B57"/><path d="M150 880 Q120 810 160 760 Q190 810 230 800 Q200 850 150 880Z" fill="#2ECC71"/>
+<circle cx="150" cy="880" r="20" fill="#E63946"/><circle cx="178" cy="900" r="18" fill="#E63946"/><circle cx="130" cy="906" r="17" fill="#E63946"/></g>`;
+document.getElementById('s').innerHTML = s;
+</script></body></html>
