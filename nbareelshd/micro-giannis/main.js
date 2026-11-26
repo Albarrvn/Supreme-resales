@@ -193,8 +193,13 @@ const M = {
     const j = seg(p, .3, .62), x = lerp(180, 560, j), y = 1250 - Math.sin(Math.PI * j) * 380;
     cray([[x, y - 150], [x, y - 60]], '#333', 12); cray([[x, y - 60], [x - 34, y]], '#333', 10); cray([[x, y - 60], [x + 34, y]], '#333', 10);
     cray([[x, y - 130], [x - 50, y - 90 - 60 * j]], '#333', 10); cray([[x, y - 130], [x + 50, y - 90 - 60 * j]], '#333', 10);
-    g.strokeStyle = '#333'; g.lineWidth = 8; g.beginPath(); g.arc(x, y - 190, 40, 0, TAU); g.stroke();
-    cray([[x - 42, y - 205], [x + 42, y - 205]], HERO, 12); g.font = '54px Gochi'; g.fillStyle = HERO; g.fillText('34', x + 26, y - 96);
+    // Giannis in crayon: dark skin, short black coils, big smile, goatee
+    g.fillStyle = 'rgba(105,64,42,.92)'; g.beginPath(); g.arc(x, y - 190, 40, 0, TAU); g.fill(); g.strokeStyle = '#333'; g.lineWidth = 8; g.stroke();
+    for (let k = 0; k < 9; k++) cray([[x - 36 + k * 9, y - 220], [x - 33 + k * 9, y - 236]], '#111', 10);
+    g.fillStyle = '#111'; g.fillRect(x - 16, y - 202, 7, 7); g.fillRect(x + 9, y - 202, 7, 7);
+    g.fillStyle = '#fff'; g.beginPath(); g.arc(x, y - 182, 17, .08 * Math.PI, .92 * Math.PI); g.closePath(); g.fill(); g.strokeStyle = '#111'; g.lineWidth = 4; g.stroke();
+    cray([[x - 7, y - 156], [x + 7, y - 156]], '#111', 9);
+    g.font = '54px Gochi'; g.fillStyle = HERO; g.fillText('34', x + 26, y - 96);
     cray([[x + 60, y - 120], [x + 80, y - 140]], '#e8741c', 22);
   },
   riso(g, lt, p) {   // two plates (pink, blue), multiply, misregistered, halftone
@@ -204,11 +209,11 @@ const M = {
     plate('#ff48b0', 0, 0, () => { half(0, 0, W, 420, .45, '#ff48b0'); g.font = '900 120px Inter'; g.fillText('MVP', 90, 330); g.font = '900 64px Inter'; g.fillText('2019 · 2020', 90, 440); });
     plate('#0078bf', 7, -5, () => {
       g.font = '900 64px Inter'; g.fillText('+ DEFENSOR DEL AÑO', 90, 530);
-      // the hero: bold shapes on the blue plate, the 34 knocked out
-      g.beginPath(); g.arc(540, 820, 90, 0, TAU); g.fill(); g.fillRect(440, 920, 200, 300); g.fillRect(450, 1220, 70, 220); g.fillRect(560, 1220, 70, 220);
+      // the hero: bold shapes on the blue plate (short coils around the crown, goatee), the 34 knocked out
+      g.beginPath(); g.arc(540, 820, 90, 0, TAU); g.fill(); for (let k = 0; k < 9; k++) { const a = Math.PI * (1.12 + k * .095); g.beginPath(); g.arc(540 + 86 * Math.cos(a), 812 + 86 * Math.sin(a), 22, 0, TAU); g.fill(); } g.fillRect(526, 884, 28, 26); g.fillRect(440, 920, 200, 300); g.fillRect(450, 1220, 70, 220); g.fillRect(560, 1220, 70, 220);
       g.fillRect(380, 930, 60, 200); g.fillRect(640, 930, 60, 200);
     });
-    g.save(); g.font = '900 110px Inter'; g.fillStyle = '#f3eee2'; g.fillText('34', 470, 1110); g.fillStyle = '#ff48b0'; g.globalCompositeOperation = 'multiply'; g.fillRect(450, 760, 180, 26); g.restore();
+    g.save(); g.font = '900 110px Inter'; g.fillStyle = '#f3eee2'; g.fillText('34', 470, 1110); g.fillRect(500, 798, 16, 16); g.fillRect(566, 798, 16, 16); g.beginPath(); g.arc(541, 836, 38, .08 * Math.PI, .92 * Math.PI); g.closePath(); g.fill(); g.restore();
     // trophy drops onto him on the pink plate
     const d = eo(seg(p, .3, .46)), ty = lerp(-300, 560, d);
     plate('#ff48b0', -6, 4, () => { g.beginPath(); g.moveTo(450, ty); g.lineTo(630, ty); g.lineTo(600, ty + 150); g.lineTo(480, ty + 150); g.closePath(); g.fill(); g.fillRect(520, ty + 150, 40, 60); g.fillRect(470, ty + 205, 140, 30); });
@@ -227,9 +232,9 @@ const M = {
     });
     // pixel hero: 16×30, headband + blue 34
     q.save(); q.translate(58, 120); q.scale(2, 2); const hx = 0, hy = 0 - (Math.floor(lt * 6) % 2);
-    q.fillStyle = '#f0c8a0'; q.fillRect(hx + 4, hy, 8, 8); q.fillStyle = '#6a3e22'; q.fillRect(hx + 4, hy, 8, 2); q.fillStyle = HERO; q.fillRect(hx + 4, hy + 2, 8, 1);
-    q.fillStyle = '#fafafa'; q.fillRect(hx + 2, hy + 8, 12, 12); q.fillStyle = HERO; q.fillRect(hx + 5, hy + 11, 2, 4); q.fillRect(hx + 9, hy + 11, 2, 4);
-    q.fillStyle = '#fafafa'; q.fillRect(hx + 3, hy + 20, 10, 5); q.fillStyle = '#f0c8a0'; q.fillRect(hx + 4, hy + 25, 3, 7); q.fillRect(hx + 9, hy + 25, 3, 7);
+    q.fillStyle = '#6b4430'; q.fillRect(hx + 4, hy, 8, 8); q.fillStyle = '#111'; q.fillRect(hx + 4, hy - 1, 8, 2); q.fillRect(hx + 5, hy - 2, 6, 1); q.fillRect(hx + 6, hy + 3, 1, 1); q.fillRect(hx + 9, hy + 3, 1, 1); q.fillStyle = '#fff'; q.fillRect(hx + 6, hy + 5, 4, 1); q.fillStyle = '#111'; q.fillRect(hx + 7, hy + 7, 2, 1);
+    q.fillStyle = '#fafafa'; q.fillRect(hx + 2, hy + 8, 12, 12); q.fillStyle = '#c8102e'; q.fillRect(hx + 2, hy + 8, 1, 12); q.fillRect(hx + 13, hy + 8, 1, 12); q.fillStyle = HERO; q.fillRect(hx + 5, hy + 11, 2, 4); q.fillRect(hx + 9, hy + 11, 2, 4);
+    q.fillStyle = '#fafafa'; q.fillRect(hx + 3, hy + 20, 10, 5); q.fillStyle = '#6b4430'; q.fillRect(hx + 4, hy + 25, 3, 7); q.fillRect(hx + 9, hy + 25, 3, 7);
     q.fillStyle = '#ff8a1e'; q.fillRect(hx + 15, hy + 14 + (Math.floor(lt * 4) % 2) * 10, 5, 5); q.restore();
     if (p > .85) { q.fillStyle = '#ffcd38'; q.fillText('¡CAMPEÓN 2021!', 30, 108); }
     g.imageSmoothingEnabled = false; g.drawImage(lo, 0, 0, W, H); g.imageSmoothingEnabled = true;
@@ -246,7 +251,9 @@ const M = {
     g.lineWidth = 2; g.beginPath(); g.moveTo(250, 1320); g.lineTo(900, 1320); g.stroke(); g.font = '46px Arch'; g.fillText('7,24 m', 500, 1300);
     // the hero in line: headband and 34
     g.lineWidth = 5; g.beginPath(); g.arc(230, 920, 40, 0, TAU); g.moveTo(230, 960); g.lineTo(230, 1110); g.moveTo(230, 1110); g.lineTo(190, 1250); g.moveTo(230, 1110); g.lineTo(270, 1250); g.moveTo(230, 990); g.lineTo(260, 1010 - 80 * (1 - u)); g.stroke();
-    g.strokeStyle = HERO; g.lineWidth = 10; g.beginPath(); g.moveTo(190, 905); g.lineTo(270, 905); g.stroke(); g.fillStyle = HERO; g.font = '50px Arch'; g.fillText('34', 205, 1060);
+    g.lineWidth = 4; g.beginPath(); for (let k = 0; k <= 10; k++) g.lineTo(196 + k * 7, 892 - (k % 2) * 12); g.stroke();
+    g.beginPath(); g.arc(230, 928, 16, .1 * Math.PI, .9 * Math.PI); g.moveTo(224, 958); g.lineTo(236, 958); g.stroke();
+    g.fillStyle = HERO; g.font = '50px Arch'; g.fillText('34', 205, 1060);
     g.fillStyle = '#fff'; g.font = '200px Arch'; g.fillText(String(Math.round(895 * clamp(seg(p, .1, .8)))), 120, 470); g.font = '60px Arch'; g.fillText('PARTIDOS · 13 AÑOS', 130, 560);
   },
   swiss(g, lt, p) {   // strict grid, one sans, one signal colour (the hero): his bar overshoots and bonks
@@ -287,10 +294,10 @@ function render(t) {
       outlined(g, 'EL TRASPASO?', 0, 70, { font: '112px Titan', lw: 20, fill: P.gold, shadow: P.mag, sd: [6, 10] });
       g.restore();
       // end cards slam in on the words that say them (times relative to the last line, from reel.json)
-      CARDS.forEach(([c, txt], i) => { if (lt <= c) return; const k2 = lt < c + .12 ? lerp(1.8, 1, eo((lt - c) / .12)) : 1, y = 1000 + i * 190;
+      CARDS.forEach(([c, txt], i) => { if (lt <= c) return; const k2 = lt < c + .12 ? lerp(1.8, 1, eo((lt - c) / .12)) : 1, y = 1000 + i * 170;
         g.save(); g.translate(W / 2, y); g.scale(k2, k2); g.rotate(i ? .04 : -.03); g.fillStyle = i ? P.mag : P.gold; g.strokeStyle = P.ink; g.lineWidth = 10; g.beginPath(); g.roundRect(-400, -90, 800, 150, 40); g.fill(); g.stroke();
         outlined(g, txt, 0, 22, { font: '84px Titan', lw: 14, fill: P.white, stroke: P.ink }); g.restore(); });
-      outlined(g, '@NBAreelsHD · SÍGUENOS', W / 2, 1000 + CARDS.length * 190, { font: '56px Lilita', lw: 10, fill: P.white, stroke: P.ink });
+      outlined(g, '@NBAreelsHD · SÍGUENOS', W / 2, 1000 + CARDS.length * 170, { font: '56px Lilita', lw: 10, fill: P.white, stroke: P.ink });
     }
   } else if (!l) {
     // stage between games: TV shows a sunburst test card; SPEED UP banner

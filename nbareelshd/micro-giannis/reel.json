@@ -67,15 +67,23 @@
 },
 {
 "id": "m7",
-"text": "¿Quién ganó el traspaso: Miami o Milwaukee? Comenta.",
+"text": "¿Quién ganó el traspaso: Miami o Milwaukee? Comenta. Para mí, Miami. Vice, Flow, GTA.",
 "say": "¡¿Quién ganó el traspaso! Miami o Milwaukee? ¡Comenta!",
 "scene": {
 "type": "end",
 "cmd": "",
 "cards": [
 [
-0.9,
+3.1,
 "COMENTA: MIA o MIL"
+],
+[
+3.9,
+"PARA MÍ: MIAMI"
+],
+[
+4.8,
+"VICE · FLOW · GTA"
 ]
 ]
 }

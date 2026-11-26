@@ -85,7 +85,7 @@ for e in E:
     y = norm(sfx.compress(y / (np.abs(y).max() + 1e-9), thr=.2, ratio=5, att=.002, rel=.08), .9)
     add(vo, y, e['t'], .85); s0 = int(e['t'] * SR); vad[s0:s0 + len(y)] = 1
 vad = uniform_filter1d(maximum_filter1d(vad, size=int(.16 * SR)), size=int(.3 * SR))
-mus *= (1 - .72 * vad)[:, None] * .5; fol *= (1 - .5 * vad)[:, None]
+mus *= (1 - .72 * vad)[:, None] * .5; fol *= (1 - .5 * vad)[:, None] * .63   # effects −4 dB overall: still heard, never over the voice
 mix = mus + vo + fol
 for c in range(2): mix[:, c] = sfx.limit(mix[:, c], .95)
 assert np.isfinite(mix).all()
