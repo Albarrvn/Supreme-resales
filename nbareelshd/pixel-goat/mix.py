@@ -36,7 +36,7 @@ def crowd(): d = 3.0; tt = t_(d); return norm(bp(rng.standard_normal(len(tt)), 3
 def select(): return np.concatenate([pulse(84, .05, .5), pulse(91, .08, .5)])
 def hit():  # punch: low thud + crunchy noise crack, bit-crushed
     d = .25; tt = t_(d); f = 55 + 120 * np.exp(-tt / .02); return norm(crush(np.sin(2 * np.pi * np.cumsum(f) / SR) * env_exp(d, .07) + lfsr(d) * env_exp(d, .02) * .8, 5))
-FOL = {'hit': (hit, .45), 'coin': (lambda: np.concatenate([pulse(83, .03, .5), pulse(90, .05, .5)]) * .5, .1), 'boom': (boom, .55), 'blip': (blip, .09), 'dribble': (dribble, .28), 'shoot': (shoot, .12), 'swish': (swish, .2), 'levelup': (levelup, .16),
+FOL = {'hit': (hit, .32), 'coin': (lambda: np.concatenate([pulse(83, .03, .5), pulse(90, .05, .5)]) * .5, .1), 'boom': (boom, .38), 'blip': (blip, .09), 'dribble': (dribble, .28), 'shoot': (shoot, .12), 'swish': (swish, .2), 'levelup': (levelup, .16),
        'swirl': (swirl, .22), 'fanfare': (fanfare, .2), 'crowd': (crowd, .22), 'select': (select, .16)}
 fol = np.zeros((N, 2))
 for e in ev['ev']:

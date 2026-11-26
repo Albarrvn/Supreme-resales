@@ -3,7 +3,7 @@
 set -e
 LIB=${LIB:-/root/lemo-opuscar}; export LIB
 HERE=$(cd "$(dirname "$0")" && pwd); mkdir -p "$HERE/out" "$HERE/voices"
-VOICE=${VOICE:-pixgoat}
+VOICE=${VOICE:-pixgoat_el}
 rm -f "$HERE/voices/"*.wav; cp "$HERE/../voices/$VOICE/"*.wav "$HERE/../voices/$VOICE/dur.json" "$HERE/voices/"
 cp "$HERE/../reels/pixgoat.json" "$HERE/reel.json"
 cd "$LIB"
