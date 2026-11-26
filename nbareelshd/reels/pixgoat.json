@@ -1,0 +1,54 @@
+{
+"title": "MJ vs LBJ",
+"no": "P2",
+"lines": [
+{
+"id": "g0",
+"text": "¿Quién es el GOAT? Jordan contra LeBron.",
+"say": "¿Quién es el GOAT? ¡Jordan contra LeBron!",
+"scene": {
+"type": "intro"
+}
+},
+{
+"id": "g1",
+"text": "Round uno: títulos. Seis contra cuatro.",
+"say": "¡Round uno! ¡títulos! ¡Seis contra cuatro!",
+"scene": {
+"type": "r1"
+}
+},
+{
+"id": "g2",
+"text": "Round dos: MVP. Cinco contra cuatro.",
+"say": "¡Round dos! ¡MVP! ¡Cinco contra cuatro!",
+"scene": {
+"type": "r2"
+}
+},
+{
+"id": "g3",
+"text": "Round tres: puntos. LeBron fue el primero en pasar los 40.000.",
+"say": "¡Round tres! ¡puntos! ¡LeBron fue el primero en pasar los cuarenta mil!",
+"scene": {
+"type": "r3"
+}
+},
+{
+"id": "g4",
+"text": "Round cuatro: Finales. Jordan, seis de seis. LeBron, diez Finales jugadas.",
+"say": "¡Round cuatro! ¡Finales! ¡Jordan, seis de seis! ¡LeBron, diez Finales jugadas!",
+"scene": {
+"type": "r4"
+}
+},
+{
+"id": "g5",
+"text": "Están empatados. Tú decides: comenta MJ o LeBron.",
+"say": "¡Están empatados! ¡Tú decides: comenta eme jota o LeBron!",
+"scene": {
+"type": "end"
+}
+}
+]
+}
