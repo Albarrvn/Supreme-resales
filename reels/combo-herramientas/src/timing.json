@@ -1,0 +1,48 @@
+{
+ "fps": 30,
+ "duration": 53.16,
+ "shots": [
+  {
+   "key": "hook",
+   "start": 0.15,
+   "end": 9.14,
+   "words": 24,
+   "text": "Si estás empezando a soldar, estas cuatro herramientas te van a ahorrar dinero, quemazos… y coraje. Y la número cuatro casi nadie la conoce."
+  },
+  {
+   "key": "careta",
+   "start": 9.44,
+   "end": 18.06,
+   "words": 25,
+   "text": "Uno: la careta automática. Ves la pieza clarita, prendes el arco… y se oscurece sola en una fracción de segundo. Se acabó soldar a ciegas."
+  },
+  {
+   "key": "maquina",
+   "start": 18.36,
+   "end": 28.31,
+   "words": 27,
+   "text": "Dos: una máquina inversora pequeña. Liviana, muchas trabajan con la corriente de la casa, y te sirve pa’ practicar con electrodo. Pa’ empezar, no necesitas un monstruo."
+  },
+  {
+   "key": "imanes",
+   "start": 28.61,
+   "end": 36.26,
+   "words": 19,
+   "text": "Tres: los imanes de escuadra. Te aguantan las piezas a noventa grados, sin ayudante, y la junta sale derechita."
+  },
+  {
+   "key": "pinza",
+   "start": 36.56,
+   "end": 45.23,
+   "words": 25,
+   "text": "Y cuatro: la pinza de soldador. Corta el alambre, limpia la boquilla, la quita y la pone… una sola herramienta que hace como seis trabajos."
+  },
+  {
+   "key": "cierre",
+   "start": 45.53,
+   "end": 52.41,
+   "words": 23,
+   "text": "¿Quieres los links de las cuatro? Comenta COMBO y te los mando por mensaje. Y dime, ¿cuál te falta a ti? Estamos activos."
+  }
+ ]
+}
