@@ -1,0 +1,8 @@
+hook | Fuego… debajo del agua. Parece imposible, pero hay gente que suelda en el fondo del mar. Y es de los trabajos más peligrosos que hay.
+pregunta | ¿Cómo es que el arco no se apaga? Mira esto.
+burbuja | El arco está tan caliente, que hierve el agua alrededor. Eso, más el gas del forro, forma una burbuja. Y dentro de esa burbuja, el arco vive.
+electrodo | El electrodo es especial: el forro viene sellado, impermeable, pa’ que el agua no se lo coma antes de tiempo.
+corriente | Y la corriente, siempre directa, nunca alterna. Arriba, en el barco, hay un interruptor. El buzo avisa por radio… y solo ahí le dan corriente.
+peligro | ¿Y por qué es tan peligroso? Uno: electricidad metida en el agua. Dos: esa burbuja tiene hidrógeno y oxígeno… si se queda atrapada, puede explotar. Tres: la presión del fondo, que te puede enfermar al subir.
+calidad | Y encima, el agua enfría el cordón de golpe. Por eso, pa’ los trabajos más importantes, meten al soldador en una cámara seca debajo del agua.
+cierre | Dime la verdad: ¿tú te tirarías a soldar al fondo del mar? Sí o no, en los comentarios. Estamos activos.
