@@ -1,0 +1,92 @@
+{
+"title": "Micro Shaq",
+"no": "M3",
+"lines": [
+{
+"id": "m0",
+"text": "Shaq jugó 19 años en la NBA… y metió UN solo triple.",
+"say": "¡Shaq jugó diecinueve años en la ene be a! ¡Y metió un solo triple!",
+"scene": {
+"type": "term",
+"cmd": "¡TIRA DE TRES!",
+"ok": false
+}
+},
+{
+"id": "m1",
+"text": "Su primer intento fue tan feo que el balón aún sigue volando.",
+"say": "¡Su primer intento fue tan feo que el balón aún sigue volando!",
+"scene": {
+"type": "crayon",
+"cmd": "¡APUNTA!",
+"ok": false
+}
+},
+{
+"id": "m2",
+"text": "Lo intentó 22 veces. Porcentaje: 4,5.",
+"say": "¡Lo intentó veintidós veces! ¡Porcentaje! ¡cuatro coma cinco!",
+"scene": {
+"type": "riso",
+"cmd": "¡OTRA VEZ!",
+"ok": false
+}
+},
+{
+"id": "m3",
+"text": "¿Y los tiros libres? Tampoco: 52 %.",
+"say": "¿Y los tiros libres? ¡Tampoco! ¡cincuenta y dos por ciento!",
+"scene": {
+"type": "pixel",
+"cmd": "¡TIRO LIBRE!",
+"ok": false
+}
+},
+{
+"id": "m4",
+"text": "Falló 5.317 tiros libres. Solo Wilt falló más.",
+"say": "¡Falló cinco mil trescientos diecisiete tiros libres! ¡Solo Wilt falló más!",
+"scene": {
+"type": "blue",
+"cmd": "¡CALCULA!",
+"ok": false
+}
+},
+{
+"id": "m5",
+"text": "Los rivales le hacían falta a propósito: el Hack-a-Shaq.",
+"say": "¡Los rivales le hacían falta a propósito! ¡el jak a shak!",
+"scene": {
+"type": "swiss",
+"cmd": "¡HAZLE FALTA!",
+"ok": false
+}
+},
+{
+"id": "m6",
+"text": "Pero el 16 de febrero de 1996… ¡entró!",
+"say": "¡Pero el dieciséis de febrero de mil novecientos noventa y seis! ¡Entró!",
+"scene": {
+"type": "term2",
+"cmd": "¡AHORA SÍ!",
+"ok": true
+}
+},
+{
+"id": "m7",
+"text": "19 años, 4 anillos… y un triple. ¿Tú le ganas a Shaq de tres? Comenta.",
+"say": "¡Diecinueve años, cuatro anillos! ¡Y un triple! ¿Tú le ganas a Shaq de tres? ¡Comenta!",
+"scene": {
+"type": "end",
+"cmd": "",
+"ok": true,
+"cards": [
+[
+2.6,
+"COMENTA: SÍ o NO"
+]
+]
+}
+}
+]
+}
